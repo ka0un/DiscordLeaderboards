@@ -1,0 +1,11 @@
+webhookurl: '-'
+database: 'h2'
+leaderboards:
+  - 'example'
+  - 'example2'
+
+#only for devs
+pluginversion: 0.0.1
+firsttime: true
+
+
