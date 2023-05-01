@@ -10,6 +10,7 @@ import org.kasun.discordleaderboards.Database.Database;
 import org.kasun.discordleaderboards.Utils.CustomConfig;
 import org.kasun.discordleaderboards.Utils.StartMessage;
 
+import java.sql.SQLOutput;
 import java.util.List;
 
 public final class DiscordLeaderboards extends JavaPlugin {
@@ -24,7 +25,10 @@ public final class DiscordLeaderboards extends JavaPlugin {
         getCommand("webhooktest").setExecutor(new WebhookTestCommand());
         getCommand("forcesend").setExecutor(new forceLeaderboardSend());
 
-        h2url = "jdbc:h2:" + getDataFolder().getAbsolutePath() + "\\database";
+        //h2url = "jdbc:h2:file:C:/Users/givem/OneDrive/Desktop/server/plugins/DiscordLeaderboards/database/database/new_db_name;AUTO_SERVER=TRUE";
+
+        h2url = "jdbc:h2:file:" + getDataFolder().getAbsolutePath() + "\\database\\database";
+        System.out.println(h2url);
         Database.initializeDatabase();
 
         FileConfiguration config = getConfig();

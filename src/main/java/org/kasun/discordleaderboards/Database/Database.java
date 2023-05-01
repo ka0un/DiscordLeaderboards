@@ -17,11 +17,11 @@ public class Database {
             Class.forName("org.h2.Driver");
             connection = DriverManager.getConnection(DiscordLeaderboards.getH2url());
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GREEN + "Connected To H2!");
-        } catch (ClassNotFoundException e) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "H2 JDBC Driver Not Found");
+        }catch (ClassNotFoundException e) {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Database Driver Not Found !");
             e.printStackTrace();
         } catch (SQLException e) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Failed to Connect H2 Database");
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Failed to Connect H2 Database !");
             e.printStackTrace();
         }
         return connection;
@@ -35,6 +35,7 @@ public class Database {
             preparedStatement.execute();
         }catch (SQLException ex){
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Database Preperation Error Detected!");
+            ex.printStackTrace();
         }
     }
 
