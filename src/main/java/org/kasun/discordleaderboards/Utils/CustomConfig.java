@@ -32,6 +32,12 @@ public class CustomConfig {
         return customFile;
     }
 
+    public static FileConfiguration getFileConfiguration(String fileName) {
+        File file = new File(Bukkit.getPluginManager().getPlugin("DiscordLeaderboards").getDataFolder() + "\\leaderboard\\", fileName + ".yml");
+        FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+        return config;
+    }
+
     public void save(){
         try {
             customFile.save(file);
