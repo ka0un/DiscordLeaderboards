@@ -1,10 +1,62 @@
-webhookurl: '-'
-database: 'h2'
+#╔═══╗╔╗   ╔═══╗╔═══╗╔═══╗╔═══╗╔═══╗╔══╗ ╔═══╗╔═══╗╔═══╗╔═══╗╔═══╗
+#╚╗╔╗║║║   ║╔══╝║╔═╗║╚╗╔╗║║╔══╝║╔═╗║║╔╗║ ║╔═╗║║╔═╗║║╔═╗║╚╗╔╗║║╔═╗║
+#║║║║║║   ║╚══╗║║ ║║ ║║║║║╚══╗║╚═╝║║╚╝╚╗║║ ║║║║ ║║║╚═╝║ ║║║║║╚══╗
+#║║║║║║ ╔╗║╔══╝║╚═╝║ ║║║║║╔══╝║╔╗╔╝║╔═╗║║║ ║║║╚═╝║║╔╗╔╝ ║║║║╚══╗║
+#╔╝╚╝║║╚═╝║║╚══╗║╔═╗║╔╝╚╝║║╚══╗║║║╚╗║╚═╝║║╚═╝║║╔═╗║║║║╚╗╔╝╚╝║║╚═╝║
+#╚═══╝╚═══╝╚═══╝╚╝ ╚╝╚═══╝╚═══╝╚╝╚═╝╚═══╝╚═══╝╚╝ ╚╝╚╝╚═╝╚═══╝╚═══╝
+#=================================================================
+# Discord Leaderboards Plugin Configuration
+# https://dsc.gg/sundevs | KASUN#8771
+#=================================================================
+# STORAGE SETTINGS (H2) (MYSQL)
+#=================================================================
+# Available Options
+# Local Databases - H2 (Default)
+# Remote Databases - MYSQL
+storage-method: 'h2'
+
+# Remote Database Settings
+# you don't have to change anything if you are using H2
+address: 'localhost'
+database: 'minecraft'
+username: 'root'
+password: ''
+
+#=================================================================
+# Leaderboards
+#=================================================================
+# you have to list leaderboard name (filename) here for load them
+# you can disable the leaderboard by removing them from this list
+# all leaderboard configs must be inside the leaderboards folder
+# and must follow default template as example leaderboard
 leaderboards:
   - 'example'
-  - 'example2'
 
-#only for devs
+#=================================================================
+# Default Settings
+#=================================================================
+# You can change these values for each leaderboard in their own
+# config file witch you can find inside leaderboards folder
+webhook-url: '-' #Required
+webhook-avatar-url: '-'
+webhook-user-name: 'DLeaderBoards'
+
+embed-title: 'Leaderboard'
+embed-url: '-'
+embed-colour: '-'
+embed-footer: 'created by kasun'
+embed-image: '-'
+embed-thumbnail: '-'
+
+embed-auther-name: '-'
+embed-auther-url: '-'
+embed-auther-icon: '-'
+
+#=================================================================
+# Debug Settings
+#=================================================================
+# Reserved for Plugin Developer, Do not Change Anything Here
+# It May Break Your Plugin
 pluginversion: 0.0.1
 firsttime: true
 

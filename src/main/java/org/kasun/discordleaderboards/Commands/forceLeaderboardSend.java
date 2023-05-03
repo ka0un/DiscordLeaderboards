@@ -12,8 +12,7 @@ public class forceLeaderboardSend implements CommandExecutor {
         if (sender instanceof Player){
             Player p = (Player) sender;
             if (args.length == 1){
-                Leaderboard l1 = new Leaderboard(args[0], 5, "%player_name%");
-                l1.send();
+                //code here
 
             }
 

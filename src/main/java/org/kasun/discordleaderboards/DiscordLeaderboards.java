@@ -42,17 +42,9 @@ public final class DiscordLeaderboards extends JavaPlugin {
             c2.get().addDefault("name", lname);
             c2.get().addDefault("placeholder", "%player_level%");
             c2.get().addDefault("top", 5);
+            c2.get().addDefault("webhookurl", "-");
             c2.get().options().copyDefaults(true);
             c2.save();
-
-            String lname2 = "example2";
-            CustomConfig c3 = new CustomConfig(lname2);
-            c3.setup();
-            c3.get().addDefault("name", lname2);
-            c3.get().addDefault("placeholder", "%player_level%");
-            c3.get().addDefault("top", 10);
-            c3.get().options().copyDefaults(true);
-            c3.save();
 
             config.set("firsttime", false);
 
