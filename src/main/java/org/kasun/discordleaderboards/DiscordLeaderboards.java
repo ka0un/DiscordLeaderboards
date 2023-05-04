@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kasun.discordleaderboards.Commands.WebhookTestCommand;
+import org.kasun.discordleaderboards.Commands.createCommand;
 import org.kasun.discordleaderboards.Commands.forceLeaderboardSend;
 import org.kasun.discordleaderboards.Database.Database;
 import org.kasun.discordleaderboards.Listeners.PlayerJoin;
@@ -23,8 +24,9 @@ public final class DiscordLeaderboards extends JavaPlugin {
         StartMessage.sendStartMessage();
         getConfig().options().copyDefaults();
         saveDefaultConfig();
-        getCommand("webhooktest").setExecutor(new WebhookTestCommand());
-        getCommand("forcesend").setExecutor(new forceLeaderboardSend());
+        getCommand("dl-testwebhook").setExecutor(new WebhookTestCommand());
+        getCommand("dl-forcesend").setExecutor(new forceLeaderboardSend());
+        getCommand("dl-create").setExecutor(new createCommand());
         getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
 
         h2url = "jdbc:h2:file:" + getDataFolder().getAbsolutePath() + "\\database\\database";

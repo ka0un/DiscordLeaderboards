@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.Plugin;
 
 import java.awt.*;
 import java.io.File;
@@ -36,42 +37,57 @@ public class Leaderboard {
         c.get().addDefault("name", name);
         c.get().addDefault("placeholder", placeholder);
         c.get().addDefault("top", top);
-        c.get().addDefault("delay", delay);
-        c.get().addDefault("webhookurl", "-");
-        c.get().addDefault("webhook-avatar-url", "-");
-        c.get().addDefault("webhook-user-name", "-");
-        c.get().addDefault("embed-title", "-");
-        c.get().addDefault("embed-url", "-");
-        c.get().addDefault("embed-colour", "-");
-        c.get().addDefault("embed-footer", "-");
-        c.get().addDefault("embed-image", "-");
-        c.get().addDefault("embed-thumbnail", "-");
-        c.get().addDefault("embed-auther-name", "-");
-        c.get().addDefault("embed-auther-url", "-");
-        c.get().addDefault("embed-auther-icon", "-");
+        c.get().addDefault("delay", delay.toString());
+        c.get().addDefault("webhook-url", "");
+        c.get().addDefault("webhook-avatar-url", "");
+        c.get().addDefault("webhook-user-name", "");
+        c.get().addDefault("embed-title", "");
+        c.get().addDefault("embed-url", "");
+        c.get().addDefault("embed-colour", "");
+        c.get().addDefault("embed-footer", "");
+        c.get().addDefault("embed-image", "");
+        c.get().addDefault("embed-thumbnail", "");
+        c.get().addDefault("embed-author-name", "");
+        c.get().addDefault("embed-author-url", "");
+        c.get().addDefault("embed-author-icon", "");
         c.get().options().copyDefaults(true);
         c.save();
 
     }
 
     public static void sendleaderboard(String name) {
+        //getting default webhook values
+        FileConfiguration mainconfig = Bukkit.getPluginManager().getPlugin("DiscordLeaderboards").getConfig();
+        String dwebhookurl = mainconfig.getString("webhook-url");
+        String dwebhookAvatarUrl = mainconfig.getString("webhook-avatar-url");
+        String dwebhookUserName = mainconfig.getString("webhook-user-name");
+        String dembedTitle = mainconfig.getString("embed-title");
+        String dembedUrl = mainconfig.getString("embed-url");
+        String dembedColour = mainconfig.getString("embed-colour");
+        String dembedFooter = mainconfig.getString("embed-footer");
+        String dembedImage = mainconfig.getString("embed-image");
+        String dembedThumbnail = mainconfig.getString("embed-thumbnail");
+        String dembedAuthorName = mainconfig.getString("embed-author-name");
+        String dembedAuthorUrl = mainconfig.getString("embed-author-url");
+        String dembedAuthorIcon = mainconfig.getString("embed-author-icon");
+
+        //getting leaderboard's values
         FileConfiguration config = CustomConfig.getFileConfiguration(name);
         String placeholder = config.getString("placeholder");
         int top = config.getInt("top");
         String delay = config.getString("delay");
-        String webhookurl = config.getString("webhookurl");
-        String webhookAvatarUrl = config.getString("webhook-avatar-url");
-        String webhookUserName = config.getString("webhook-user-name", "-");
-        String embedTitle = config.getString("embed-title", "-");
-        String embedUrl = config.getString("embed-url", "-");
-        String embedColour = config.getString("embed-colour", "-");
-        String embedFooter = config.getString("embed-footer", "-");
-        String embedImage = config.getString("embed-image", "-");
-        String embedThumbnail = config.getString("embed-thumbnail", "-");
-        String embedAuthorName = config.getString("embed-auther-name", "-");
-        String embedAuthorUrl = config.getString("embed-auther-url", "-");
-        String embedAuthorIcon = config.getString("embed-auther-icon", "-");
-
+        String webhookurl = config.getString("webhook-url", dwebhookurl);
+        String webhookAvatarUrl = config.getString("webhook-avatar-url", dwebhookAvatarUrl);
+        String webhookUserName = config.getString("webhook-user-name", dwebhookUserName);
+        String embedTitle = config.getString("embed-title", dembedTitle);
+        String embedUrl = config.getString("embed-url", dembedUrl);
+        String embedColour = config.getString("embed-colour", dembedColour);
+        String embedFooter = config.getString("embed-footer", dembedFooter);
+        String embedImage = config.getString("embed-image", dembedImage);
+        String embedThumbnail = config.getString("embed-thumbnail", dembedThumbnail);
+        String embedAuthorName = config.getString("embed-author-name", dembedAuthorName);
+        String embedAuthorUrl = config.getString("embed-author-url", dembedAuthorUrl);
+        String embedAuthorIcon = config.getString("embed-author-icon", dembedAuthorIcon);
 
     }
 }

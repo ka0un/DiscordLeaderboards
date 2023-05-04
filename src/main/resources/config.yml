@@ -37,7 +37,7 @@ leaderboards:
 #=================================================================
 # You can change these values for each leaderboard in their own
 # config file witch you can find inside leaderboards folder
-webhook-url: '-' #Required
+webhook-url: '-'  #Required !!!
 webhook-avatar-url: '-'
 webhook-user-name: 'DLeaderBoards'
 
@@ -48,9 +48,9 @@ embed-footer: 'created by kasun'
 embed-image: '-'
 embed-thumbnail: '-'
 
-embed-auther-name: '-'
-embed-auther-url: '-'
-embed-auther-icon: '-'
+embed-author-name: '-'
+embed-author-url: '-'
+embed-author-icon: '-'
 
 #=================================================================
 # Debug Settings

@@ -6,9 +6,12 @@ prefix: DLeaderboards
 authors: [Kasun Hapangama]
 description: Post Leaderboard to discord channel using webhooks
 commands:
-  webhooktest:
+  dl-testwebhook:
     description: Test Your Webhook Url
     usage: /<Command> Message
-  forcesend:
+  dl-forcesend:
     description: force send the webhook
     usage: /<Command> leaderboardname
+  dl-create:
+    description: Create Leaderboard
+    usage: /<Command> name top %placeholder% delay
