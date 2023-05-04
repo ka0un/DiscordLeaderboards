@@ -43,8 +43,9 @@ webhook-user-name: 'DLeaderBoards'
 
 embed-title: 'Leaderboard'
 embed-url: '-'
-embed-colour: '-'
-embed-footer: 'created by kasun'
+embed-colour: '#00ffee'
+embed-footer: '-'
+embed-footer-icon: '-'
 embed-image: '-'
 embed-thumbnail: '-'
 

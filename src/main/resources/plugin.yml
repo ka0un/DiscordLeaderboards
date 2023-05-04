@@ -15,3 +15,7 @@ commands:
   dl-create:
     description: Create Leaderboard
     usage: /<Command> name top %placeholder% delay
+  dl-view:
+    description: View Leaderboard
+    usage: /<Command> name
+

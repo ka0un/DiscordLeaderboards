@@ -7,8 +7,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kasun.discordleaderboards.Utils.CustomConfig;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class UserData {
     public static void add(Player p) {
@@ -39,9 +38,28 @@ public class UserData {
 
     }
 
-    public static void gettop(String placeholder, int top){
-        List<String> toplist = new ArrayList<>(top);
+    public static Map gettoplistmap(String placeholder, int top){
+        List<String> uuidlist = Database.gettop(placeholder, top);
+        LinkedHashMap<String, Integer> toplistmap = new LinkedHashMap<>();
+        for (String uuid: uuidlist){
+            String name = Database.getName(uuid);
+            int value = Database.getValue(uuid, placeholder).intValue();
+            toplistmap.put(name, value);
+        }
+        return toplistmap;
+    }
 
-
+    public static String gettoplistString(String placeholder, int top){
+        Map<String, Integer> toplistmap = UserData.gettoplistmap(placeholder, top);
+        StringBuilder sb = new StringBuilder();
+        int i = 1;
+        for (Map.Entry<String, Integer> entry : toplistmap.entrySet()) {
+            String name = entry.getKey();
+            int score = entry.getValue();
+            String formattedEntry = String.format("%d. %-20s %d\n", i++, name, score);
+            sb.append(formattedEntry);
+        }
+        String leaderboardString = sb.toString();
+        return leaderboardString;
     }
 }

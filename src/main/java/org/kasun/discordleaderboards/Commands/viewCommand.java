@@ -7,31 +7,29 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import org.kasun.discordleaderboards.DiscordLeaderboards;
 import org.kasun.discordleaderboards.Utils.Leaderboard;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class forceLeaderboardSend implements CommandExecutor, TabCompleter {
+public class viewCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String lable, String[] args) {
         if (args.length == 1){
-            Leaderboard.sendleaderboard(args[0]);
+            String leaderboardstring = Leaderboard.toString(args[0]);
             if (sender instanceof Player){
                 Player p = (Player) sender;
-                p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GREEN + "Leaderboard Sent!");
+                p.sendMessage( ChatColor.GRAY + leaderboardstring);
             }else{
-                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GREEN + "Leaderboard Sent!");
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GRAY + leaderboardstring);
             }
         }else{
             if (sender instanceof Player){
                 Player p = (Player) sender;
                 p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Wrong Command Usage !");
-                p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "/dl-forcesend leaderboard");
+                p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "/dl-view leaderboard");
             }else{
                 Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Wrong Command Usage !");
-                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "/dl-forcesend leaderboard");
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "/dl-view leaderboard");
             }
         }
         return true;

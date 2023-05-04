@@ -44,16 +44,17 @@ public class createCommand implements CommandExecutor, TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> suggestions = new ArrayList<String>();
-
-        if (args.length == 2) {
-            // Add suggestions for the first argument
+        if (args.length == 1) {
+            suggestions.add("name");
+        } else if (args.length == 2) {
             suggestions.add("3");
             suggestions.add("5");
             suggestions.add("10");
             suggestions.add("15");
             suggestions.add("20");
+        } else if (args.length == 3) {
+            suggestions.add("%placeholder%");
         } else if (args.length == 4) {
-            // Add suggestions for the second argument
             suggestions.add("Live");
             suggestions.add("Hourly");
             suggestions.add("Daily");

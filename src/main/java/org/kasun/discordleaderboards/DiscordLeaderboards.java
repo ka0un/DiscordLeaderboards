@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.kasun.discordleaderboards.Commands.WebhookTestCommand;
 import org.kasun.discordleaderboards.Commands.createCommand;
 import org.kasun.discordleaderboards.Commands.forceLeaderboardSend;
+import org.kasun.discordleaderboards.Commands.viewCommand;
 import org.kasun.discordleaderboards.Database.Database;
 import org.kasun.discordleaderboards.Listeners.PlayerJoin;
 import org.kasun.discordleaderboards.Utils.CustomConfig;
@@ -28,6 +29,7 @@ public final class DiscordLeaderboards extends JavaPlugin {
         getCommand("dl-testwebhook").setExecutor(new WebhookTestCommand());
         getCommand("dl-forcesend").setExecutor(new forceLeaderboardSend());
         getCommand("dl-create").setExecutor(new createCommand());
+        getCommand("dl-view").setExecutor(new viewCommand());
         getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
 
         h2url = "jdbc:h2:file:" + getDataFolder().getAbsolutePath() + "\\database\\database";
