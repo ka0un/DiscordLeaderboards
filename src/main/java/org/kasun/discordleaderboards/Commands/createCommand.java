@@ -1,5 +1,6 @@
 package org.kasun.discordleaderboards.Commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,13 +18,22 @@ public class createCommand implements CommandExecutor, TabCompleter {
         if (args.length == 4){
             //name top placeholder delay
             Leaderboard.createLeaderboard(args[0],Integer.parseInt(args[1]), args[2], Leaderboard.WebhookDelay.valueOf(args[3]));
-            System.out.println("Debug : created");
+            if (sender instanceof Player){
+                Player p = (Player) sender;
+                p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GREEN + "Leaderboard Created!");
+                p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "you can change the settings from plugins\\DiscordLeaderboards\\leaderboard\\" + args[0] + ".yml");
+            }else{
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GREEN + "Leaderboard Created!");
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "you can change the settings from plugins\\DiscordLeaderboards\\leaderboard\\" + args[0] + ".yml");
+            }
         }else{
             if (sender instanceof Player){
                 Player p = (Player) sender;
                 p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Wrong Command Usage !");
                 p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "/dl-create name 5 %placeholder% Daily");
-                System.out.println("Debug : notcreated");
+            }else{
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Wrong Command Usage !");
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "/dl-create name 5 %placeholder% Daily");
             }
         }
 

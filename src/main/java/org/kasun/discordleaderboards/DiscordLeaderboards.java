@@ -10,6 +10,7 @@ import org.kasun.discordleaderboards.Commands.forceLeaderboardSend;
 import org.kasun.discordleaderboards.Database.Database;
 import org.kasun.discordleaderboards.Listeners.PlayerJoin;
 import org.kasun.discordleaderboards.Utils.CustomConfig;
+import org.kasun.discordleaderboards.Utils.Leaderboard;
 import org.kasun.discordleaderboards.Utils.StartMessage;
 
 import java.sql.SQLOutput;
@@ -36,23 +37,10 @@ public final class DiscordLeaderboards extends JavaPlugin {
         FileConfiguration config = getConfig();
         List<String> itemList = config.getStringList("leaderboards");
 
-        //templates
+        //example leaderboard generate
         if (config.getBoolean("firsttime")) {
-            String lname = "example";
-            CustomConfig c2 = new CustomConfig(lname);
-            c2.setup();
-            c2.get().addDefault("name", lname);
-            c2.get().addDefault("placeholder", "%player_level%");
-            c2.get().addDefault("top", 5);
-            c2.get().addDefault("webhookurl", "-");
-            c2.get().options().copyDefaults(true);
-            c2.save();
-
+            Leaderboard.createLeaderboard("example", 5, "%player_level%", Leaderboard.WebhookDelay.Daily);
             config.set("firsttime", false);
-
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "=========================================");
-
-
         }
 
         for (String lb : itemList) {
@@ -61,6 +49,7 @@ public final class DiscordLeaderboards extends JavaPlugin {
             c1.get().options().copyDefaults(true);
             c1.save();
         }
+        Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "=========================================");
 
     }
 

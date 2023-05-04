@@ -21,7 +21,7 @@ public class WebhookTestCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
 
-        String url = (String) plugin.getConfig().get("webhookurl");
+        String url = (String) plugin.getConfig().get("webhook-url");
         DiscordWebhook w = new DiscordWebhook(url);
         if (url != null && !url.equalsIgnoreCase("-")) {
             w.setContent("Your Webhook is Working");
