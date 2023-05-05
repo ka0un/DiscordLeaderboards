@@ -14,6 +14,7 @@ import org.kasun.discordleaderboards.Utils.CustomConfig;
 import org.kasun.discordleaderboards.Utils.Leaderboard;
 import org.kasun.discordleaderboards.Utils.StartMessage;
 
+import java.sql.SQLException;
 import java.sql.SQLOutput;
 import java.util.List;
 
@@ -39,11 +40,6 @@ public final class DiscordLeaderboards extends JavaPlugin {
         FileConfiguration config = getConfig();
         List<String> itemList = config.getStringList("leaderboards");
 
-        //example leaderboard generate
-        if (config.getBoolean("firsttime")) {
-            Leaderboard.createLeaderboard("example", 5, "%player_level%", Leaderboard.WebhookDelay.Daily);
-            config.set("firsttime", false);
-        }
 
         for (String lb : itemList) {
             CustomConfig c1 = new CustomConfig(lb);
@@ -51,13 +47,26 @@ public final class DiscordLeaderboards extends JavaPlugin {
             c1.get().options().copyDefaults(true);
             c1.save();
         }
+
+        //example leaderboard generate
+        if (config.getBoolean("firsttime")) {
+            Leaderboard.createexampleLeaderboard();
+            config.set("firsttime", false);
+        }
+
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "=========================================");
 
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        try{
+            Database.getConnection().close();
+        }catch (SQLException e){
+
+        }
+        Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "Plugin Disconnected From Database...");
+        Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "Plugin ShutDown");
     }
 
     public static String getH2url() {

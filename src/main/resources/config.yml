@@ -32,6 +32,7 @@ password: ''
 leaderboards:
   - 'example'
 
+
 #=================================================================
 # Default Settings
 #=================================================================
@@ -41,17 +42,12 @@ webhook-url: '-'  #Required !!!
 webhook-avatar-url: '-'
 webhook-user-name: 'DLeaderBoards'
 
-embed-title: 'Leaderboard'
+embed-title: 'Leaderboard' #Required !!!
 embed-url: '-'
 embed-colour: '#00ffee'
 embed-footer: '-'
-embed-footer-icon: '-'
 embed-image: '-'
 embed-thumbnail: '-'
-
-embed-author-name: '-'
-embed-author-url: '-'
-embed-author-icon: '-'
 
 #=================================================================
 # Debug Settings

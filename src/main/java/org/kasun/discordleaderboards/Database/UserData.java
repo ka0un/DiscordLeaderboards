@@ -49,6 +49,30 @@ public class UserData {
         return toplistmap;
     }
 
+    public static String gettoplistStringforWebhook(String placeholder, int top){
+        Map<String, Integer> toplistmap = UserData.gettoplistmap(placeholder, top);
+
+        // find the maximum length of the names
+        int maxNameLength = 0;
+        for (String name : toplistmap.keySet()) {
+            if (name.length() > maxNameLength) {
+                maxNameLength = name.length();
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        int i = 1;
+        for (Map.Entry<String, Integer> entry : toplistmap.entrySet()) {
+            String name = entry.getKey();
+            int score = entry.getValue();
+            String formattedEntry = String.format("%d. %-"+(maxNameLength+2)+"s %d\\u000A", i++, name, score);
+            sb.append(formattedEntry);
+        }
+        String leaderboardString = sb.toString();
+        return leaderboardString;
+    }
+
+
     public static String gettoplistString(String placeholder, int top){
         Map<String, Integer> toplistmap = UserData.gettoplistmap(placeholder, top);
         StringBuilder sb = new StringBuilder();

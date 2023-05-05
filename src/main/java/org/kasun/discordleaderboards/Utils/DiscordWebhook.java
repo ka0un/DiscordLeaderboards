@@ -94,7 +94,6 @@ public class DiscordWebhook {
                     JSONObject jsonFooter = new JSONObject();
 
                     jsonFooter.put("text", footer.getText());
-                    jsonFooter.put("icon_url", footer.getIconUrl());
                     jsonEmbed.put("footer", jsonFooter);
                 }
 
@@ -209,7 +208,7 @@ public class DiscordWebhook {
         }
 
         public EmbedObject setDescription(String description) {
-            this.description = description;
+            this.description = "```" + description + "```";
             return this;
         }
 
@@ -223,8 +222,8 @@ public class DiscordWebhook {
             return this;
         }
 
-        public EmbedObject setFooter(String text, String icon) {
-            this.footer = new Footer(text, icon);
+        public EmbedObject setFooter(String text) {
+            this.footer = new Footer(text);
             return this;
         }
 
@@ -250,20 +249,15 @@ public class DiscordWebhook {
 
         private class Footer {
             private String text;
-            private String iconUrl;
 
-            private Footer(String text, String iconUrl) {
+            private Footer(String text) {
                 this.text = text;
-                this.iconUrl = iconUrl;
             }
 
             private String getText() {
                 return text;
             }
 
-            private String getIconUrl() {
-                return iconUrl;
-            }
         }
 
         private class Thumbnail {

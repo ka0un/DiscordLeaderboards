@@ -23,8 +23,11 @@ public class WebhookTestCommand implements CommandExecutor {
 
         String url = (String) plugin.getConfig().get("webhook-url");
         DiscordWebhook w = new DiscordWebhook(url);
+        DiscordWebhook.EmbedObject embed = new DiscordWebhook.EmbedObject();
         if (url != null && !url.equalsIgnoreCase("-")) {
-            w.setContent("Your Webhook is Working");
+            embed.setTitle("Dleaderboards");
+            embed.setDescription("Your Webhook is Working");
+            w.addEmbed(embed);
             System.out.println(url);
             if (sender instanceof Player) {
                 Player p = (Player) sender;
