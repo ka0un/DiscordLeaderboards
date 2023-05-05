@@ -24,11 +24,27 @@ public class Leaderboard {
 
     public static void createLeaderboard(String name, int top, String placeholder, WebhookDelay delay) {
         //adding leaderboard to main config
-        List<String> leaderboards = Bukkit.getServer().getPluginManager().getPlugin("DiscordLeaderboards").getConfig().getStringList("leaderboards");
+
+        File configFile = new File(Bukkit.getPluginManager().getPlugin("DiscordLeaderboards").getDataFolder(), "config.yml");
+        FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
+        List<String> leaderboards = config.getStringList("leaderboards");
         leaderboards.add(name);
-        Bukkit.getServer().getPluginManager().getPlugin("DiscordLeaderboards").getConfig().options().copyDefaults(true);
-        Bukkit.getServer().getPluginManager().getPlugin("DiscordLeaderboards").getConfig().set("leaderboards", leaderboards);
-        Bukkit.getServer().getPluginManager().getPlugin("DiscordLeaderboards").saveConfig();
+        config.set("leaderboards", leaderboards);
+        config.addDefault("new_key", "default_value");
+        try {
+            config.save(configFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        //FileConfiguration config = Bukkit.getServer().getPluginManager().getPlugin("DiscordLeaderboards").getConfig();
+        //List<String> leaderboards = config.getStringList("leaderboards");
+        //leaderboards.add(name);
+        //config.options().copyHeader(true);
+        //config.options().copyDefaults(true);
+        //config.addDefault("leaderboards", leaderboards);
+        //Bukkit.getServer().getPluginManager().getPlugin("DiscordLeaderboards").saveConfig();
 
         //creating custom config
         CustomConfig c = new CustomConfig(name);

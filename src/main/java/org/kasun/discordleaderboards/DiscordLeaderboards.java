@@ -3,6 +3,7 @@ package org.kasun.discordleaderboards;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kasun.discordleaderboards.Commands.WebhookTestCommand;
 import org.kasun.discordleaderboards.Commands.createCommand;
@@ -14,6 +15,8 @@ import org.kasun.discordleaderboards.Utils.CustomConfig;
 import org.kasun.discordleaderboards.Utils.Leaderboard;
 import org.kasun.discordleaderboards.Utils.StartMessage;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.SQLOutput;
 import java.util.List;
@@ -36,8 +39,8 @@ public final class DiscordLeaderboards extends JavaPlugin {
         h2url = "jdbc:h2:file:" + getDataFolder().getAbsolutePath() + "\\database\\database";
         Database.initializeDatabase();
 
-
-        FileConfiguration config = getConfig();
+        File configFile = new File(Bukkit.getPluginManager().getPlugin("DiscordLeaderboards").getDataFolder(), "config.yml");
+        FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
         List<String> itemList = config.getStringList("leaderboards");
 
 
@@ -52,6 +55,11 @@ public final class DiscordLeaderboards extends JavaPlugin {
         if (config.getBoolean("firsttime")) {
             Leaderboard.createexampleLeaderboard();
             config.set("firsttime", false);
+            try {
+                config.save(configFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "=========================================");

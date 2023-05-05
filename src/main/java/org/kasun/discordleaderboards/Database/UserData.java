@@ -65,7 +65,7 @@ public class UserData {
         for (Map.Entry<String, Integer> entry : toplistmap.entrySet()) {
             String name = entry.getKey();
             int score = entry.getValue();
-            String formattedEntry = String.format("%d. %-"+(maxNameLength+2)+"s %d\\u000A", i++, name, score);
+            String formattedEntry = String.format("%d. %-"+(maxNameLength+4)+"s %d\\u000A", i++, name, score);
             sb.append(formattedEntry);
         }
         String leaderboardString = sb.toString();
