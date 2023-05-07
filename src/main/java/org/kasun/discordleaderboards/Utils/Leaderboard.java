@@ -204,7 +204,7 @@ public class Leaderboard {
 
         if (embedColour != null && !embedColour.equals("") && !embedColour.equals("-")){
             embed.setColor(Color.decode(embedColour));
-            System.out.println("avatar colour");
+            System.out.println("colour added");
         }
 
         if (embedFooter != null && !embedFooter.equals("") && !embedFooter.equals("-")){
@@ -235,6 +235,7 @@ public class Leaderboard {
             webhook.execute();
         }catch (IOException e){
             System.out.println(e);
+            e.printStackTrace();
 
         }
     }

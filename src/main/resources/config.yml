@@ -43,7 +43,7 @@ leaderboards:
 # You can change these values for each leaderboard in their own
 # config file witch you can find inside leaderboards folder
 webhook-url: '-'  #Required !!!
-webhook-avatar-url: '-'
+webhook-avatar-url: 'https://cdn.discordapp.com/attachments/1074520108514431026/1104804320349802596/Board_3.png'
 webhook-user-name: 'DLeaderBoards'
 
 embed-title: 'Leaderboard' #Required !!!
