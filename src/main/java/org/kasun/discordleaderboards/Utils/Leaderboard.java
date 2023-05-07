@@ -10,6 +10,7 @@ import org.kasun.discordleaderboards.Database.UserData;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -236,6 +237,11 @@ public class Leaderboard {
             System.out.println(e);
 
         }
+    }
+    public static String getDelay(String leaderboard){
+        FileConfiguration config = CustomConfig.getFileConfiguration(leaderboard);
+        String delay = config.getString("delay");
+        return delay;
     }
 }
 

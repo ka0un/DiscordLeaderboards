@@ -23,15 +23,19 @@ username: 'root'
 password: ''
 
 #=================================================================
-# Leaderboards
+# Main Settings
 #=================================================================
+# Delay between schedule check
+# Default 5
+# High Delay = Low Cpu Usage
+# Low Delay = High Accenture Timings
+scheduledelaymins: 5
 # you have to list leaderboard name (filename) here for load them
 # you can disable the leaderboard by removing them from this list
 # all leaderboard configs must be inside the leaderboards folder
 # and must follow default template as example leaderboard
 leaderboards:
   - 'example'
-
 
 #=================================================================
 # Default Settings

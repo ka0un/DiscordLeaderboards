@@ -5,12 +5,14 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.kasun.discordleaderboards.Commands.WebhookTestCommand;
 import org.kasun.discordleaderboards.Commands.createCommand;
 import org.kasun.discordleaderboards.Commands.forceLeaderboardSend;
 import org.kasun.discordleaderboards.Commands.viewCommand;
 import org.kasun.discordleaderboards.Database.Database;
 import org.kasun.discordleaderboards.Listeners.PlayerJoin;
+import org.kasun.discordleaderboards.Schedules.LeaderboardSchedule;
 import org.kasun.discordleaderboards.Utils.CustomConfig;
 import org.kasun.discordleaderboards.Utils.Leaderboard;
 import org.kasun.discordleaderboards.Utils.StartMessage;
@@ -18,7 +20,6 @@ import org.kasun.discordleaderboards.Utils.StartMessage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 import java.util.List;
 
 public final class DiscordLeaderboards extends JavaPlugin {
@@ -42,6 +43,7 @@ public final class DiscordLeaderboards extends JavaPlugin {
         File configFile = new File(Bukkit.getPluginManager().getPlugin("DiscordLeaderboards").getDataFolder(), "config.yml");
         FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
         List<String> itemList = config.getStringList("leaderboards");
+        int scheduleDelay = config.getInt("scheduledelaymins");
 
 
         for (String lb : itemList) {
@@ -60,6 +62,18 @@ public final class DiscordLeaderboards extends JavaPlugin {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else{
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    // This code will run every x minutes
+                    List<String> itemList = config.getStringList("leaderboards");
+
+                    for (String leaderboard : itemList) {
+                        LeaderboardSchedule.runLeaderboardSchedule(leaderboard);
+                    }
+                }
+            }.runTaskTimerAsynchronously(this, 0L, 20L * 60 * scheduleDelay);
         }
 
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "=========================================");
@@ -80,4 +94,5 @@ public final class DiscordLeaderboards extends JavaPlugin {
     public static String getH2url() {
         return h2url;
     }
+
 }

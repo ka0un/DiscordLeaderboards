@@ -26,16 +26,7 @@ public class UserData {
             } catch (NumberFormatException ex) {
                 Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "[ERROR] " + ph + " isn't working Make Sure Required Papi Expansion installed or Placeholder Outputting Number Value eg- 1, 5, 2000");
             }
-
-            //debug code
-            //List<String> toplist = Database.gettop(ph, 5);
-            //for (String uuid : toplist){
-            //    System.out.println("Debug top : " + uuid);
-            //}
-            //System.out.println("Debug getname : " + Database.getName(p.getUniqueId().toString()));
-            //System.out.println("Debug getvalue : " + Database.getValue(p.getUniqueId().toString(), ph));
         }
-
     }
 
     public static Map gettoplistmap(String placeholder, int top){
@@ -46,6 +37,7 @@ public class UserData {
             int value = Database.getValue(uuid, placeholder).intValue();
             toplistmap.put(name, value);
         }
+        System.out.println("Debug : gettoplistmap working " + uuidlist.toString());
         return toplistmap;
     }
 
@@ -69,6 +61,7 @@ public class UserData {
             sb.append(formattedEntry);
         }
         String leaderboardString = sb.toString();
+        System.out.println("Debug : gettoplistforwebhook working " + leaderboardString);
         return leaderboardString;
     }
 
