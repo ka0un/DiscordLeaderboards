@@ -6,11 +6,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Array;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Class used to execute Discord Webhooks with low effort
@@ -22,6 +18,7 @@ public class DiscordWebhook {
     private String username;
     private String avatarUrl;
     private boolean tts;
+    private UUID uuid;
     private List<EmbedObject> embeds = new ArrayList<>();
 
     /**

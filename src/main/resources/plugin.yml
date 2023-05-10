@@ -1,7 +1,9 @@
 name: DiscordLeaderboards
 version: '0.0.1'
 main: org.kasun.discordleaderboards.DiscordLeaderboards
-softdepend: [PlaceholderAPI] # If your plugin requires PlaceholderAPI, to work, use this.
+softdepend:
+  - PlaceholderAPI
+  - DiscordSRV
 prefix: DLeaderboards
 authors: [Kasun Hapangama]
 description: Post Leaderboard to discord channel using webhooks

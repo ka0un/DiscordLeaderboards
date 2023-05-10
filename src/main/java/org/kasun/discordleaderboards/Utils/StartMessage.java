@@ -22,6 +22,9 @@ public class StartMessage {
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.UNDERLINE + "https://www.spigotmc.org/resources/placeholderapi.6245/");
             Bukkit.getPluginManager().disablePlugin(plugin);
         }
+        if (Bukkit.getPluginManager().getPlugin("DiscordSRV") != null) {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "DiscordSRV Hooked!");
+        }
 
 
     }
