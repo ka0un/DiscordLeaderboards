@@ -17,7 +17,6 @@ public class SrvEmbeds {
         String embedFooter = lb.getEmbedFooter();
         String embedImage = lb.getEmbedImage();
         String embedThumbnail = lb.getEmbedThumbnail();
-        String embedDescription = lb.getDescription();
 
         if (embedTitle != null && !embedTitle.equals("") && !embedTitle.equals("-")){
             embedBuilder.setTitle(embedTitle);

@@ -10,6 +10,7 @@ import github.scarsz.discordsrv.dependencies.jda.api.interactions.commands.Optio
 import github.scarsz.discordsrv.dependencies.jda.api.interactions.commands.build.CommandData;
 import github.scarsz.discordsrv.dependencies.jda.api.interactions.commands.build.OptionData;
 import github.scarsz.discordsrv.dependencies.jda.api.interactions.commands.build.SubcommandData;
+import jdk.jfr.internal.tool.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -28,10 +29,7 @@ import org.kasun.discordleaderboards.Listeners.DiscordSRVListener;
 import org.kasun.discordleaderboards.Listeners.PlayerJoin;
 import org.kasun.discordleaderboards.Listeners.PlayerQuit;
 import org.kasun.discordleaderboards.Schedules.LeaderboardSchedule;
-import org.kasun.discordleaderboards.Utils.CustomConfig;
-import org.kasun.discordleaderboards.Utils.Leaderboard;
-import org.kasun.discordleaderboards.Utils.SrvEmbeds;
-import org.kasun.discordleaderboards.Utils.StartMessage;
+import org.kasun.discordleaderboards.Utils.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -64,10 +62,10 @@ public final class DiscordLeaderboards extends JavaPlugin implements Listener, S
         h2url = "jdbc:h2:file:" + getDataFolder().getAbsolutePath() + "\\database\\database";
         Database.initializeDatabase();
 
-        File configFile = new File(getPlugin(this.getClass()).getDataFolder(), "config.yml");
-        FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
-        List<String> itemList = config.getStringList("leaderboards");
-        int scheduleDelay = config.getInt("scheduledelaymins");
+        File configFile = MainConfig.getConfigFile();
+        FileConfiguration config = MainConfig.getConfig();
+        List<String> itemList = MainConfig.getLeaderboardsList();
+        int scheduleDelay = MainConfig.getScheduleDelayMins();
 
         instance = this;
 
@@ -131,10 +129,7 @@ public final class DiscordLeaderboards extends JavaPlugin implements Listener, S
     public Set<PluginSlashCommand> getSlashCommands() {
 
         CommandData commandData = new CommandData("leaderboard", "view leaderboards");
-
-        File configFile = new File(getPlugin(this.getClass()).getDataFolder(), "config.yml");
-        FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
-        List<String> itemList = config.getStringList("leaderboards");
+        List<String> itemList = MainConfig.getLeaderboardsList();
         List<OptionData> options = new ArrayList<>();
         OptionData dropdownOption = new OptionData(OptionType.INTEGER, "leaderboard", "Dropdown Option Description", true);
 
@@ -166,10 +161,7 @@ public final class DiscordLeaderboards extends JavaPlugin implements Listener, S
 
     @SlashCommand(path = "leaderboard")
     public void bestPlugin(SlashCommandEvent event) {
-        File configFile = new File(getPlugin(this.getClass()).getDataFolder(), "config.yml");
-        FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
-        List<String> itemList = config.getStringList("leaderboards");
-
+        List<String> itemList = MainConfig.getLeaderboardsList();
         int option = (int) event.getOption("leaderboard").getAsDouble();
         String replay = Leaderboard.toString(itemList.get(option));
         MessageEmbed messageEmbed = SrvEmbeds.getMessageEmbed(itemList.get(option));
