@@ -10,7 +10,6 @@ import github.scarsz.discordsrv.dependencies.jda.api.interactions.commands.build
 import github.scarsz.discordsrv.dependencies.jda.api.interactions.commands.build.OptionData;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
-import org.kasun.discordleaderboards.DiscordSRV.SrvEmbeds;
 import org.kasun.discordleaderboards.Utils.Leaderboard;
 import org.kasun.discordleaderboards.Utils.MainConfig;
 

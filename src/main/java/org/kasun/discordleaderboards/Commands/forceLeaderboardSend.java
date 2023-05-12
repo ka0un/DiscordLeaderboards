@@ -7,10 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import org.kasun.discordleaderboards.DiscordLeaderboards;
 import org.kasun.discordleaderboards.Utils.Leaderboard;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class forceLeaderboardSend implements CommandExecutor, TabCompleter {
