@@ -2,6 +2,7 @@ package org.kasun.discordleaderboards.Database;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.kasun.discordleaderboards.Utils.MainConfig;
 import org.kasun.discordleaderboards.Utils.TimeUtils;
 
 import java.sql.PreparedStatement;
@@ -19,6 +20,7 @@ public class Schedule {
             preparedStatement.setTimestamp(1, timestamp);
             preparedStatement.setString(2, leaderboard);
             int rowsUpdated = preparedStatement.executeUpdate();
+            preparedStatement.close();
         }catch (SQLException ex){
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading data in database [code : 01]");
         }
@@ -27,14 +29,32 @@ public class Schedule {
     public static void setLastSent(String leaderboard){
         Timestamp timestamp = TimeUtils.getCurrentTimeStamp();
         PreparedStatement preparedStatement;
-        try {
-            preparedStatement = getConnection().prepareStatement("MERGE INTO Schedule s USING (VALUES (?, ?)) data (Leaderboard, LastSent) ON s.Leaderboard = data.Leaderboard WHEN MATCHED THEN UPDATE SET s.LastSent = data.LastSent WHEN NOT MATCHED THEN INSERT (Leaderboard, LastSent) VALUES (data.Leaderboard, data.LastSent);");
-            preparedStatement.setString(1, leaderboard);
-            preparedStatement.setTimestamp(2, timestamp);
-            int rowsUpdated = preparedStatement.executeUpdate();
-        } catch (SQLException ex) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading data in database  [code : 13]");
+        if (MainConfig.getStorageType().equalsIgnoreCase("h2")){
+            try {
+                preparedStatement = getConnection().prepareStatement("MERGE INTO Schedule s USING (VALUES (?, ?)) data (Leaderboard, LastSent) ON s.Leaderboard = data.Leaderboard WHEN MATCHED THEN UPDATE SET s.LastSent = data.LastSent WHEN NOT MATCHED THEN INSERT (Leaderboard, LastSent) VALUES (data.Leaderboard, data.LastSent);");
+                preparedStatement.setString(1, leaderboard);
+                preparedStatement.setTimestamp(2, timestamp);
+                int rowsUpdated = preparedStatement.executeUpdate();
+                preparedStatement.close();
+            } catch (SQLException ex) {
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading data in database  [code : 13]");
+            }
+        } else if (MainConfig.getStorageType().equalsIgnoreCase("mysql")) {
+            try {
+                preparedStatement = getConnection().prepareStatement(
+                        "REPLACE INTO Schedule (Leaderboard, LastSent) VALUES (?, ?)"
+                );
+                preparedStatement.setString(1, leaderboard);
+                preparedStatement.setTimestamp(2, timestamp);
+                int rowsUpdated = preparedStatement.executeUpdate();
+
+                preparedStatement.close();
+
+            } catch (SQLException ex) {
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading data in database  [code : 13.1]");
+            }
         }
+
     }
 
     public  static  boolean isAlredySent(String leaderboard){
@@ -47,6 +67,7 @@ public class Schedule {
                 int count = rs.getInt("count");
                 return count > 0;
             }
+            preparedStatement.close();
         }catch (SQLException ex){
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading data in database  [code : 14]");
         }
@@ -63,6 +84,7 @@ public class Schedule {
             if (rs.next()) {
                 lastsent = rs.getTimestamp("LastSent");
             }
+            preparedStatement.close();
         }catch (SQLException ex){
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading data in database  [code : 15]");
         }

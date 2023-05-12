@@ -25,6 +25,7 @@ public class StartMessage {
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "DiscordSRV Hooked!");
         }
 
+        Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "=========================================");
 
     }
 }

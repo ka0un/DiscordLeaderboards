@@ -84,7 +84,7 @@ public final class DiscordLeaderboards extends JavaPlugin {
 
 
 
-        Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "=========================================");
+
         if (Bukkit.getPluginManager().getPlugin("DiscordSRV") != null) {
             SrvUtils.load();
         }
