@@ -1,18 +1,10 @@
-package org.kasun.discordleaderboards.Listeners;
+package org.kasun.discordleaderboards.DiscordSRV;
 
-import github.scarsz.discordsrv.DiscordSRV;
 import github.scarsz.discordsrv.api.Subscribe;
-import github.scarsz.discordsrv.api.events.DiscordGuildMessageReceivedEvent;
 import github.scarsz.discordsrv.api.events.DiscordGuildMessageSentEvent;
 import github.scarsz.discordsrv.api.events.DiscordReadyEvent;
 import github.scarsz.discordsrv.util.DiscordUtil;
 import org.bukkit.plugin.Plugin;
-import github.scarsz.discordsrv.DiscordSRV;
-import github.scarsz.discordsrv.api.commands.PluginSlashCommand;
-import github.scarsz.discordsrv.api.commands.SlashCommand;
-import github.scarsz.discordsrv.dependencies.jda.api.events.interaction.SlashCommandEvent;
-import github.scarsz.discordsrv.dependencies.jda.api.interactions.commands.build.CommandData;
-import github.scarsz.discordsrv.dependencies.jda.api.interactions.commands.build.SubcommandData;
 
 
 public class DiscordSRVListener {

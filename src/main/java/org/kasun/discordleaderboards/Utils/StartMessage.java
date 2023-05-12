@@ -1,11 +1,13 @@
 package org.kasun.discordleaderboards.Utils;
 
-import net.kyori.adventure.platform.facet.Facet;
+import github.scarsz.discordsrv.DiscordSRV;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kasun.discordleaderboards.DiscordLeaderboards;
+import org.kasun.discordleaderboards.DiscordSRV.DiscordSRVListener;
+import org.kasun.discordleaderboards.DiscordSRV.SrvSlashCommands;
 
 public class StartMessage {
     public static void sendStartMessage() {

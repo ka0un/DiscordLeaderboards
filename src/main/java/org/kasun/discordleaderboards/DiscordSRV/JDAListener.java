@@ -1,4 +1,4 @@
-package org.kasun.discordleaderboards.Listeners;
+package org.kasun.discordleaderboards.DiscordSRV;
 
 import github.scarsz.discordsrv.dependencies.jda.api.events.guild.GuildUnavailableEvent;
 import github.scarsz.discordsrv.dependencies.jda.api.hooks.ListenerAdapter;

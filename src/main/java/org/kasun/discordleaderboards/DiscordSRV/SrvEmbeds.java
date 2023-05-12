@@ -1,8 +1,9 @@
-package org.kasun.discordleaderboards.Utils;
+package org.kasun.discordleaderboards.DiscordSRV;
 
 import github.scarsz.discordsrv.dependencies.jda.api.EmbedBuilder;
 import github.scarsz.discordsrv.dependencies.jda.api.entities.MessageEmbed;
 import org.kasun.discordleaderboards.Database.UserData;
+import org.kasun.discordleaderboards.Utils.Leaderboard;
 
 import java.awt.*;
 
