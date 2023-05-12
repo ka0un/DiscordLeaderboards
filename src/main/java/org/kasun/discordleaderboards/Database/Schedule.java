@@ -20,8 +20,7 @@ public class Schedule {
             preparedStatement.setString(2, leaderboard);
             int rowsUpdated = preparedStatement.executeUpdate();
         }catch (SQLException ex){
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading data in database");
-            ex.printStackTrace();
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading data in database [code : 01]");
         }
     }
 
@@ -34,8 +33,7 @@ public class Schedule {
             preparedStatement.setTimestamp(2, timestamp);
             int rowsUpdated = preparedStatement.executeUpdate();
         } catch (SQLException ex) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading data in database");
-            ex.printStackTrace();
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading data in database  [code : 13]");
         }
     }
 
@@ -50,8 +48,7 @@ public class Schedule {
                 return count > 0;
             }
         }catch (SQLException ex){
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading data in database");
-            ex.printStackTrace();
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading data in database  [code : 14]");
         }
         return false;
     }
@@ -67,8 +64,7 @@ public class Schedule {
                 lastsent = rs.getTimestamp("LastSent");
             }
         }catch (SQLException ex){
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading data in database");
-            ex.printStackTrace();
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading data in database  [code : 15]");
         }
         return lastsent;
     }

@@ -6,15 +6,19 @@ import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.kasun.discordleaderboards.DiscordLeaderboards;
 import org.kasun.discordleaderboards.Utils.CustomConfig;
 
 import java.util.*;
 
 public class UserData {
     public static void add(Player p) {
+        Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
         String name = p.getName();
 
-        FileConfiguration config = Bukkit.getPluginManager().getPlugin("DiscordLeaderboards").getConfig();
+        FileConfiguration config = plugin.getConfig();
         List<String> lblist = config.getStringList("leaderboards");
 
         for (String lbname : lblist) {
@@ -25,15 +29,16 @@ public class UserData {
                 String UUID = p.getUniqueId().toString();
                 Database.enterUserData(UUID, name, ph, value);
             } catch (NumberFormatException ex) {
-                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "[ERROR] " + ph + " isn't working Make Sure Required Papi Expansion installed or Placeholder Outputting Number Value eg- 1, 5, 2000");
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "[ERROR] " + ph + " isn't working Make Sure Required Papi Expansion installed or Placeholder Outputting Number Value eg- 1, 5, 2000  [code : 16]");
             }
         }
     }
 
     public static void add(OfflinePlayer p) {
         String name = p.getName();
+        Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
 
-        FileConfiguration config = Bukkit.getPluginManager().getPlugin("DiscordLeaderboards").getConfig();
+        FileConfiguration config = plugin.getConfig();
         List<String> lblist = config.getStringList("leaderboards");
 
         for (String lbname : lblist) {
@@ -44,7 +49,7 @@ public class UserData {
                 String UUID = p.getUniqueId().toString();
                 Database.enterUserData(UUID, name, ph, value);
             } catch (NumberFormatException ex) {
-                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "[ERROR] " + ph + " may not support offline players. you can ignore this warning!");
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "[ERROR] " + ph + " may not support offline players. you can ignore this warning!  [code : 17]");
             }
         }
     }
@@ -57,7 +62,6 @@ public class UserData {
             int value = Database.getValue(uuid, placeholder).intValue();
             toplistmap.put(name, value);
         }
-        System.out.println("Debug : gettoplistmap working " + uuidlist.toString());
         return toplistmap;
     }
 
@@ -81,7 +85,6 @@ public class UserData {
             sb.append(formattedEntry);
         }
         String leaderboardString = sb.toString();
-        System.out.println("Debug : gettoplistforwebhook working " + leaderboardString);
         return leaderboardString;
     }
 

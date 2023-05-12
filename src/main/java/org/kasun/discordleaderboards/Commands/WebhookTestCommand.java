@@ -28,7 +28,6 @@ public class WebhookTestCommand implements CommandExecutor {
             embed.setTitle("Dleaderboards");
             embed.setDescription("Your Webhook is Working");
             w.addEmbed(embed);
-            System.out.println(url);
             if (sender instanceof Player) {
                 Player p = (Player) sender;
                 p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "Sending Webhook Message....");
@@ -40,11 +39,13 @@ public class WebhookTestCommand implements CommandExecutor {
             } catch (FileNotFoundException e) {
                 if (sender instanceof Player) {
                     Player p = (Player) sender;
-                    p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Invalid Webhook Url");
+                    p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Invalid Webhook Url [code : 04]");
                 } else {
-                    Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Invalid Webhook Url");
+                    Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Invalid Webhook Url [code : 04]");
                 }
-            } catch (IOException ee) {}
+            } catch (IOException ee) {
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "embed not ready yet, internal plugin issue pleace contact plugin developer [code : 05]");
+            }
 
         }else{
             if (sender instanceof Player) {

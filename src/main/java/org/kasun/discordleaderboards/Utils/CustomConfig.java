@@ -2,8 +2,12 @@ package org.kasun.discordleaderboards.Utils;
 
 import jogamp.graph.font.typecast.ot.mac.ResourceFile;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.kasun.discordleaderboards.DiscordLeaderboards;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,7 +23,8 @@ public class CustomConfig {
     }
 
     public void setup(){
-        file = new File(Bukkit.getServer().getPluginManager().getPlugin("DiscordLeaderboards").getDataFolder() + "\\leaderboard\\", name + ".yml");
+        Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
+        file = new File(plugin.getDataFolder() + "/leaderboard/", name + ".yml");
 
         if (!file.exists()){
             try {
@@ -36,7 +41,8 @@ public class CustomConfig {
     }
 
     public static FileConfiguration getFileConfiguration(String fileName) {
-        File file = new File(Bukkit.getPluginManager().getPlugin("DiscordLeaderboards").getDataFolder() + "\\leaderboard\\", fileName + ".yml");
+        Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
+        File file = new File(plugin.getDataFolder() + "/leaderboard/", fileName + ".yml");
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
         return config;
     }
@@ -45,7 +51,8 @@ public class CustomConfig {
         try {
             customFile.save(file);
         }catch (IOException e){
-            System.out.println("couldent Save File");
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "file saving issue , internal plugin issue please contact plugin developer [code : 22]");
+
         }
     }
 

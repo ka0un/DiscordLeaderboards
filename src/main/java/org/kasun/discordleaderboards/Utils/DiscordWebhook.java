@@ -1,5 +1,7 @@
 package org.kasun.discordleaderboards.Utils;
 
+import org.apache.commons.lang.NullArgumentException;
+
 import javax.net.ssl.HttpsURLConnection;
 import java.awt.Color;
 import java.io.IOException;
@@ -50,10 +52,12 @@ public class DiscordWebhook {
         this.embeds.add(embed);
     }
 
-    public void execute() throws IOException {
-        if (this.content == null && this.embeds.isEmpty()) {
+    public void execute() throws IOException{
+        if (this.content == null && this.embeds.isEmpty() ) {
             throw new IllegalArgumentException("Set content or add at least one EmbedObject");
         }
+
+
 
         JSONObject json = new JSONObject();
 

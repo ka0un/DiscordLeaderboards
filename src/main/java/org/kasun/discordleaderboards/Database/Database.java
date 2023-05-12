@@ -18,11 +18,9 @@ public class Database {
             Class.forName("org.h2.Driver");
             connection = DriverManager.getConnection(DiscordLeaderboards.getH2url());
         } catch (ClassNotFoundException e) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Database Driver Not Found !");
-            e.printStackTrace();
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Database Driver Not Found ! [code : 06]");
         } catch (SQLException e) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to Connect H2 Database !");
-            e.printStackTrace();
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to Connect H2 Database ! [code : 07]");
         }
         return connection;
 
@@ -47,8 +45,7 @@ public class Database {
                     ");");
             preparedStatement.execute();
         } catch (SQLException ex) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Database Preparation Error Detected!");
-            ex.printStackTrace();
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Database Preparation Error Detected! [code : 08]");
         }
     }
 
@@ -61,8 +58,8 @@ public class Database {
             preparedStatement = getConnection().prepareStatement("MERGE INTO UserData u USING (SELECT '" + UUID + "' AS PlayerUUID, '" + name + "' AS PlayerName, " + value + " AS " + placeholderColumnName + " FROM DUAL) data ON u.PlayerUUID = data.PlayerUUID WHEN MATCHED THEN UPDATE SET u." + placeholderColumnName + " = data." + placeholderColumnName + " WHEN NOT MATCHED THEN INSERT (PlayerUUID, PlayerName, " + placeholderColumnName + ") VALUES (data.PlayerUUID, data.PlayerName, data." + placeholderColumnName + ");");
             preparedStatement.execute();
         } catch (SQLException ex) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while adding UserData to database");
-            ex.printStackTrace();
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while adding UserData to database [code : 09]");
+
         }
     }
 
@@ -78,10 +75,8 @@ public class Database {
                 String uuid = rs.getString("PlayerUUID");
                 toplist.add(uuid);
             }
-            System.out.println("Debug : gettop working " + toplist);
         } catch (SQLException ex) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading Userdata in database");
-            ex.printStackTrace();
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading Userdata, pleace check your placeholders in leaderboard configs [code : 10]");
         }
 
         return toplist;
@@ -99,8 +94,8 @@ public class Database {
                 name = playerName;
             }
         } catch (SQLException ex) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading data in database");
-            ex.printStackTrace();
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading data in database [code : 11]");
+
         }
         return name;
     }
@@ -117,8 +112,8 @@ public class Database {
                 value = rs.getDouble(placeholderColumnName);
             }
         } catch (SQLException ex) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading data in database");
-            ex.printStackTrace();
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading data in database  [code : 12]");
+
         }
         return value;
     }

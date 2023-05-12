@@ -27,8 +27,8 @@ public class LiveCache {
 
             int rowsUpdated = preparedStatement.executeUpdate();
         } catch (SQLException ex) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while saving Live Cache");
-            ex.printStackTrace();
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while saving Live Cache [code : 02]");
+
         }
     }
 
@@ -57,8 +57,7 @@ public class LiveCache {
             resultSet.close();
             preparedStatement.close();
         } catch (SQLException ex) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading Live Cache");
-            ex.printStackTrace();
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading Live Cache [code : 03]");
         } catch (IOException ex) {
             return null;
         }
