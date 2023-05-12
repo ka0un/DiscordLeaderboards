@@ -2,7 +2,6 @@ package org.kasun.discordleaderboards.Utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 import org.kasun.discordleaderboards.Database.UserData;
 
 import java.util.ArrayList;
