@@ -1,10 +1,12 @@
 package org.kasun.discordleaderboards.Utils;
 
+import jogamp.graph.font.typecast.ot.mac.ResourceFile;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 public class CustomConfig {
@@ -28,6 +30,7 @@ public class CustomConfig {
         }
         customFile = YamlConfiguration.loadConfiguration(file);
     }
+
     public FileConfiguration get(){
         return customFile;
     }

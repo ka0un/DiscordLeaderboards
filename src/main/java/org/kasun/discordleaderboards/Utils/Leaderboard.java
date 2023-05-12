@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.kasun.discordleaderboards.Database.UserData;
+import org.kasun.discordleaderboards.DiscordLeaderboards;
 
 import java.awt.*;
 import java.io.File;
@@ -118,28 +119,6 @@ public class Leaderboard {
         c.get().addDefault("embed-image", "");
         c.get().addDefault("embed-thumbnail", "");
         c.save();
-
-    }
-
-    public static void createexampleLeaderboard() {
-        //creating custom config
-        CustomConfig d = new CustomConfig("example");
-        d.setup();
-        d.get().options().copyDefaults(true);
-        d.get().addDefault("name", "example");
-        d.get().addDefault("placeholder", "%player_level%");
-        d.get().addDefault("top", 5);
-        d.get().addDefault("delay", "Daily");
-        d.get().addDefault("webhook-url", "");
-        d.get().addDefault("webhook-avatar-url", "");
-        d.get().addDefault("webhook-user-name", "");
-        d.get().addDefault("embed-title", "");
-        d.get().addDefault("embed-url", "");
-        d.get().addDefault("embed-colour", "");
-        d.get().addDefault("embed-footer", "");
-        d.get().addDefault("embed-image", "");
-        d.get().addDefault("embed-thumbnail", "");
-        d.save();
 
     }
 

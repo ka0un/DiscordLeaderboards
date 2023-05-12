@@ -1,0 +1,63 @@
+#===================================
+# Discord Leaderboards
+# Config Version 0.0.1
+# Leaderboard Config
+#===================================
+
+name: example
+# Required
+# Unique identifier for each leaderboard.
+# Must be the same as the file name.
+
+placeholder: '%player_level%'
+# Required
+# PlaceholderAPI Placeholder. Please include % %.
+# Make sure this PlaceholderAPI placeholder outputs a number value.
+
+top: 5
+# Required
+# Leaderboard amount, e.g., top 5 or top 3.
+# Must be an integer value.
+
+#===================================
+# WEBHOOK OPTIONS
+# Enter '' to use default values.
+#===================================
+
+delay: Daily
+# Required
+# Webhook send schedule:
+# - Live: Send webhook every time the leaderboard changes.
+# - Hourly: Send webhook every hour.
+# - Daily: Send webhook every day.
+# - Weekly: Send webhook every week.
+# - Monthly: Send webhook every month.
+# - None: Send webhook only with the '/dl-forcesend' command or DiscordSRV '/leaderboard' command.
+
+webhook-url: ''
+# Discord Webhook URL.
+
+webhook-avatar-url: ''
+# Discord Webhook avatar URL.
+# Must be a direct image link.
+
+webhook-user-name: ''
+# Discord Webhook Username.
+
+embed-title: ''
+# Discord embed Title.
+
+embed-url: ''
+# Discord embed Title URL.
+
+embed-colour: ''
+# Discord embed Colour.
+
+embed-footer: ''
+# Discord embed Footer.
+
+embed-image: ''
+# Discord embed Image.
+
+embed-thumbnail: ''
+# Discord embed Thumbnail.

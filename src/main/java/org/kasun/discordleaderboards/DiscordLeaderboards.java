@@ -16,8 +16,7 @@ import org.kasun.discordleaderboards.Listeners.PlayerQuit;
 import org.kasun.discordleaderboards.Schedules.LeaderboardSchedule;
 import org.kasun.discordleaderboards.Utils.*;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -64,7 +63,7 @@ public final class DiscordLeaderboards extends JavaPlugin {
 
         //example leaderboard generate
         if (config.getBoolean("firsttime")) {
-            Leaderboard.createexampleLeaderboard();
+            copyResourceFile("example.yml", new File(JavaPlugin.getPlugin(DiscordLeaderboards.class).getDataFolder() + "\\leaderboard\\", "example.yml"));
             config.set("firsttime", false);
             try {
                 config.save(configFile);
@@ -85,8 +84,9 @@ public final class DiscordLeaderboards extends JavaPlugin {
             }.runTaskTimerAsynchronously(this, 0L, 20L * 60 * scheduleDelay);
         }
 
-        Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "=========================================");
 
+
+        Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "=========================================");
         if (Bukkit.getPluginManager().getPlugin("DiscordSRV") != null) {
             SrvUtils.load();
         }
@@ -116,6 +116,20 @@ public final class DiscordLeaderboards extends JavaPlugin {
 
     public static DiscordLeaderboards getInstance() {
         return instance;
+    }
+
+    public void copyResourceFile(String resourceName, File destination) {
+        try (InputStream inputStream = getResource(resourceName);
+             OutputStream outputStream = new FileOutputStream(destination)) {
+
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = inputStream.read(buffer)) > 0) {
+                outputStream.write(buffer, 0, length);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
