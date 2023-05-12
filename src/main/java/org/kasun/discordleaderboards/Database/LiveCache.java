@@ -3,6 +3,7 @@ package org.kasun.discordleaderboards.Database;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.kasun.discordleaderboards.Utils.Leaderboard;
+import org.kasun.discordleaderboards.Utils.MainConfig;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -15,21 +16,44 @@ public class LiveCache {
         String cache = Leaderboard.toString(leaderboard);
 
         PreparedStatement preparedStatement;
-        try {
-            Connection conn = getConnection();
-            preparedStatement = conn.prepareStatement("MERGE INTO LiveCache s USING (VALUES (?, ?)) data (Leaderboard, Cache) ON s.Leaderboard = data.Leaderboard WHEN MATCHED THEN UPDATE SET s.Cache = data.Cache WHEN NOT MATCHED THEN INSERT (Leaderboard, Cache) VALUES (data.Leaderboard, data.Cache);");
-            preparedStatement.setString(1, leaderboard);
+        if (MainConfig.getStorageType().equalsIgnoreCase("h2")){
+            try {
+                Connection conn = getConnection();
+                preparedStatement = conn.prepareStatement("MERGE INTO LiveCache s USING (VALUES (?, ?)) data (Leaderboard, Cache) ON s.Leaderboard = data.Leaderboard WHEN MATCHED THEN UPDATE SET s.Cache = data.Cache WHEN NOT MATCHED THEN INSERT (Leaderboard, Cache) VALUES (data.Leaderboard, data.Cache);");
+                preparedStatement.setString(1, leaderboard);
 
-            // Convert the 'cache' string to a Clob object
-            Clob clob = conn.createClob();
-            clob.setString(1, cache);
-            preparedStatement.setClob(2, clob);
+                // Convert the 'cache' string to a Clob object
+                Clob clob = conn.createClob();
+                clob.setString(1, cache);
+                preparedStatement.setClob(2, clob);
 
-            int rowsUpdated = preparedStatement.executeUpdate();
-        } catch (SQLException ex) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while saving Live Cache [code : 02]");
+                int rowsUpdated = preparedStatement.executeUpdate();
+                conn.close();
+            } catch (SQLException ex) {
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while saving Live Cache [code : 02]");
 
+            }
+
+        } else if (MainConfig.getStorageType().equalsIgnoreCase("mysql")) {
+            try {
+                Connection conn = getConnection();
+                preparedStatement = conn.prepareStatement(
+                        "INSERT INTO LiveCache (Leaderboard, Cache) VALUES (?, ?) " +
+                                "ON DUPLICATE KEY UPDATE Cache = VALUES(Cache)"
+                );
+                preparedStatement.setString(1, leaderboard);
+                preparedStatement.setString(2, cache);
+
+                int rowsUpdated = preparedStatement.executeUpdate();
+                preparedStatement.close();
+                conn.close();
+
+            } catch (SQLException ex) {
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while saving Live Cache [code : 02.1]");
+
+            }
         }
+
     }
 
     public static String getCache(String leaderboard) {
@@ -56,6 +80,7 @@ public class LiveCache {
             }
             resultSet.close();
             preparedStatement.close();
+            conn.close();
         } catch (SQLException ex) {
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while reading Live Cache [code : 03]");
         } catch (IOException ex) {
