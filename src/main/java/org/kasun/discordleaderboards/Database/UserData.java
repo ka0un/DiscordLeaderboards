@@ -3,6 +3,7 @@ package org.kasun.discordleaderboards.Database;
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.kasun.discordleaderboards.Utils.CustomConfig;
@@ -25,6 +26,25 @@ public class UserData {
                 Database.enterUserData(UUID, name, ph, value);
             } catch (NumberFormatException ex) {
                 Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "[ERROR] " + ph + " isn't working Make Sure Required Papi Expansion installed or Placeholder Outputting Number Value eg- 1, 5, 2000");
+            }
+        }
+    }
+
+    public static void add(OfflinePlayer p) {
+        String name = p.getName();
+
+        FileConfiguration config = Bukkit.getPluginManager().getPlugin("DiscordLeaderboards").getConfig();
+        List<String> lblist = config.getStringList("leaderboards");
+
+        for (String lbname : lblist) {
+            FileConfiguration c = CustomConfig.getFileConfiguration(lbname);
+            String ph = c.getString("placeholder");
+            try {
+                double value = Double.parseDouble(PlaceholderAPI.setPlaceholders(p, ph));
+                String UUID = p.getUniqueId().toString();
+                Database.enterUserData(UUID, name, ph, value);
+            } catch (NumberFormatException ex) {
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "[ERROR] " + ph + " may not support offline players. you can ignore this warning!");
             }
         }
     }

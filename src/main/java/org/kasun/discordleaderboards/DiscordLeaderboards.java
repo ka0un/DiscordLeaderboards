@@ -5,10 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.kasun.discordleaderboards.Commands.WebhookTestCommand;
-import org.kasun.discordleaderboards.Commands.createCommand;
-import org.kasun.discordleaderboards.Commands.forceLeaderboardSend;
-import org.kasun.discordleaderboards.Commands.viewCommand;
+import org.kasun.discordleaderboards.Commands.*;
 import org.kasun.discordleaderboards.Database.Database;
 import org.kasun.discordleaderboards.DiscordSRV.SrvUtils;
 import org.kasun.discordleaderboards.Listeners.PlayerJoin;
@@ -38,6 +35,7 @@ public final class DiscordLeaderboards extends JavaPlugin {
         getCommand("dl-forcesend").setExecutor(new forceLeaderboardSend());
         getCommand("dl-create").setExecutor(new createCommand());
         getCommand("dl-view").setExecutor(new viewCommand());
+        getCommand("dl-syncall").setExecutor(new syncAllPlayers());
         getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
         getServer().getPluginManager().registerEvents(new PlayerQuit(), this);
 

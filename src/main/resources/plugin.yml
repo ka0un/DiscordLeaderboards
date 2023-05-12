@@ -20,4 +20,8 @@ commands:
   dl-view:
     description: View Leaderboard
     usage: /<Command> name
+  dl-syncall:
+    description: View Sync all players with database
+    usage: /<Command>
+
 
