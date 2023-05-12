@@ -19,7 +19,7 @@ public class CustomConfig {
     }
 
     public void setup(){
-        file = new File(Bukkit.getServer().getPluginManager().getPlugin("DiscordLeaderboards").getDataFolder() + "\\leaderboard\\", name + ".yml");
+        file = new File(Bukkit.getServer().getPluginManager().getPlugin("DiscordLeaderboards").getDataFolder() + "/leaderboard/", name + ".yml");
 
         if (!file.exists()){
             try {
@@ -36,7 +36,7 @@ public class CustomConfig {
     }
 
     public static FileConfiguration getFileConfiguration(String fileName) {
-        File file = new File(Bukkit.getPluginManager().getPlugin("DiscordLeaderboards").getDataFolder() + "\\leaderboard\\", fileName + ".yml");
+        File file = new File(Bukkit.getPluginManager().getPlugin("DiscordLeaderboards").getDataFolder() + "/leaderboard/", fileName + ".yml");
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
         return config;
     }
