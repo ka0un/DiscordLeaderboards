@@ -17,7 +17,6 @@ public class LeaderboardSchedule {
     public static void runLeaderboardSchedule(String leaderboard) {
         if (Schedule.isAlredySent(leaderboard)){
 
-            System.out.println("Debug : Sheduler is running");
 
             Timestamp currentTime = TimeUtils.getCurrentTimeStamp();
             Timestamp lastsent = Schedule.getLastSent(leaderboard);

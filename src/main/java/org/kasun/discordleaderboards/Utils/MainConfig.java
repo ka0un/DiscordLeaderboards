@@ -3,13 +3,16 @@ package org.kasun.discordleaderboards.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.kasun.discordleaderboards.DiscordLeaderboards;
 
 import java.io.File;
 import java.util.List;
 
 public class MainConfig {
-    private static File configFile = new File(Bukkit.getPluginManager().getPlugin("DiscordLeaderboards").getDataFolder(), "config.yml");
+    private static Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
+    private static File configFile = new File(plugin.getDataFolder(), "config.yml");
     private static FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
     private static List<String> leaderboardsList = config.getStringList("leaderboards");
     private static String dwebhookurl = config.getString("webhook-url");

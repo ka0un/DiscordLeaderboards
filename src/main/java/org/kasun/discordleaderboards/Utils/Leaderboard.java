@@ -1,8 +1,11 @@
 package org.kasun.discordleaderboards.Utils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.kasun.discordleaderboards.Database.UserData;
 import org.kasun.discordleaderboards.DiscordLeaderboards;
 
@@ -12,9 +15,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class Leaderboard {
-    public enum WebhookDelay {Live, Hourly, Daily, Weekly, Monthly}
+    Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
+    public enum WebhookDelay {Live, Hourly, Daily, Weekly, Monthly, None}
     private String name;
-    private FileConfiguration mainconfig = Bukkit.getPluginManager().getPlugin("DiscordLeaderboards").getConfig();
+    private FileConfiguration mainconfig = plugin.getConfig();
     private String dembedTitle = mainconfig.getString("embed-title");
     private String dwebhookurl = mainconfig.getString("webhook-url");
     private String dwebhookAvatarUrl = mainconfig.getString("webhook-avatar-url");
@@ -87,8 +91,8 @@ public class Leaderboard {
 
     public static void createLeaderboard(String name, int top, String placeholder, WebhookDelay delay) {
         //adding leaderboard to main config
-
-        File configFile = new File(Bukkit.getPluginManager().getPlugin("DiscordLeaderboards").getDataFolder(), "config.yml");
+        Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
+        File configFile = new File(plugin.getDataFolder(), "config.yml");
         FileConfiguration config = YamlConfiguration.loadConfiguration(configFile);
         List<String> leaderboards = config.getStringList("leaderboards");
         leaderboards.add(name);
@@ -97,7 +101,7 @@ public class Leaderboard {
         try {
             config.save(configFile);
         } catch (IOException e) {
-            e.printStackTrace();
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "unable to save custom config. please make sure you arent using same identifier twice  [code : 23]");
         }
 
 
@@ -134,8 +138,10 @@ public class Leaderboard {
 
     public static void sendleaderboard(String name) {
 
+        Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
         String dembedTitle = "Leaderboard";
-        FileConfiguration mainconfig = Bukkit.getPluginManager().getPlugin("DiscordLeaderboards").getConfig();
+        String dembedDescription = "No Player Data Found !";
+        FileConfiguration mainconfig = plugin.getConfig();
         String dwebhookurl = mainconfig.getString("webhook-url");
         String dwebhookAvatarUrl = mainconfig.getString("webhook-avatar-url");
         String dwebhookUserName = mainconfig.getString("webhook-user-name");
@@ -199,56 +205,54 @@ public class Leaderboard {
         //checking if default values are not null
         if (webhookAvatarUrl != null && !webhookAvatarUrl.equals("") && !webhookAvatarUrl.equals("-")){
             webhook.setAvatarUrl(webhookAvatarUrl);
-            System.out.println("avatar added");
         }
 
         if (webhookUserName != null && !webhookUserName.equals("") && !webhookUserName.equals("-")){
             webhook.setUsername(webhookUserName);
-            System.out.println("username added");
         }
 
         DiscordWebhook.EmbedObject embed = new DiscordWebhook.EmbedObject();
 
         if (embedTitle != null && !embedTitle.equals("") && !embedTitle.equals("-")){
             embed.setTitle(embedTitle);
-            System.out.println("title added");
         }
 
         if (embedUrl != null && !embedUrl.equals("") && !embedUrl.equals("-")){
             embed.setUrl(embedUrl);
-            System.out.println("embedurl added");
         }
 
         if (embedColour != null && !embedColour.equals("") && !embedColour.equals("-")){
             embed.setColor(Color.decode(embedColour));
-            System.out.println("colour added");
         }
 
         if (embedFooter != null && !embedFooter.equals("") && !embedFooter.equals("-")){
             embed.setFooter(embedFooter);
-            System.out.println("embed footer icon added");
         }
 
 
         if (embedThumbnail != null && !embedThumbnail.equals("") && !embedThumbnail.equals("-")){
             embed.setThumbnail(embedThumbnail);
-            System.out.println("embed Thumb added");
+
         }
 
         if (embedImage != null && !embedImage.equals("") && !embedImage.equals("-")){
             embed.setImage(embedImage);
-            System.out.println("embed image added");
+
         }
 
         String description = UserData.gettoplistStringforWebhook(placeholder, top);
+
+        if (description == null || description.equals("") || dembedDescription.equals("-")) {
+            description = dembedDescription;
+        }
+
         embed.setDescription(description);
 
         webhook.addEmbed(embed);
         try{
             webhook.execute();
         }catch (IOException e){
-            System.out.println(e);
-            e.printStackTrace();
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Webhook issue detected, Check You Config Files  [code : 24]");
         }
 
     }

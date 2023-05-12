@@ -66,7 +66,7 @@ public final class DiscordLeaderboards extends JavaPlugin {
             try {
                 config.save(configFile);
             } catch (IOException e) {
-                e.printStackTrace();
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "unable to save file, internal plugin issue please contact plugin developer  [code : 18]");
             }
         }else{
             new BukkitRunnable() {
@@ -100,7 +100,7 @@ public final class DiscordLeaderboards extends JavaPlugin {
         try{
             Database.getConnection().close();
         }catch (SQLException e){
-
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Invalid Webhook Url  [code : 19]");
         }
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "Plugin Disconnected From Database...");
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "Plugin ShutDown");
@@ -126,7 +126,7 @@ public final class DiscordLeaderboards extends JavaPlugin {
                 outputStream.write(buffer, 0, length);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "cannot copy file , internal plugin issue please contact the developer  [code : 20]");
         }
     }
 

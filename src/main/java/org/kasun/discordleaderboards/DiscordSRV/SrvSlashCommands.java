@@ -10,6 +10,9 @@ import github.scarsz.discordsrv.dependencies.jda.api.interactions.commands.build
 import github.scarsz.discordsrv.dependencies.jda.api.interactions.commands.build.OptionData;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.kasun.discordleaderboards.DiscordLeaderboards;
 import org.kasun.discordleaderboards.Utils.Leaderboard;
 import org.kasun.discordleaderboards.Utils.MainConfig;
 
@@ -18,6 +21,7 @@ import java.util.*;
 public class SrvSlashCommands implements Listener, SlashCommandProvider {
     @Override
     public Set<PluginSlashCommand> getSlashCommands() {
+        Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
 
         CommandData commandData = new CommandData("leaderboard", "view leaderboards");
         List<String> itemList = MainConfig.getLeaderboardsList();
@@ -38,10 +42,10 @@ public class SrvSlashCommands implements Listener, SlashCommandProvider {
         return new HashSet<>(Arrays.asList(
 
                 // ping pong
-                new PluginSlashCommand(Bukkit.getServer().getPluginManager().getPlugin("DiscordLeaderboards"), new CommandData("ping", "A classic match of ping pong")),
+                new PluginSlashCommand(plugin, new CommandData("ping", "A classic match of ping pong")),
 
                 // bests
-                new PluginSlashCommand(Bukkit.getServer().getPluginManager().getPlugin("DiscordLeaderboards"), commandData)
+                new PluginSlashCommand(plugin, commandData)
 
         ));
 
