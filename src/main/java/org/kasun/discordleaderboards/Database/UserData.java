@@ -59,7 +59,9 @@ public class UserData {
         for (String uuid: uuidlist){
             String name = Database.getName(uuid);
             int value = Database.getValue(uuid, placeholder).intValue();
-            toplistmap.put(name, value);
+            if (value != 0){
+                toplistmap.put(name, value);
+            }
         }
         return toplistmap;
     }
