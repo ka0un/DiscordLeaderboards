@@ -22,15 +22,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class createCommand implements CommandExecutor, TabCompleter {
+public class CreateCommand implements CommandExecutor, TabCompleter {
     Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
     @Override
     public boolean onCommand(CommandSender sender, Command command, String lable, String[] args) {
         if (args.length == 4){
             //name top placeholder delay
             if (sender instanceof Player){
-
                 Player p = (Player) sender;
+
+                if (!p.hasPermission("dl.create") && !p.hasPermission("dl.admin")) {
+                    p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "No Permission ! [dl.create], [dl.admin]");
+                    return true;
+                }
+
                 try{
                     double value = Double.parseDouble(PlaceholderAPI.setPlaceholders(p, args[2]));
                     Leaderboard.createLeaderboard(args[0],Integer.parseInt(args[1]), args[2], Leaderboard.WebhookDelay.valueOf(args[3]));

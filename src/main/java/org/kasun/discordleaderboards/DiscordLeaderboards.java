@@ -32,10 +32,10 @@ public final class DiscordLeaderboards extends JavaPlugin {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
         getCommand("dl-testwebhook").setExecutor(new WebhookTestCommand());
-        getCommand("dl-forcesend").setExecutor(new forceLeaderboardSend());
-        getCommand("dl-create").setExecutor(new createCommand());
-        getCommand("dl-view").setExecutor(new viewCommand());
-        getCommand("dl-syncall").setExecutor(new syncAllPlayers());
+        getCommand("dl-forcesend").setExecutor(new ForceLeaderboardSend());
+        getCommand("dl-create").setExecutor(new CreateCommand());
+        getCommand("dl-view").setExecutor(new ViewCommand());
+        getCommand("dl-syncall").setExecutor(new SyncAllPlayers());
         getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
         getServer().getPluginManager().registerEvents(new PlayerQuit(), this);
 

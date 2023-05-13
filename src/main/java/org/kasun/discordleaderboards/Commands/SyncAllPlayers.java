@@ -11,7 +11,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.kasun.discordleaderboards.Database.Database;
 import org.kasun.discordleaderboards.Database.UserData;
 import org.kasun.discordleaderboards.DiscordLeaderboards;
 import org.kasun.discordleaderboards.Utils.AllPlayers;
@@ -20,12 +19,18 @@ import org.kasun.discordleaderboards.Utils.CustomConfig;
 import java.util.List;
 import java.util.Random;
 
-public class syncAllPlayers implements CommandExecutor {
+public class SyncAllPlayers implements CommandExecutor {
     Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
     @Override
     public boolean onCommand(CommandSender sender, Command command, String lable, String[] args) {
         if (sender instanceof Player){
             Player p = (Player) sender;
+
+            if (!p.hasPermission("dl.syncall") && !p.hasPermission("dl.admin")) {
+                p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "No Permission ! [dl.syncall], [dl.admin]");
+                return true;
+            }
+
             List<OfflinePlayer> players = AllPlayers.getAllPlayers();
 
             for (OfflinePlayer player : players) {
