@@ -13,7 +13,7 @@ import org.kasun.discordleaderboards.DiscordLeaderboards;
 import org.kasun.discordleaderboards.Utils.Leaderboard;
 import java.util.List;
 
-public class forceLeaderboardSend implements CommandExecutor, TabCompleter {
+public class ForceLeaderboardSend implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String lable, String[] args) {
 

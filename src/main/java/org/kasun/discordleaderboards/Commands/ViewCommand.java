@@ -14,7 +14,7 @@ import org.kasun.discordleaderboards.Utils.Leaderboard;
 
 import java.util.List;
 
-public class viewCommand implements CommandExecutor, TabCompleter {
+public class ViewCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String lable, String[] args) {
 

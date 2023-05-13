@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class createCommand implements CommandExecutor, TabCompleter {
+public class CreateCommand implements CommandExecutor, TabCompleter {
     Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
     @Override
     public boolean onCommand(CommandSender sender, Command command, String lable, String[] args) {
