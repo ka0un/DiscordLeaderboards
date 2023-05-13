@@ -8,16 +8,19 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kasun.discordleaderboards.Database.UserData;
 import org.kasun.discordleaderboards.DiscordLeaderboards;
 import org.kasun.discordleaderboards.Utils.AllPlayers;
+import org.kasun.discordleaderboards.Utils.CustomConfig;
 import org.kasun.discordleaderboards.Utils.Leaderboard;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class createCommand implements CommandExecutor, TabCompleter {
     Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
@@ -52,6 +55,25 @@ public class createCommand implements CommandExecutor, TabCompleter {
                     }
                     p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GREEN + "Leaderboard Created!");
                     p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "you can change the settings from plugins\\DiscordLeaderboards\\leaderboard\\" + args[0] + ".yml");
+
+                    //getting random offline player
+                    players.remove(p);
+                    Random random = new Random();
+                    int randomIndex = random.nextInt(players.size());
+                    OfflinePlayer randomPlayer = players.get(randomIndex);
+
+                    //checking placeholders if they supports offline players
+                    FileConfiguration config = plugin.getConfig();
+                    List<String> lblist = config.getStringList("leaderboards");
+                    for (String lbname : lblist) {
+                        FileConfiguration c = CustomConfig.getFileConfiguration(lbname);
+                        String ph = c.getString("placeholder");
+                        try {
+                            double value2 = Double.parseDouble(PlaceholderAPI.setPlaceholders(randomPlayer, ph));
+                        } catch (NumberFormatException ex) {
+                            p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "[ERROR] " + ph + " may not support offline players. [code : 17]");
+                        }
+                    }
 
 
                 }catch (NumberFormatException e){
