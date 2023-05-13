@@ -17,6 +17,15 @@ import java.util.List;
 public class viewCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String lable, String[] args) {
+
+        if (sender instanceof Player){
+            Player p = (Player) sender;
+            if (!p.hasPermission("dl.view") && !p.hasPermission("dl.admin")) {
+                p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "No Permission ! [dl.view], [dl.admin]");
+                return true;
+            }
+        }
+
         if (args.length == 1){
             String leaderboardstring = Leaderboard.toString(args[0]);
             if (sender instanceof Player){

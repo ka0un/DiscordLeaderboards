@@ -26,6 +26,12 @@ public class syncAllPlayers implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String lable, String[] args) {
         if (sender instanceof Player){
             Player p = (Player) sender;
+
+            if (!p.hasPermission("dl.syncall") && !p.hasPermission("dl.admin")) {
+                p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "No Permission ! [dl.syncall], [dl.admin]");
+                return true;
+            }
+
             List<OfflinePlayer> players = AllPlayers.getAllPlayers();
 
             for (OfflinePlayer player : players) {

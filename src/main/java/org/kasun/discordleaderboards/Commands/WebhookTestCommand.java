@@ -20,6 +20,13 @@ public class WebhookTestCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
+        if (sender instanceof Player){
+            Player p = (Player) sender;
+            if (!p.hasPermission("dl.testwebhook") && !p.hasPermission("dl.admin")) {
+                p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "No Permission ! [dl.testwebhook], [dl.admin]");
+                return true;
+            }
+        }
 
         String url = (String) plugin.getConfig().get("webhook-url");
         DiscordWebhook w = new DiscordWebhook(url);

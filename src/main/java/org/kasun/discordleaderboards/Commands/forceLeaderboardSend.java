@@ -16,6 +16,15 @@ import java.util.List;
 public class forceLeaderboardSend implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String lable, String[] args) {
+
+        if (sender instanceof Player){
+            Player p = (Player) sender;
+            if (!p.hasPermission("dl.forcesend") && !p.hasPermission("dl.admin")) {
+                p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "No Permission ! [dl.forcesend], [dl.admin]");
+                return true;
+            }
+        }
+
         if (args.length == 1){
             Leaderboard.sendleaderboard(args[0]);
             if (sender instanceof Player){
