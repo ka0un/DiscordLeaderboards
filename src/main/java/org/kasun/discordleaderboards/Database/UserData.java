@@ -49,7 +49,6 @@ public class UserData {
                 String UUID = p.getUniqueId().toString();
                 Database.enterUserData(UUID, name, ph, value);
             } catch (NumberFormatException ex) {
-                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "[ERROR] " + ph + " may not support offline players. you can ignore this warning!  [code : 17]");
             }
         }
     }
