@@ -21,7 +21,7 @@ public class Leaderboard {
     public Leaderboard(String name) {
         this.name = name;
         leaderboardConfig = new LeaderboardConfig(name);
-        topList = new TopList(name);
+        topList = new TopList(leaderboardConfig);
     }
 
     //constructer for create leaderboard
@@ -33,9 +33,9 @@ public class Leaderboard {
         leaderboards.add(name);
         mainConfig.setLeaderboardsList(leaderboards);
         mainConfig.saveConfig();
-        topList = new TopList(name);
 
         leaderboardConfig = new LeaderboardConfig(name, placeholder, top, delay.toString()); //creating LeaderboardConfig
+        topList = new TopList(leaderboardConfig);
     }
 
     public String toString(){

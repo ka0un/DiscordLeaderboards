@@ -19,7 +19,7 @@ public class LeaderboardDiscordSrvEmbed {
         discordsrvEmbed.setEmbedFooter(leaderboard.getConfig().getEmbedFooter());
         discordsrvEmbed.setEmbedImage(leaderboard.getConfig().getEmbedImage());
         discordsrvEmbed.setEmbedThumbnail(leaderboard.getConfig().getEmbedThumbnail());
-        topList = new TopList(leaderboard);
+        topList = new TopList(leaderboard.getConfig());
         String description = "```" + topList.getTopListAsStringForWebhook() + "```";
         discordsrvEmbed.setEmbedDescription(description);
 
