@@ -1,5 +1,7 @@
 package org.kasun.discordleaderboards.DiscordSRV;
 
+import jdk.jfr.internal.tool.Main;
+import org.kasun.discordleaderboards.Configs.MainConfig;
 import org.kasun.discordleaderboards.Leaderboard.Leaderboard;
 import org.kasun.discordleaderboards.Leaderboard.TopList;
 
@@ -12,16 +14,31 @@ public class LeaderboardDiscordSrvEmbed {
         this.leaderboard = leaderboard;
     }
 
-    public DiscordsrvEmbed getDiscordsrvEmbed(){
-        discordsrvEmbed = new DiscordsrvEmbed();
-        discordsrvEmbed.setEmbedTitle(leaderboard.getConfig().getEmbedTitle());
-        discordsrvEmbed.setEmbedColour(leaderboard.getConfig().getEmbedColour());
-        discordsrvEmbed.setEmbedFooter(leaderboard.getConfig().getEmbedFooter());
-        discordsrvEmbed.setEmbedImage(leaderboard.getConfig().getEmbedImage());
-        discordsrvEmbed.setEmbedThumbnail(leaderboard.getConfig().getEmbedThumbnail());
+    private String getDefaultIfNullOrEmpty(String value, String defaultValue) {
+        return (value == null || value.isEmpty() || value.equals("-")) ? defaultValue : value;
+    }
+
+    public DiscordsrvEmbed getDiscordsrvEmbed() {
+
         topList = new TopList(leaderboard.getConfig());
-        String description = "```" + topList.getTopListAsStringForWebhook() + "```";
-        discordsrvEmbed.setEmbedDescription(description);
+        String ddescription = "``` Leaderboard is Empty ! ```";
+        String description = "```" + topList.getTopListAsString() + "```";
+
+        MainConfig mainConfig = new MainConfig();
+        String title = getDefaultIfNullOrEmpty(leaderboard.getConfig().getEmbedTitle(), mainConfig.getDembedTitle());
+        String colour = getDefaultIfNullOrEmpty(leaderboard.getConfig().getEmbedColour(), mainConfig.getDembedColour());
+        String footer = getDefaultIfNullOrEmpty(leaderboard.getConfig().getEmbedFooter(), mainConfig.getDembedFooter());
+        String image = getDefaultIfNullOrEmpty(leaderboard.getConfig().getEmbedImage(), mainConfig.getDembedImage());
+        String thumb = getDefaultIfNullOrEmpty(leaderboard.getConfig().getEmbedThumbnail(), mainConfig.getDembedThumbnail());
+        String desc = (description == "```" + "```") ? ddescription : description;
+
+        discordsrvEmbed = new DiscordsrvEmbed();
+        discordsrvEmbed.setEmbedTitle(title);
+        discordsrvEmbed.setEmbedColour(colour);
+        discordsrvEmbed.setEmbedFooter(footer);
+        discordsrvEmbed.setEmbedImage(image);
+        discordsrvEmbed.setEmbedThumbnail(thumb);
+        discordsrvEmbed.setEmbedDescription(desc);
 
         return discordsrvEmbed;
     }
