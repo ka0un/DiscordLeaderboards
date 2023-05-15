@@ -2,31 +2,23 @@ package org.kasun.discordleaderboards.Leaderboard;
 
 import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import org.kasun.discordleaderboards.Utils.SqlUtils;
+
+import java.sql.SQLOutput;
 import java.util.Map;
 
 public class TopList {
     private int top;
-    private Leaderboard leaderboard;
     private LeaderboardConfig leaderboardConfig;
     private String placeholder;
     private String leaderboardname;
     String placeholderColumnName;
 
-    public TopList(Leaderboard leaderboard) {
-        this.leaderboard = leaderboard;
-        leaderboardConfig = leaderboard.getConfig();
+    public TopList(LeaderboardConfig leaderboardConfig) {
+        this.leaderboardConfig = leaderboardConfig;
         top = leaderboardConfig.getTop();
         placeholder = leaderboardConfig.getPlaceholder();
-        leaderboardname = leaderboard.getName();
-        placeholderColumnName = leaderboardConfig.getPlaceholder().substring(1, leaderboardConfig.getPlaceholder().length() - 1);
-    }
-
-    public TopList(String leaderboardname) {
-        this.leaderboardname = leaderboardname;
-        leaderboard = new Leaderboard(leaderboardname);
-        leaderboardConfig = leaderboard.getConfig();
-        top = leaderboardConfig.getTop();
-        placeholder = leaderboardConfig.getPlaceholder();
+        leaderboardname = leaderboardConfig.getName();
+        System.out.println("Debug2 : " + leaderboardConfig.getPlaceholder());
         placeholderColumnName = leaderboardConfig.getPlaceholder().substring(1, leaderboardConfig.getPlaceholder().length() - 1);
     }
 

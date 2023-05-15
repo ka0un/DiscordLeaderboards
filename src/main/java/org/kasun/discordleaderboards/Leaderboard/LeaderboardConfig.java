@@ -6,6 +6,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.kasun.discordleaderboards.DiscordLeaderboards;
 import org.kasun.discordleaderboards.Configs.CustomConfig;
 
+import java.sql.SQLOutput;
+
 public class LeaderboardConfig {
     private final DiscordLeaderboards plugin  = DiscordLeaderboards.getInstance();
     private String name;
@@ -77,8 +79,6 @@ public class LeaderboardConfig {
 
     //load methode
     public void load(){
-
-        this.config = customConfig.get();
 
         this.placeholder = config.getString("placeholder");
         this.top = config.getInt("top");
