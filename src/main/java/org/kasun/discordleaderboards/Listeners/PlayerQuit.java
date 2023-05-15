@@ -11,6 +11,7 @@ public class PlayerQuit implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent e) {
         Player player = e.getPlayer();
-        UserData.add(player);
+        UserData userData = new UserData();
+        userData.addUserDataToDBAllPlaceholders(player);
     }
 }

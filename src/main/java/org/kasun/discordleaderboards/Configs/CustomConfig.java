@@ -1,31 +1,25 @@
-package org.kasun.discordleaderboards.Utils;
+package org.kasun.discordleaderboards.Configs;
 
-import jogamp.graph.font.typecast.ot.mac.ResourceFile;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.kasun.discordleaderboards.DiscordLeaderboards;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 public class CustomConfig {
     private File file;
     private FileConfiguration customFile;
     private String name;
-
+    private final DiscordLeaderboards plugin  = DiscordLeaderboards.getInstance();
     public CustomConfig(String name) {
         this.name = name;
+        file = new File(plugin.getDataFolder() + "/leaderboard/", name + ".yml");
     }
 
     public void setup(){
-        Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
-        file = new File(plugin.getDataFolder() + "/leaderboard/", name + ".yml");
-
         if (!file.exists()){
             try {
                 file.createNewFile();
@@ -37,14 +31,8 @@ public class CustomConfig {
     }
 
     public FileConfiguration get(){
+        customFile = YamlConfiguration.loadConfiguration(file);
         return customFile;
-    }
-
-    public static FileConfiguration getFileConfiguration(String fileName) {
-        Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
-        File file = new File(plugin.getDataFolder() + "/leaderboard/", fileName + ".yml");
-        FileConfiguration config = YamlConfiguration.loadConfiguration(file);
-        return config;
     }
 
     public void save(){

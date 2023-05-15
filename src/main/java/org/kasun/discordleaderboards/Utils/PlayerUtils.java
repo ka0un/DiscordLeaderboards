@@ -2,13 +2,12 @@ package org.kasun.discordleaderboards.Utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.kasun.discordleaderboards.Database.UserData;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class AllPlayers {
+public class PlayerUtils {
     public static List<UUID> getAllPlayerUUIDs() {
         List<UUID> playerUUIDs = new ArrayList<>();
 
@@ -28,17 +27,6 @@ public class AllPlayers {
 
         return players;
     }
-
-    public static void addAllCurrentPlayersToUserData() {
-        List<OfflinePlayer> players = getAllPlayers();
-
-        for (OfflinePlayer player : players) {
-            UserData.add(player);
-        }
-
-    }
-
-
 
 
 }

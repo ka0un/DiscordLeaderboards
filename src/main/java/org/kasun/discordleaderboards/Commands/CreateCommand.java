@@ -8,22 +8,20 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.kasun.discordleaderboards.Configs.MainConfig;
 import org.kasun.discordleaderboards.Database.UserData;
 import org.kasun.discordleaderboards.DiscordLeaderboards;
-import org.kasun.discordleaderboards.Utils.AllPlayers;
-import org.kasun.discordleaderboards.Utils.CustomConfig;
-import org.kasun.discordleaderboards.Utils.Leaderboard;
+import org.kasun.discordleaderboards.Leaderboard.LeaderboardConfig;
+import org.kasun.discordleaderboards.Utils.PlayerUtils;
+import org.kasun.discordleaderboards.Leaderboard.Leaderboard;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class CreateCommand implements CommandExecutor, TabCompleter {
-    Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
+    private final DiscordLeaderboards plugin  = DiscordLeaderboards.getInstance();
     @Override
     public boolean onCommand(CommandSender sender, Command command, String lable, String[] args) {
         if (args.length == 4){
@@ -38,48 +36,51 @@ public class CreateCommand implements CommandExecutor, TabCompleter {
 
                 try{
                     double value = Double.parseDouble(PlaceholderAPI.setPlaceholders(p, args[2]));
-                    Leaderboard.createLeaderboard(args[0],Integer.parseInt(args[1]), args[2], Leaderboard.WebhookDelay.valueOf(args[3]));
+                    Leaderboard leaderboard = new Leaderboard(args[0],Integer.parseInt(args[1]), args[2], Leaderboard.WebhookDelay.valueOf(args[3]));
                     p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GREEN + "Starting Leaderboard Setup!");
                     plugin.reloadConfig();
-                    UserData.add(p);
+                    UserData userData = new UserData(p, args[2]);
+                    userData.addToDatabase();
                     p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.YELLOW + "Attempting to Sync Offline Player Data...");
 
                     try {
-                        Thread.sleep(3000); // Sleep for 3 seconds (3000 milliseconds)
+                        Thread.sleep(2000); // Sleep for 2 seconds (2000 milliseconds)
                     } catch (InterruptedException e) {
                         // Handle the InterruptedException if needed
                     }
+
                     p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.YELLOW + "Synchronization Started !");
 
-                    List<OfflinePlayer> players = AllPlayers.getAllPlayers();
-                    for (OfflinePlayer player : players) {
-                        if (player != null){
-                            UserData.add(player);
-                            p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "Added " + player.getName() + " to Database " + ChatColor.GREEN +  (players.indexOf(player) + 1) + "/" + players.size());
-                        }
-                    }
+
+                    Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+                        userData.addUserDataToDBAllPlayersThisPlaceholder();
+                        Bukkit.getScheduler().runTask(plugin, () -> {
+                            p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.YELLOW + "Synchronization Complete !");
+                        });
+                    });
+
                     p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GREEN + "Leaderboard Created!");
                     p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "you can change the settings from plugins\\DiscordLeaderboards\\leaderboard\\" + args[0] + ".yml");
 
                     //getting random offline player
+                    List<OfflinePlayer> players = PlayerUtils.getAllPlayers();
                     players.remove(p);
                     Random random = new Random();
                     int randomIndex = random.nextInt(players.size());
                     OfflinePlayer randomPlayer = players.get(randomIndex);
 
                     //checking placeholders if they supports offline players
-                    FileConfiguration config = plugin.getConfig();
-                    List<String> lblist = config.getStringList("leaderboards");
+                    MainConfig mainConfig = new MainConfig();
+                    List<String> lblist = mainConfig.getLeaderboardsList();
                     for (String lbname : lblist) {
-                        FileConfiguration c = CustomConfig.getFileConfiguration(lbname);
-                        String ph = c.getString("placeholder");
+                        LeaderboardConfig leaderboardConfig = new LeaderboardConfig(lbname);
+                        String ph = leaderboardConfig.getPlaceholder();
                         try {
                             double value2 = Double.parseDouble(PlaceholderAPI.setPlaceholders(randomPlayer, ph));
                         } catch (NumberFormatException ex) {
                             p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "[ERROR] " + ph + " may not support offline players. [code : 17]");
                         }
                     }
-
 
                 }catch (NumberFormatException e){
                     p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Placeholder " + args[2] + " Unsupported, Expansion Not Installed or Doesn't output Number value");

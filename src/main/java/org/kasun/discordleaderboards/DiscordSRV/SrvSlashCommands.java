@@ -8,29 +8,28 @@ import github.scarsz.discordsrv.dependencies.jda.api.events.interaction.SlashCom
 import github.scarsz.discordsrv.dependencies.jda.api.interactions.commands.OptionType;
 import github.scarsz.discordsrv.dependencies.jda.api.interactions.commands.build.CommandData;
 import github.scarsz.discordsrv.dependencies.jda.api.interactions.commands.build.OptionData;
-import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kasun.discordleaderboards.DiscordLeaderboards;
-import org.kasun.discordleaderboards.Utils.Leaderboard;
-import org.kasun.discordleaderboards.Utils.MainConfig;
+import org.kasun.discordleaderboards.Leaderboard.Leaderboard;
+import org.kasun.discordleaderboards.Configs.MainConfig;
 
 import java.util.*;
 
 public class SrvSlashCommands implements Listener, SlashCommandProvider {
+    private final DiscordLeaderboards plugin  = DiscordLeaderboards.getInstance();
+    MainConfig mainConfig = new MainConfig();
+    List<String> leaderboardList = mainConfig.getLeaderboardsList();
     @Override
     public Set<PluginSlashCommand> getSlashCommands() {
-        Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
-
         CommandData commandData = new CommandData("leaderboard", "view leaderboards");
-        List<String> itemList = MainConfig.getLeaderboardsList();
         List<OptionData> options = new ArrayList<>();
         OptionData dropdownOption = new OptionData(OptionType.INTEGER, "leaderboard", "Dropdown Option Description", true);
 
-        if (itemList.size() != 0) {
-            for (String subcommandName : itemList) {
-                dropdownOption.addChoice(subcommandName, itemList.indexOf(subcommandName));
+        if (leaderboardList.size() != 0) {
+            for (String subcommandName : leaderboardList) {
+                dropdownOption.addChoice(subcommandName, leaderboardList.indexOf(subcommandName));
             }
         }
         options.add(dropdownOption);
@@ -56,15 +55,12 @@ public class SrvSlashCommands implements Listener, SlashCommandProvider {
 
     @SlashCommand(path = "leaderboard")
     public void bestPlugin(SlashCommandEvent event) {
-        List<String> itemList = MainConfig.getLeaderboardsList();
         int option = (int) event.getOption("leaderboard").getAsDouble();
-        String replay = Leaderboard.toString(itemList.get(option));
-        MessageEmbed messageEmbed = SrvEmbeds.getMessageEmbed(itemList.get(option));
+        Leaderboard leaderboard = new Leaderboard(leaderboardList.get(option));
+        LeaderboardDiscordSrvEmbed leaderboardDiscordSrvEmbed = new LeaderboardDiscordSrvEmbed(leaderboard);
+        MessageEmbed messageEmbed = leaderboardDiscordSrvEmbed.getDiscordsrvEmbed().getMessageEmbed();
         event.replyEmbeds(messageEmbed).queue();
     }
-
-
-
 
     @SlashCommand(path = "ping")
     public void pingCommand(SlashCommandEvent event) {
