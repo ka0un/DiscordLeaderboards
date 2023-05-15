@@ -7,10 +7,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.kasun.discordleaderboards.DiscordLeaderboards;
-import org.kasun.discordleaderboards.Utils.Leaderboard;
+import org.kasun.discordleaderboards.Configs.MainConfig;
+import org.kasun.discordleaderboards.Leaderboard.Leaderboard;
 
 import java.util.List;
 
@@ -27,13 +25,16 @@ public class ViewCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 1){
-            String leaderboardstring = Leaderboard.toString(args[0]);
+            Leaderboard leaderboard = new Leaderboard(args[0]);
+            String leaderboardstring = leaderboard.toString();
+
             if (sender instanceof Player){
                 Player p = (Player) sender;
                 p.sendMessage( ChatColor.GRAY + leaderboardstring);
             }else{
                 Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GRAY + leaderboardstring);
             }
+
         }else{
             if (sender instanceof Player){
                 Player p = (Player) sender;
@@ -49,8 +50,8 @@ public class ViewCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
-        List<String> suggestions = plugin.getConfig().getStringList("leaderboards");
+        MainConfig mainConfig = new MainConfig();
+        List<String> suggestions = mainConfig.getLeaderboardsList();
         return suggestions;
     }
 }

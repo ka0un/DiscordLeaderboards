@@ -12,6 +12,7 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        UserData.add(player);
+        UserData userData = new UserData();
+        userData.addUserDataToDBAllPlaceholders(player);
     }
 }

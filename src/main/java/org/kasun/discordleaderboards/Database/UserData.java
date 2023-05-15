@@ -1,106 +1,118 @@
 package org.kasun.discordleaderboards.Database;
 
 import me.clip.placeholderapi.PlaceholderAPI;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.kasun.discordleaderboards.DiscordLeaderboards;
-import org.kasun.discordleaderboards.Utils.CustomConfig;
+import org.kasun.discordleaderboards.Configs.MainConfig;
+import org.kasun.discordleaderboards.Leaderboard.Leaderboard;
+import org.kasun.discordleaderboards.Utils.PlayerUtils;
+import org.kasun.discordleaderboards.Utils.SqlUtils;
 
-import java.util.*;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class UserData {
-    public static void add(Player p) {
-        Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
-        String name = p.getName();
+    private MainConfig mainConfig = new MainConfig();
+    private Database database = new Database();
+    private Player player;
+    private OfflinePlayer offlinePlayer;
+    private String placeholder;
+    private String username;
+    private String uuid;
+    private double value;
+    String placeholderColumnName;
 
-        FileConfiguration config = plugin.getConfig();
-        List<String> lblist = config.getStringList("leaderboards");
 
-        for (String lbname : lblist) {
-            FileConfiguration c = CustomConfig.getFileConfiguration(lbname);
-            String ph = c.getString("placeholder");
-            try {
-                double value = Double.parseDouble(PlaceholderAPI.setPlaceholders(p, ph));
-                String UUID = p.getUniqueId().toString();
-                Database.enterUserData(UUID, name, ph, value);
-            } catch (NumberFormatException ex) {
-                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "[ERROR] " + ph + " isn't working Make Sure Required Papi Expansion installed or Placeholder Outputting Number Value eg- 1, 5, 2000  [code : 16]");
+    //constructers
+    public UserData() {}
+    public UserData(Player player, String placeholder) {
+        this.player = player;
+        this.placeholder = placeholder;
+        placeholderColumnName = placeholder.substring(1, placeholder.length() - 1);
+    }
+    public UserData(OfflinePlayer offlinePlayer, String placeholder) {
+        this.offlinePlayer = offlinePlayer;
+        this.placeholder = placeholder;
+        placeholderColumnName = placeholder.substring(1, placeholder.length() - 1);
+    }
+
+    public void addToDatabase(){
+
+        CompletableFuture.runAsync(() -> {
+            SqlUtils.addUserDataToDatabase(placeholderColumnName, uuid, username, value);
+        });
+
+    }
+
+    //getters and setters
+    public String getUserName(){
+        if (player != null){
+            username = player.getName();
+        } else if (offlinePlayer != null) {
+            username = offlinePlayer.getName();
+        }
+        return username;
+    }
+
+    public String getUuid(){
+        if (player != null){
+            uuid = player.getUniqueId().toString();
+        } else if (offlinePlayer != null) {
+            uuid = offlinePlayer.getUniqueId().toString();
+        }
+        return uuid;
+    }
+
+    public double getValue(){
+        if (player != null){
+            value = Double.parseDouble(PlaceholderAPI.setPlaceholders(player, placeholder));
+        } else if (offlinePlayer != null) {
+            value = Double.parseDouble(PlaceholderAPI.setPlaceholders(offlinePlayer, placeholder));
+        }
+        return value;
+    }
+
+    public void addUserDataToDBAllPlaceholders(Player player){
+        MainConfig mainConfig = new MainConfig();
+        List<String> leaderboardnamelist = mainConfig.getLeaderboardsList();
+        for (String lbname : leaderboardnamelist){
+            Leaderboard leaderboard = new Leaderboard(lbname);
+            UserData userData = new UserData(player, leaderboard.getConfig().getPlaceholder());
+            addToDatabase();
+        }
+    }
+    public void addUserDataToDBAllPlaceholders(OfflinePlayer offlinePlayer){
+        MainConfig mainConfig = new MainConfig();
+        List<String> leaderboardnamelist = mainConfig.getLeaderboardsList();
+        for (String lbname : leaderboardnamelist){
+            Leaderboard leaderboard = new Leaderboard(lbname);
+            UserData userData = new UserData(offlinePlayer, leaderboard.getConfig().getPlaceholder());
+            addToDatabase();
+        }
+    }
+
+    public void addUserDataToDBAllPlayersAllPlaceholders(){
+        List<OfflinePlayer> players = PlayerUtils.getAllPlayers();
+        for (OfflinePlayer player : players) {
+            if (player != null){
+                addUserDataToDBAllPlaceholders(player);
             }
         }
+
     }
 
-    public static void add(OfflinePlayer p) {
-        String name = p.getName();
-        Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
-
-        FileConfiguration config = plugin.getConfig();
-        List<String> lblist = config.getStringList("leaderboards");
-
-        for (String lbname : lblist) {
-            FileConfiguration c = CustomConfig.getFileConfiguration(lbname);
-            String ph = c.getString("placeholder");
-            try {
-                double value = Double.parseDouble(PlaceholderAPI.setPlaceholders(p, ph));
-                String UUID = p.getUniqueId().toString();
-                Database.enterUserData(UUID, name, ph, value);
-            } catch (NumberFormatException ex) {
-            }
-        }
-    }
-
-    public static Map gettoplistmap(String placeholder, int top){
-        List<String> uuidlist = Database.gettop(placeholder, top);
-        LinkedHashMap<String, Integer> toplistmap = new LinkedHashMap<>();
-        for (String uuid: uuidlist){
-            String name = Database.getName(uuid);
-            int value = Database.getValue(uuid, placeholder).intValue();
-            if (value != 0){
-                toplistmap.put(name, value);
-            }
-        }
-        return toplistmap;
-    }
-
-    public static String gettoplistStringforWebhook(String placeholder, int top){
-        Map<String, Integer> toplistmap = UserData.gettoplistmap(placeholder, top);
-
-        // find the maximum length of the names
-        int maxNameLength = 0;
-        for (String name : toplistmap.keySet()) {
-            if (name.length() > maxNameLength) {
-                maxNameLength = name.length();
+    public void addUserDataToDBAllPlayersThisPlaceholder(){
+        List<OfflinePlayer> players = PlayerUtils.getAllPlayers();
+        for (OfflinePlayer player : players) {
+            if (player != null){
+                addToDatabase();
             }
         }
 
-        StringBuilder sb = new StringBuilder();
-        int i = 1;
-        for (Map.Entry<String, Integer> entry : toplistmap.entrySet()) {
-            String name = entry.getKey();
-            int score = entry.getValue();
-            String formattedEntry = String.format("%d. %-"+(maxNameLength+4)+"s %d\\u000A", i++, name, score);
-            sb.append(formattedEntry);
-        }
-        String leaderboardString = sb.toString();
-        return leaderboardString;
     }
 
-
-    public static String gettoplistString(String placeholder, int top){
-        Map<String, Integer> toplistmap = UserData.gettoplistmap(placeholder, top);
-        StringBuilder sb = new StringBuilder();
-        int i = 1;
-        for (Map.Entry<String, Integer> entry : toplistmap.entrySet()) {
-            String name = entry.getKey();
-            int score = entry.getValue();
-            String formattedEntry = String.format("%d. %-20s %d\n", i++, name, score);
-            sb.append(formattedEntry);
-        }
-        String leaderboardString = sb.toString();
-        return leaderboardString;
+    public String getPlaceholder() {
+        return placeholder;
     }
+
 }

@@ -6,8 +6,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.kasun.discordleaderboards.DiscordLeaderboards;
 import org.kasun.discordleaderboards.Utils.DiscordWebhook;
 
@@ -15,7 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class WebhookTestCommand implements CommandExecutor {
-    Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
+    private final DiscordLeaderboards plugin  = DiscordLeaderboards.getInstance();
 
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

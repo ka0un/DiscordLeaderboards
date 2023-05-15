@@ -7,8 +7,8 @@ import org.kasun.discordleaderboards.DiscordLeaderboards;
 
 
 public class StartMessage {
+    private static final DiscordLeaderboards plugin  = DiscordLeaderboards.getInstance();
     public static void sendStartMessage() {
-        Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
 
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "=========================================");
         Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "Discord Leaderboards Plugin Started !");
