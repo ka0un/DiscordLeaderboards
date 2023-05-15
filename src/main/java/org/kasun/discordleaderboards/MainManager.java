@@ -1,11 +1,11 @@
 package org.kasun.discordleaderboards;
 
-import org.kasun.discordleaderboards.Commands.CommandsManager;
-import org.kasun.discordleaderboards.Configs.ConfigManager;
-import org.kasun.discordleaderboards.Database.DatabaseManager;
-import org.kasun.discordleaderboards.DiscordSRV.DiscordSrvManager;
-import org.kasun.discordleaderboards.Listeners.ListenerManager;
-import org.kasun.discordleaderboards.Schedules.ScheduleManager;
+import org.kasun.discordleaderboards.commands.CommandsManager;
+import org.kasun.discordleaderboards.configs.ConfigManager;
+import org.kasun.discordleaderboards.database.DatabaseManager;
+import org.kasun.discordleaderboards.discordsrv.DiscordSrvManager;
+import org.kasun.discordleaderboards.listeners.ListenerManager;
+import org.kasun.discordleaderboards.schedules.ScheduleManager;
 
 public class MainManager {
     private ConfigManager configManager;
