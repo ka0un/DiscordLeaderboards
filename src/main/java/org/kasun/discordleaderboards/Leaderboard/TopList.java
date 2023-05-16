@@ -18,7 +18,6 @@ public class TopList {
         top = leaderboardConfig.getTop();
         placeholder = leaderboardConfig.getPlaceholder();
         leaderboardname = leaderboardConfig.getName();
-        System.out.println("Debug2 : " + leaderboardConfig.getPlaceholder());
         placeholderColumnName = leaderboardConfig.getPlaceholder().substring(1, leaderboardConfig.getPlaceholder().length() - 1);
     }
 

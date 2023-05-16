@@ -13,11 +13,12 @@ public class DiscordsrvEmbed {
     private String embedImage;
     private String embedThumbnail;
     private String embedDescription;
-    private EmbedBuilder embedBuilder;
     private MessageEmbed messageEmbed;
 
 
     public MessageEmbed getMessageEmbed() {
+
+        EmbedBuilder embedBuilder = new EmbedBuilder();
 
         if (embedTitle != null && !embedTitle.equals("") && !embedTitle.equals("-")){
             embedBuilder.setTitle(embedTitle);

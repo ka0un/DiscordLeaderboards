@@ -109,7 +109,9 @@ public class SqlUtils {
             while (rs.next()) {
                 String playerName = rs.getString("PlayerName");
                 int score = rs.getInt(placeholderColumnName);
-                topPlayerScores.put(playerName, score);
+                if (score > 0){
+                    topPlayerScores.put(playerName, score);
+                }
             }
             preparedStatement.close();
         } catch (SQLException ex) {

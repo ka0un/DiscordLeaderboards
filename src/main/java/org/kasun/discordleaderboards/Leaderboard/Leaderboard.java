@@ -60,7 +60,7 @@ public class Leaderboard {
         String dembedImage = mainConfig.getDembedImage();
         String dembedThumbnail = mainConfig.getDembedThumbnail();
 
-        String dembedDescription = "No Player Data Found !";
+        String dembedDescription = "Leaderboard is Empty !";
 
         //getting leaderboard's values from leaderboard config
         String placeholder = leaderboardConfig.getPlaceholder();
