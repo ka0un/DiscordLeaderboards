@@ -5,12 +5,14 @@ import org.kasun.discordleaderboards.Utils.SqlUtils;
 
 import java.sql.SQLOutput;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class TopList {
-    private int top;
-    private LeaderboardConfig leaderboardConfig;
-    private String placeholder;
-    private String leaderboardname;
+    private final int top;
+    private final LeaderboardConfig leaderboardConfig;
+    private final String placeholder;
+    private final String leaderboardname;
     String placeholderColumnName;
 
     public TopList(LeaderboardConfig leaderboardConfig) {
@@ -21,13 +23,13 @@ public class TopList {
         placeholderColumnName = leaderboardConfig.getPlaceholder().substring(1, leaderboardConfig.getPlaceholder().length() - 1);
     }
 
-    public Map<String, Integer> getTopListAsMap(){
+    public Map<String, Integer> getTopListAsMap() {
         int top = leaderboardConfig.getTop();
-        Map<String, Integer> toplist = SqlUtils.getTopPlayerMap(placeholderColumnName, top);
-        return toplist;
+        return SqlUtils.getTopPlayerMap(placeholderColumnName, top);
+
     }
 
-    public String getTopListAsStringForWebhook(){
+    public String getTopListAsStringForWebhook() {
         Map<String, Integer> toplistmap = getTopListAsMap();
         // find the maximum length of the names
         int maxNameLength = 0;
@@ -41,14 +43,14 @@ public class TopList {
         for (Map.Entry<String, Integer> entry : toplistmap.entrySet()) {
             String name = entry.getKey();
             int score = entry.getValue();
-            String formattedEntry = String.format("%d. %-"+(maxNameLength+4)+"s %d\\u000A", i++, name, score);
+            String formattedEntry = String.format("%d. %-" + (maxNameLength + 4) + "s %d\\u000A", i++, name, score);
             sb.append(formattedEntry);
         }
         String leaderboardString = sb.toString();
         return leaderboardString;
     }
 
-    public String getTopListAsString(){
+    public String getTopListAsString() {
         Map<String, Integer> toplistmap = getTopListAsMap();
         StringBuilder sb = new StringBuilder();
         int i = 1;

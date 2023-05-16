@@ -11,6 +11,7 @@ import org.kasun.discordleaderboards.Configs.MainConfig;
 import org.kasun.discordleaderboards.Leaderboard.Leaderboard;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class ViewCommand implements CommandExecutor, TabCompleter {
     @Override
@@ -25,15 +26,17 @@ public class ViewCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 1){
-            Leaderboard leaderboard = new Leaderboard(args[0]);
-            String leaderboardstring = leaderboard.toString();
+            CompletableFuture.runAsync(() -> {
+                Leaderboard leaderboard = new Leaderboard(args[0]);
+                String leaderboardstring = leaderboard.toString();
 
-            if (sender instanceof Player){
-                Player p = (Player) sender;
-                p.sendMessage( ChatColor.GRAY + leaderboardstring);
-            }else{
-                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GRAY + leaderboardstring);
-            }
+                if (sender instanceof Player){
+                    Player p = (Player) sender;
+                    p.sendMessage( ChatColor.GRAY + leaderboardstring);
+                }else{
+                    Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GRAY + leaderboardstring);
+                }
+            });
 
         }else{
             if (sender instanceof Player){

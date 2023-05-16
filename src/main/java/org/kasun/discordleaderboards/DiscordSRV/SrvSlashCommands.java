@@ -16,6 +16,7 @@ import org.kasun.discordleaderboards.Leaderboard.Leaderboard;
 import org.kasun.discordleaderboards.Configs.MainConfig;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 public class SrvSlashCommands implements Listener, SlashCommandProvider {
     private final DiscordLeaderboards plugin  = DiscordLeaderboards.getInstance();
@@ -56,10 +57,13 @@ public class SrvSlashCommands implements Listener, SlashCommandProvider {
     @SlashCommand(path = "leaderboard")
     public void bestPlugin(SlashCommandEvent event) {
         int option = (int) event.getOption("leaderboard").getAsDouble();
-        Leaderboard leaderboard = new Leaderboard(leaderboardList.get(option));
-        LeaderboardDiscordSrvEmbed leaderboardDiscordSrvEmbed = new LeaderboardDiscordSrvEmbed(leaderboard);
-        MessageEmbed messageEmbed = leaderboardDiscordSrvEmbed.getDiscordsrvEmbed().getMessageEmbed();
-        event.replyEmbeds(messageEmbed).queue();
+        CompletableFuture.runAsync(() -> {
+            Leaderboard leaderboard = new Leaderboard(leaderboardList.get(option));
+            LeaderboardDiscordSrvEmbed leaderboardDiscordSrvEmbed = new LeaderboardDiscordSrvEmbed(leaderboard);
+            MessageEmbed messageEmbed = leaderboardDiscordSrvEmbed.getDiscordsrvEmbed().getMessageEmbed();
+            event.replyEmbeds(messageEmbed).queue();
+        });
+
     }
 
     @SlashCommand(path = "ping")

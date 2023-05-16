@@ -11,6 +11,7 @@ import org.kasun.discordleaderboards.Configs.MainConfig;
 import org.kasun.discordleaderboards.Leaderboard.Leaderboard;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 public class ForceLeaderboardSend implements CommandExecutor, TabCompleter {
     @Override
@@ -25,8 +26,10 @@ public class ForceLeaderboardSend implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 1){
-            Leaderboard leaderboard = new Leaderboard(args[0]);
-            leaderboard.send();
+            CompletableFuture.runAsync(() -> {
+                Leaderboard leaderboard = new Leaderboard(args[0]);
+                leaderboard.send();
+            });
             if (sender instanceof Player){
                 Player p = (Player) sender;
                 p.sendMessage( ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GREEN + "Leaderboard Sent!");
