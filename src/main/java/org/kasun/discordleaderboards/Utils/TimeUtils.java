@@ -1,6 +1,7 @@
 package org.kasun.discordleaderboards.Utils;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Date;
 
 public class TimeUtils {
@@ -13,5 +14,10 @@ public class TimeUtils {
         long diffInSec = Math.abs((timestamp2.getTime() - timestamp1.getTime()) / 1000);
         return diffInSec;
     }
+
+    public static long getCurrentUnixTimestamp() {
+        return Instant.now().getEpochSecond();
+    }
+
 
 }

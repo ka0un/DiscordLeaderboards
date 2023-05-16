@@ -48,11 +48,12 @@ public class CreateCommand implements CommandExecutor, TabCompleter {
                         userData.addUserDataToDBAllPlayersThisPlaceholder();
                         Bukkit.getScheduler().runTask(plugin, () -> {
                             p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.YELLOW + "Synchronization Complete !");
+                            p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GREEN + "Leaderboard Created!");
+                            p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "you can change the settings from plugins\\DiscordLeaderboards\\leaderboard\\" + args[0] + ".yml");
                         });
                     });
 
-                    p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GREEN + "Leaderboard Created!");
-                    p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "you can change the settings from plugins\\DiscordLeaderboards\\leaderboard\\" + args[0] + ".yml");
+
 
                     //getting random offline player
                     List<OfflinePlayer> players = PlayerUtils.getAllPlayers();

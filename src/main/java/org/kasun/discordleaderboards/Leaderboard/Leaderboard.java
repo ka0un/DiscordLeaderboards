@@ -8,6 +8,7 @@ import org.kasun.discordleaderboards.Configs.MainConfig;
 
 import java.awt.*;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.List;
 
 public class Leaderboard {
@@ -60,7 +61,7 @@ public class Leaderboard {
         String dembedImage = mainConfig.getDembedImage();
         String dembedThumbnail = mainConfig.getDembedThumbnail();
 
-        String dembedDescription = "Leaderboard is Empty !";
+        String dembedDescription = "Description is Empty !";
 
         //getting leaderboard's values from leaderboard config
         String placeholder = leaderboardConfig.getPlaceholder();
@@ -127,8 +128,9 @@ public class Leaderboard {
 
         }
 
-
-        String description = topList.getTopListAsStringForWebhook();
+        DescriptionGenerator descriptionGenerator = new DescriptionGenerator(name);
+        String description = descriptionGenerator.getDescriptionForWebhook();
+        System.out.println("Debug : " + description);
 
         if (description == null || description.equals("") || dembedDescription.equals("-")) {
             description = dembedDescription;
@@ -141,6 +143,7 @@ public class Leaderboard {
             webhook.execute();
         }catch (IOException e){
             Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Webhook issue detected, Check You Config Files  [code : 24]");
+            e.printStackTrace();
         }
 
     }

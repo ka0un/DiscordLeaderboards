@@ -2,6 +2,7 @@ package org.kasun.discordleaderboards.Schedules;
 
 import org.kasun.discordleaderboards.Database.Cache;
 import org.kasun.discordleaderboards.Leaderboard.Leaderboard;
+import org.kasun.discordleaderboards.Leaderboard.LeaderboardConfig;
 import org.kasun.discordleaderboards.Utils.SqlUtils;
 import org.kasun.discordleaderboards.Utils.TimeUtils;
 
@@ -41,24 +42,28 @@ public class Schedule {
                     if (TimeUtils.getTimestampDifference(currentTime, lastsent) >= SECSFORHOUR){
                         leaderboard.send();
                         setLastSent();
+                        deleteDataIfNeeded();
                     }
                     break;
                 case "daily":
                     if (TimeUtils.getTimestampDifference(currentTime, lastsent) >= SECSFORDAY){
                         leaderboard.send();
                         setLastSent();
+                        deleteDataIfNeeded();
                     }
                     break;
                 case "weekly":
                     if (TimeUtils.getTimestampDifference(currentTime, lastsent) >= SECSFORWEEK){
                         leaderboard.send();
                         setLastSent();
+                        deleteDataIfNeeded();
                     }
                     break;
                 case "monthly":
                     if (TimeUtils.getTimestampDifference(currentTime, lastsent) >= SECSSFORMONTH){
                         leaderboard.send();
                         setLastSent();
+                        deleteDataIfNeeded();
                     }
                     break;
                 default:
@@ -86,5 +91,14 @@ public class Schedule {
         String leaderboardname = leaderboard.getName();
         isalredysent = SqlUtils.isScheduleAlredySent(leaderboardname);
         return isalredysent;
+    }
+
+    public void deleteDataIfNeeded(){
+        boolean isrefreshonsent = leaderboard.getConfig().isRefreshOnSent();
+        String ColumnName = leaderboard.getConfig().getPlaceholder().substring(1, leaderboard.getConfig().getPlaceholder().length() - 1);
+        String tablename = "UserData";
+        if (isrefreshonsent){
+            SqlUtils.deleteAllValues(tablename, ColumnName);
+        }
     }
 }

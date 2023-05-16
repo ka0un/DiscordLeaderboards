@@ -2,6 +2,7 @@ package org.kasun.discordleaderboards.DiscordSRV;
 
 import jdk.jfr.internal.tool.Main;
 import org.kasun.discordleaderboards.Configs.MainConfig;
+import org.kasun.discordleaderboards.Leaderboard.DescriptionGenerator;
 import org.kasun.discordleaderboards.Leaderboard.Leaderboard;
 import org.kasun.discordleaderboards.Leaderboard.TopList;
 
@@ -20,9 +21,6 @@ public class LeaderboardDiscordSrvEmbed {
 
     public DiscordsrvEmbed getDiscordsrvEmbed() {
 
-        topList = new TopList(leaderboard.getConfig());
-        String ddescription = "``` Leaderboard is Empty ! ```";
-        String description = "```" + topList.getTopListAsString() + "```";
 
         MainConfig mainConfig = new MainConfig();
         String title = getDefaultIfNullOrEmpty(leaderboard.getConfig().getEmbedTitle(), mainConfig.getDembedTitle());
@@ -30,7 +28,8 @@ public class LeaderboardDiscordSrvEmbed {
         String footer = getDefaultIfNullOrEmpty(leaderboard.getConfig().getEmbedFooter(), mainConfig.getDembedFooter());
         String image = getDefaultIfNullOrEmpty(leaderboard.getConfig().getEmbedImage(), mainConfig.getDembedImage());
         String thumb = getDefaultIfNullOrEmpty(leaderboard.getConfig().getEmbedThumbnail(), mainConfig.getDembedThumbnail());
-        String desc = (description == "```" + "```") ? ddescription : description;
+
+
 
         discordsrvEmbed = new DiscordsrvEmbed();
         discordsrvEmbed.setEmbedTitle(title);
@@ -38,7 +37,8 @@ public class LeaderboardDiscordSrvEmbed {
         discordsrvEmbed.setEmbedFooter(footer);
         discordsrvEmbed.setEmbedImage(image);
         discordsrvEmbed.setEmbedThumbnail(thumb);
-        discordsrvEmbed.setEmbedDescription(desc);
+        DescriptionGenerator descriptionGenerator = new DescriptionGenerator(leaderboard);
+        discordsrvEmbed.setEmbedDescription(descriptionGenerator.getDescriptionForSrv());
 
         return discordsrvEmbed;
     }

@@ -270,6 +270,31 @@ public class SqlUtils {
         return cache;
     }
 
+    public static void deleteAllValues(String tableName, String columnName) {
+        PreparedStatement preparedStatement;
+        MainConfig mainConfig = new MainConfig();
+        Database database = new Database();
+        try {
+            if (mainConfig.getStorageType().equalsIgnoreCase("h2")) {
+                preparedStatement = database.getConnection().prepareStatement(
+                        "DELETE FROM " + tableName + " WHERE " + columnName + " IS NOT NULL"
+                );
+            } else if (mainConfig.getStorageType().equalsIgnoreCase("mysql")) {
+                preparedStatement = database.getConnection().prepareStatement(
+                        "UPDATE " + tableName + " SET " + columnName + " = NULL"
+                );
+            } else {
+                throw new UnsupportedOperationException("Unsupported storage type: " + mainConfig.getStorageType());
+            }
+
+            int rowsUpdated = preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Issue while deleting data in the database [code: 13]");
+        }
+    }
+
+
 
 
 }

@@ -9,7 +9,7 @@ name: example
 # Unique identifier for each leaderboard.
 # Must be the same as the file name.
 
-placeholder: '%player_level%'
+placeholder: "%player_level%"
 # Required
 # PlaceholderAPI Placeholder. Please include % %.
 # Make sure this PlaceholderAPI placeholder outputs a number value.
@@ -18,6 +18,14 @@ top: 5
 # Required
 # Leaderboard amount, e.g., top 5 or top 3.
 # Must be an integer value.
+
+refresh-database-onsent: false
+# Required Default : False
+# Delete Collected Placeholder Values After Every Hourly, Daily,
+# Weekly, Monthly Webhook Delivery, Example Use case
+# Imaging you setting up daily bed-wars top players if this false
+# Yesterday collected Values can be used to generate today's leaderboard
+# so in that case you have to change this to true
 
 #===================================
 # WEBHOOK OPTIONS
@@ -33,31 +41,47 @@ delay: Daily
 # - Weekly: Send webhook every week.
 # - Monthly: Send webhook every month.
 # - None: Send webhook only with the '/dl-forcesend' command or DiscordSRV '/leaderboard' command.
+# - Custom [Premium Only]
 
-webhook-url: ''
+webhook-url: ""
 # Discord Webhook URL.
 
-webhook-avatar-url: ''
+webhook-avatar-url: ""
 # Discord Webhook avatar URL.
 # Must be a direct image link.
 
-webhook-user-name: ''
+webhook-user-name: ""
 # Discord Webhook Username.
 
-embed-title: ''
+embed-title: ""
 # Discord embed Title.
 
-embed-url: ''
+embed-description:
+  - "{toplist}"
+
+# Discord Embed Description
+# Valid Placeholders -
+# {toplist} - leaderboard toplist
+# {top <place> name} - name of the "place"th player eg :- {top 1 name} 1st's name
+# {top <place> score} - score(value) of the "place"th player eg :- {top 2 name} 2nd's score(value)
+# {timestamp-now} - embed sent time (current time)
+# {timestamp-next} - next schedule time eg:- if its Daily , 1 Days left
+
+embed-url: ""
 # Discord embed Title URL.
 
-embed-colour: ''
+embed-colour: ""
 # Discord embed Colour.
 
-embed-footer: ''
+embed-footer: ""
 # Discord embed Footer.
 
-embed-image: ''
+embed-image: ""
 # Discord embed Image.
 
-embed-thumbnail: ''
+embed-thumbnail: ""
 # Discord embed Thumbnail.
+
+# Comments on leaderboards configs never generated again,
+# so keep this a refernce you can disable this leaderboard
+# by removing "example" from leaderboard list in config.yml

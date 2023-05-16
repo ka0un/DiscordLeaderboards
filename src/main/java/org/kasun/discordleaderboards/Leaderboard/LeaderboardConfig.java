@@ -7,6 +7,8 @@ import org.kasun.discordleaderboards.DiscordLeaderboards;
 import org.kasun.discordleaderboards.Configs.CustomConfig;
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LeaderboardConfig {
     private final DiscordLeaderboards plugin  = DiscordLeaderboards.getInstance();
@@ -15,10 +17,12 @@ public class LeaderboardConfig {
     private String placeholder;
     private int top;
     private String delay;
+    private boolean refreshOnSent;
     private String webhookurl;
     private String webhookAvatarUrl;
     private String webhookUserName;
     private String embedTitle;
+    private List<String> embedDescription;
     private String embedUrl;
     private String embedColour;
     private String embedFooter;
@@ -40,10 +44,14 @@ public class LeaderboardConfig {
         this.placeholder = placeholder;
         this.top = top;
         this.delay = delay;
+        this.refreshOnSent = false;
         this.webhookurl = "-";
         this.webhookAvatarUrl = "-";
         this.webhookUserName = "-";
         this.embedTitle = "-";
+        List<String> description = new ArrayList<>();
+        description.add("{toplist}");
+        this.embedDescription = description;
         this.embedUrl = "-";
         this.embedColour = "-";
         this.embedFooter = "-";
@@ -62,10 +70,12 @@ public class LeaderboardConfig {
         config.set("placeholder", placeholder);
         config.set("top", top);
         config.set("delay", delay);
+        config.set("refresh-database-onsent", refreshOnSent);
         config.set("webhook-url", webhookurl);
         config.set("webhook-avatar-url", webhookAvatarUrl);
         config.set("webhook-user-name", webhookUserName);
         config.set("embed-title", embedTitle);
+        config.set("embed-description", embedDescription);
         config.set("embed-url", embedUrl);
         config.set("embed-colour", embedColour);
         config.set("embed-footer", embedFooter);
@@ -83,10 +93,12 @@ public class LeaderboardConfig {
         this.placeholder = config.getString("placeholder");
         this.top = config.getInt("top");
         this.delay = config.getString("delay");
+        this.refreshOnSent = config.getBoolean("refresh-database-onsent");
         this.webhookurl = config.getString("webhook-url");
         this.webhookAvatarUrl = config.getString("webhook-avatar-url");
         this.webhookUserName = config.getString("webhook-user-name");
         this.embedTitle = config.getString("embed-title");
+        this.embedDescription = config.getStringList("embed-description");
         this.embedUrl = config.getString("embed-url");
         this.embedColour = config.getString("embed-colour");
         this.embedFooter = config.getString("embed-footer");
@@ -95,6 +107,23 @@ public class LeaderboardConfig {
     }
 
     //getters and setters
+
+    public boolean isRefreshOnSent() {
+        return refreshOnSent;
+    }
+
+    public void setRefreshOnSent(boolean refreshOnSent) {
+        this.refreshOnSent = refreshOnSent;
+    }
+
+    public List<String> getEmbedDescription() {
+        return embedDescription;
+    }
+
+    public void setEmbedDescription(List<String> embedDescription) {
+        this.embedDescription = embedDescription;
+    }
+
     public String getName() {
         return name;
     }

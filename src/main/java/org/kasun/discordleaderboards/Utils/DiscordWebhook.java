@@ -209,7 +209,7 @@ public class DiscordWebhook {
         }
 
         public EmbedObject setDescription(String description) {
-            this.description = "```" + description + "```";
+            this.description = description;
             return this;
         }
 
