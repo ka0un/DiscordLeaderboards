@@ -130,7 +130,6 @@ public class Leaderboard {
 
         DescriptionGenerator descriptionGenerator = new DescriptionGenerator(name);
         String description = descriptionGenerator.getDescriptionForWebhook();
-        System.out.println("Debug : " + description);
 
         if (description == null || description.equals("") || dembedDescription.equals("-")) {
             description = dembedDescription;
