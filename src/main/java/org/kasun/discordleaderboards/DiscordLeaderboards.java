@@ -25,6 +25,8 @@ public final class DiscordLeaderboards extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+        int pluginId = 18497;
+        Metrics metrics = new Metrics(this, pluginId);
         StartMessage.sendStartMessage();
         MainManager mainManager = new MainManager();
     }
