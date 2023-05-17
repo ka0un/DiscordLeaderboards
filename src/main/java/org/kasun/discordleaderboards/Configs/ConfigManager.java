@@ -23,7 +23,7 @@ public class ConfigManager {
             c1.save();
         }
         if (mainConfig.isFirstTime()) {
-            copyResourceFile("example.yml", new File(JavaPlugin.getPlugin(DiscordLeaderboards.class).getDataFolder() + "\\leaderboard\\", "example.yml"));
+            copyResourceFile("example.yml", new File(JavaPlugin.getPlugin(DiscordLeaderboards.class).getDataFolder() + "/leaderboard/", "example.yml"));
             mainConfig.setFirstTime(false);
             mainConfig.saveConfig();
         }
