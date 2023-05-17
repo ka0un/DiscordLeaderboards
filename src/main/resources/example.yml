@@ -83,5 +83,5 @@ embed-thumbnail: ""
 # Discord embed Thumbnail.
 
 # Comments on leaderboards configs never generated again,
-# so keep this a refernce you can disable this leaderboard
+# so keep this a reference you can disable this leaderboard
 # by removing "example" from leaderboard list in config.yml

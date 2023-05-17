@@ -15,7 +15,7 @@ public class Database {
 
     public Connection getConnection() {
         Connection connection = null;
-        h2url = "jdbc:h2:file:" + plugin.getDataFolder().getAbsolutePath() + "\\database\\database";
+        h2url = "jdbc:h2:file:" + plugin.getDataFolder().getAbsolutePath() + "/database/database";
 
         if (mainConfig.getStorageType().equalsIgnoreCase("h2")){
 

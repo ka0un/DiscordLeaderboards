@@ -13,7 +13,7 @@
 #=================================================================
 # Available Options
 # Local Databases - H2 (Default)
-# Remote Databases - MYSQL
+# Remote Databases - MYSQL (Beta - Under Development)
 storage-method: 'h2'
 
 # Remote Mysql Database Settings
