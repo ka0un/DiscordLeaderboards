@@ -1,4 +1,4 @@
-
+![Main Image](https://cdn.discordapp.com/attachments/1074520108514431026/1108474446987141261/Group_9.png "Discord Leaderboards")
 # Discord Leaderboards
 
 > Create Minecraft Leaderboards with PlaceholderAPI and Post it to Discord Via Webhooks or DiscordSRV
@@ -9,6 +9,7 @@
 * Trello - https://trello.com/b/3nEM0ADF/dleaderboard
 > Your stellar generosity in leaving a ⭐ warms my heart with gratitude. Thank you for brightening my day!
 
+![Main2 Image](https://cdn.discordapp.com/attachments/1074520108514431026/1108469361464840263/Untitled.png "Discord Leaderboards")
 
 ### Dependencies
 
