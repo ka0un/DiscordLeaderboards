@@ -1,6 +1,7 @@
 # Discord Leaderboards
 
 > Create Minecraft Leaderboards with PlaceholderAPI and Post it to Discord Via Webhooks or DiscordSRV
+
 > Your stellar generosity in leaving a ⭐ warms my heart with gratitude. Thank you for brightening my day!
 
 * Spigot - https://www.spigotmc.org/resources/discord-leaderboards-free-beta.109908/
