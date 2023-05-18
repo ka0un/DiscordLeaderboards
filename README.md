@@ -1,6 +1,6 @@
 # Discord Leaderboards
 
-Create Minecraft Leaderboards with PlaceholderAPI and Post it to Discord Via Webhooks or DiscordSRV
+> Create Minecraft Leaderboards with PlaceholderAPI and Post it to Discord Via Webhooks or DiscordSRV
 
 
 * Spigot - https://www.spigotmc.org/resources/discord-leaderboards-free-beta.109908/
@@ -18,11 +18,11 @@ Create Minecraft Leaderboards with PlaceholderAPI and Post it to Discord Via Web
 
 ### Commands And Permissions
 
-* /DL-CREATE <name> <top> <%placeholder%> <Schedule> - Create Leaderboard
-* /DL-VIEW <name> - Preview Leaderboard
-* /DL-FORCESEND <name> - Force send leaderboard to Discord Webook
-* /DL-TESTWEBHOOK - Test the Webhook Url
-* /DL-SYNCALL - Sync all Offline Players Required Placeholder Values to Plugin Database
+* DL-CREATE <name> <top> <%placeholder%> <Schedule> - Create Leaderboard
+* DL-VIEW <name> - Preview Leaderboard
+* DL-FORCESEND <name> - Force send leaderboard to Discord Webook
+* DL-TESTWEBHOOK - Test the Webhook Url
+* DL-SYNCALL - Sync all Offline Players Required Placeholder Values to Plugin Database
 
 * DL.ADMIN - Permission To All Commands
 * DL.<COMMAND> - Permission to Specific Command
