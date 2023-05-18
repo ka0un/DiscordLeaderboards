@@ -18,14 +18,13 @@
 
 ### Commands And Permissions
 
-* DL-CREATE <name> <top> <%placeholder%> <Schedule> - Create Leaderboard
-* DL-VIEW <name> - Preview Leaderboard
-* DL-FORCESEND <name> - Force send leaderboard to Discord Webook
-* DL-TESTWEBHOOK - Test the Webhook Url
-* DL-SYNCALL - Sync all Offline Players Required Placeholder Values to Plugin Database
-
-* DL.ADMIN - Permission To All Commands
-* DL.<COMMAND> - Permission to Specific Command
+* dl-create <name> <top> <%placeholder%> <schedule> - create leaderboard
+* dl-view <name> - preview leaderboard
+* dl-forcesend <name> - force send leaderboard to discord webook
+* dl-testwebhook - test the webhook url
+* dl-syncall - sync all offline players required placeholder values to plugin database
+* dl.admin - permission to all commands
+* dl.<commandname> - permission to specific command
 
 ### Features
 
