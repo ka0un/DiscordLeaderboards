@@ -1,5 +1,6 @@
 package org.kasun.discordleaderboards;
 
+import org.bukkit.Bukkit;
 import org.kasun.discordleaderboards.Commands.CommandsManager;
 import org.kasun.discordleaderboards.Configs.ConfigManager;
 import org.kasun.discordleaderboards.Database.DatabaseManager;
@@ -21,7 +22,8 @@ public class MainManager {
         databaseManager = new DatabaseManager();
         commandsManager = new CommandsManager();
         listenerManager = new ListenerManager();
-        discordSrvManager = new DiscordSrvManager();
-
+        if (Bukkit.getPluginManager().getPlugin("DiscordSRV") != null){
+            discordSrvManager = new DiscordSrvManager();
+        }
     }
 }
