@@ -8,7 +8,6 @@ import org.kasun.discordleaderboards.Configs.MainConfig;
 
 import java.awt.*;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.List;
 
 public class Leaderboard {

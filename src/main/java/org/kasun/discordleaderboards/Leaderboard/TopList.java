@@ -1,12 +1,11 @@
 package org.kasun.discordleaderboards.Leaderboard;
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
+
 import org.kasun.discordleaderboards.Utils.SqlUtils;
 
-import java.sql.SQLOutput;
+
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
+
 
 public class TopList {
     private final int top;

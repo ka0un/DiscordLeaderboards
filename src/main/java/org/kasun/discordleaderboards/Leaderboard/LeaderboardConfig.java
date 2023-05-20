@@ -1,12 +1,10 @@
 package org.kasun.discordleaderboards.Leaderboard;
 
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.kasun.discordleaderboards.DiscordLeaderboards;
 import org.kasun.discordleaderboards.Configs.CustomConfig;
 
-import java.sql.SQLOutput;
+
 import java.util.ArrayList;
 import java.util.List;
 

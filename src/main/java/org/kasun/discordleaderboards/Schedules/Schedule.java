@@ -2,7 +2,6 @@ package org.kasun.discordleaderboards.Schedules;
 
 import org.kasun.discordleaderboards.Database.Cache;
 import org.kasun.discordleaderboards.Leaderboard.Leaderboard;
-import org.kasun.discordleaderboards.Leaderboard.LeaderboardConfig;
 import org.kasun.discordleaderboards.Utils.SqlUtils;
 import org.kasun.discordleaderboards.Utils.TimeUtils;
 

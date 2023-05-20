@@ -9,10 +9,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
-import org.kasun.discordleaderboards.Configs.MainConfig;
 import org.kasun.discordleaderboards.Database.UserData;
 import org.kasun.discordleaderboards.DiscordLeaderboards;
-import org.kasun.discordleaderboards.Leaderboard.LeaderboardConfig;
 import org.kasun.discordleaderboards.Utils.PlayerUtils;
 import org.kasun.discordleaderboards.Leaderboard.Leaderboard;
 

@@ -1,6 +1,4 @@
 package org.kasun.discordleaderboards.DiscordSRV;
-
-import jdk.jfr.internal.tool.Main;
 import org.kasun.discordleaderboards.Configs.MainConfig;
 import org.kasun.discordleaderboards.Leaderboard.DescriptionGenerator;
 import org.kasun.discordleaderboards.Leaderboard.Leaderboard;

@@ -2,8 +2,6 @@ package org.kasun.discordleaderboards.DiscordSRV;
 
 import github.scarsz.discordsrv.DiscordSRV;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.kasun.discordleaderboards.DiscordLeaderboards;
 
 public class DiscordSrvManager {

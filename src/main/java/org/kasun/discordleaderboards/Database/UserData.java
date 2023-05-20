@@ -8,7 +8,6 @@ import org.kasun.discordleaderboards.Leaderboard.Leaderboard;
 import org.kasun.discordleaderboards.Utils.PlayerUtils;
 import org.kasun.discordleaderboards.Utils.SqlUtils;
 
-import java.sql.SQLOutput;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -31,7 +30,11 @@ public class UserData {
         this.placeholder = placeholder;
         placeholderColumnName = placeholder.substring(1, placeholder.length() - 1);
         uuid = player.getUniqueId().toString();
-        value = Double.parseDouble(PlaceholderAPI.setPlaceholders(player, placeholder));
+        try{
+            value = Double.parseDouble(PlaceholderAPI.setPlaceholders(player, placeholder));
+        }catch (NumberFormatException e){
+            value  = 0.0;
+        }
         username = player.getName();
     }
     public UserData(OfflinePlayer offlinePlayer, String placeholder) {
@@ -39,7 +42,11 @@ public class UserData {
         this.placeholder = placeholder;
         placeholderColumnName = placeholder.substring(1, placeholder.length() - 1);
         uuid = offlinePlayer.getUniqueId().toString();
-        value = Double.parseDouble(PlaceholderAPI.setPlaceholders(offlinePlayer, placeholder));
+        try{
+            value = Double.parseDouble(PlaceholderAPI.setPlaceholders(offlinePlayer, placeholder));
+        }catch (NumberFormatException e){
+            value  = 0.0;
+        }
         username = offlinePlayer.getName();
     }
 

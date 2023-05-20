@@ -1,7 +1,5 @@
 package org.kasun.discordleaderboards.Leaderboard;
 
-import org.kasun.discordleaderboards.Database.Cache;
-import org.kasun.discordleaderboards.DiscordSRV.LeaderboardDiscordSrvEmbed;
 import org.kasun.discordleaderboards.Utils.TimeUtils;
 
 import java.util.Comparator;
