@@ -11,7 +11,7 @@
 > Your stellar generosity in leaving a ⭐ warms my heart with gratitude. Thank you for brightening my day!
 
 ![Main2 Image](https://cdn.discordapp.com/attachments/1074520108514431026/1108469361464840263/Untitled.png "Discord Leaderboards")
-
+![Ad Image](https://cdn.discordapp.com/attachments/1074520108514431026/1109732216604475492/Group_16.png "Add Star From Star Button on Top Right Corner")
 ### Dependencies
 
 * PlaceholderAPI - Required
