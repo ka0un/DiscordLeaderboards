@@ -43,5 +43,5 @@
 
 Contribution Appirciated!
 
-![Trello](https://trello.com/c/3nEM0ADF.png "TODO")
+![Trello](https://trello.com/c/NIRpzVDM.png "TODO")
 ![Bstats Plugin Statistics](https://bstats.org/signatures/bukkit/Discord%20Leaderboards.svg "Plugin Statistics")
