@@ -12,10 +12,15 @@
 > Your stellar generosity in leaving a ⭐ warms my heart with gratitude. Thank you for brightening my day!
 
 ![Main2 Image](https://cdn.discordapp.com/attachments/1074520108514431026/1108469361464840263/Untitled.png "Discord Leaderboards")
+
+---
+
 ### Dependencies
 
 * PlaceholderAPI - Required
 * DiscordSRV - Optional
+
+---
 
 ### Commands And Permissions
 
@@ -26,6 +31,8 @@
 * dl-syncall - sync all offline players required placeholder values to plugin database
 * dl.admin - permission to all commands
 * dl.<commandname> - permission to specific command
+
+---
 
 ### Features
 
@@ -41,6 +48,8 @@
 * Embed Description Placeholders
 * Support Discord
 
-Contribution Appirciated!
+---
 
+Contribution Appirciated!
+[![](https://opencollective.com/html-react-parser/contributors.svg?width=890&button=false)](https://github.com/remarkablemark/html-react-parser/graphs/contributors)
 ![Bstats Plugin Statistics](https://bstats.org/signatures/bukkit/Discord%20Leaderboards.svg "Plugin Statistics")
