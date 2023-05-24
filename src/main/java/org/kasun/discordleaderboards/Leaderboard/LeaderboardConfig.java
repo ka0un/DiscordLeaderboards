@@ -26,7 +26,7 @@ public class LeaderboardConfig {
     private String embedFooter;
     private String embedImage;
     private String embedThumbnail;
-    private CustomConfig customConfig;
+    private final CustomConfig customConfig;
 
     //Constructer for load exciting leaderboardConfig
     public LeaderboardConfig(String name) {

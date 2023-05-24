@@ -7,12 +7,10 @@ import java.util.Date;
 public class TimeUtils {
     public static Timestamp getCurrentTimeStamp(){
         Date currentDate = new Date();
-        Timestamp currentTimestamp = new Timestamp(currentDate.getTime());
-        return currentTimestamp;
+        return new Timestamp(currentDate.getTime());
     }
     public static long getTimestampDifference(Timestamp timestamp1, Timestamp timestamp2) {
-        long diffInSec = Math.abs((timestamp2.getTime() - timestamp1.getTime()) / 1000);
-        return diffInSec;
+        return Math.abs((timestamp2.getTime() - timestamp1.getTime()) / 1000);
     }
 
     public static long getCurrentUnixTimestamp() {

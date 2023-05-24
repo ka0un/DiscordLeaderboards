@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,9 +22,7 @@ public class PlayerUtils {
     public static List<OfflinePlayer> getAllPlayers() {
         List<OfflinePlayer> players = new ArrayList<>();
 
-        for (OfflinePlayer offlinePlayer : Bukkit.getOfflinePlayers()) {
-            players.add(offlinePlayer);
-        }
+        Collections.addAll(players, Bukkit.getOfflinePlayers());
 
         return players;
     }

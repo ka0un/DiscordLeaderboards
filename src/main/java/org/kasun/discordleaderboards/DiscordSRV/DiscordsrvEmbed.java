@@ -44,8 +44,7 @@ public class DiscordsrvEmbed {
             embedBuilder.setDescription(embedDescription);
         }
 
-        MessageEmbed messageEmbed = embedBuilder.build();
-        return messageEmbed;
+        return embedBuilder.build();
     }
 
 

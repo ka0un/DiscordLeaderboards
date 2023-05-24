@@ -1,11 +1,10 @@
 package org.kasun.discordleaderboards.Configs;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.kasun.discordleaderboards.DiscordLeaderboards;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.List;
 
 public class ConfigManager {
@@ -31,7 +30,7 @@ public class ConfigManager {
 
     public void copyResourceFile(String resourceName, File destination) {
         try (InputStream inputStream = plugin.getResource(resourceName);
-             OutputStream outputStream = new FileOutputStream(destination)) {
+             OutputStream outputStream = Files.newOutputStream(destination.toPath())) {
 
             byte[] buffer = new byte[1024];
             int length;
@@ -39,7 +38,7 @@ public class ConfigManager {
                 outputStream.write(buffer, 0, length);
             }
         } catch (IOException e) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "cannot copy file , internal plugin issue please contact the developer  [code : 20]");
+            plugin.getLogger().severe("cannot copy file , internal plugin issue please contact the developer  [code : 20]");
         }
     }
 }

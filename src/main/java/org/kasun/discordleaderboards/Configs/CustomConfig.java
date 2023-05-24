@@ -1,7 +1,5 @@
 package org.kasun.discordleaderboards.Configs;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.kasun.discordleaderboards.DiscordLeaderboards;
@@ -10,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class CustomConfig {
-    private File file;
+    private final File file;
     private FileConfiguration customFile;
     private String name;
     private final DiscordLeaderboards plugin  = DiscordLeaderboards.getInstance();
@@ -23,8 +21,7 @@ public class CustomConfig {
         if (!file.exists()){
             try {
                 file.createNewFile();
-            }catch (IOException e){
-
+            }catch (IOException ignored){
             }
         }
         customFile = YamlConfiguration.loadConfiguration(file);
@@ -39,8 +36,7 @@ public class CustomConfig {
         try {
             customFile.save(file);
         }catch (IOException e){
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "file saving issue , internal plugin issue please contact plugin developer [code : 22]");
-
+            plugin.getLogger().severe("file saving issue , internal plugin issue please contact plugin developer [code : 22]");
         }
     }
 

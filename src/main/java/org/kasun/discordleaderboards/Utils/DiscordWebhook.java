@@ -1,7 +1,5 @@
 package org.kasun.discordleaderboards.Utils;
 
-import org.apache.commons.lang.NullArgumentException;
-
 import javax.net.ssl.HttpsURLConnection;
 import java.awt.Color;
 import java.io.IOException;
@@ -21,7 +19,7 @@ public class DiscordWebhook {
     private String avatarUrl;
     private boolean tts;
     private UUID uuid;
-    private List<EmbedObject> embeds = new ArrayList<>();
+    private final List<EmbedObject> embeds = new ArrayList<>();
 
     /**
      * Constructs a new DiscordWebhook instance
