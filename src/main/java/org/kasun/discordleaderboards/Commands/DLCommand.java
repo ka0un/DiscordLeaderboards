@@ -8,8 +8,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.kasun.discordleaderboards.Configs.MainConfig;
 import org.kasun.discordleaderboards.Database.UserData;
 import org.kasun.discordleaderboards.DiscordLeaderboards;
@@ -168,7 +166,6 @@ public class DLCommand implements TabExecutor {
 
             p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.YELLOW + "Synchronization Starting...");
             UserData userData = new UserData();
-            Plugin plugin = JavaPlugin.getPlugin(DiscordLeaderboards.class);
             Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
                 userData.addUserDataToDBAllPlayersAllPlaceholders();
                 Bukkit.getScheduler().runTask(plugin, () -> {
