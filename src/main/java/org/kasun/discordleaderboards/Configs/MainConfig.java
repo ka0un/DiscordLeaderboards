@@ -95,10 +95,9 @@ public class MainConfig {
         this.config = config;
         try{
             this.config.save(configFile);
-        }catch (IOException e){
+        }catch (IOException ignored){
 
         }
-
     }
 
     public void setLeaderboardsList(List<String> leaderboardsList) {

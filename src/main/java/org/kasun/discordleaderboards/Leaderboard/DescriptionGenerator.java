@@ -9,9 +9,9 @@ import java.util.regex.Pattern;
 import java.util.regex.*;
 
 public class DescriptionGenerator {
-    private Leaderboard leaderboard;
-    private List<String> embedDescriptionlist;
-    private TopList topList;
+    private final Leaderboard leaderboard;
+    private final List<String> embedDescriptionlist;
+    private final TopList topList;
     private final long SECSFORHOUR = 3600;
     private final long SECSFORDAY = 86400;
     private final long SECSFORWEEK = 604800;

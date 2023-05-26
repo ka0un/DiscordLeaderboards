@@ -13,9 +13,9 @@ import java.util.List;
 public class Leaderboard {
     private final DiscordLeaderboards plugin  = DiscordLeaderboards.getInstance();
     public enum WebhookDelay {Live, Hourly, Daily, Weekly, Monthly, None}
-    private LeaderboardConfig leaderboardConfig;
-    private String name;
-    private TopList topList;
+    private final LeaderboardConfig leaderboardConfig;
+    private final String name;
+    private final TopList topList;
 
     //constructer for load leaderboard
     public Leaderboard(String name) {
@@ -41,8 +41,7 @@ public class Leaderboard {
     public String toString(){
         String placeholder = leaderboardConfig.getPlaceholder();
         int top = leaderboardConfig.getTop();
-        String leaderboardstring = topList.getTopListAsString();
-        return leaderboardstring;
+        return topList.getTopListAsString();
     }
 
     public void send() {

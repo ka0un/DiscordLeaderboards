@@ -10,11 +10,11 @@ import org.kasun.discordleaderboards.Leaderboard.Leaderboard;
 import java.util.List;
 
 public class ScheduleManager {
-    private final DiscordLeaderboards plugin  = DiscordLeaderboards.getInstance();
     public ScheduleManager() {
         MainConfig mainConfig = new MainConfig();
         if (!mainConfig.isFirstTime()){
             int scheduleDelay = mainConfig.getScheduleDelayMins();
+            DiscordLeaderboards plugin = DiscordLeaderboards.getInstance();
             new BukkitRunnable() {
                 @Override
                 public void run() {

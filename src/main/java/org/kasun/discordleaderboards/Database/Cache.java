@@ -4,8 +4,8 @@ import org.kasun.discordleaderboards.Leaderboard.Leaderboard;
 import org.kasun.discordleaderboards.Utils.SqlUtils;
 
 public class Cache {
-    private Leaderboard leaderboard;
-    private String cache;
+    private final Leaderboard leaderboard;
+    private final String cache;
 
     public Cache(Leaderboard leaderboard) {
         this.leaderboard = leaderboard;
@@ -19,8 +19,7 @@ public class Cache {
 
     public String getCache(){
         String leaderboardname = leaderboard.getName();
-        String cache = SqlUtils.getCache(leaderboardname);
-        return cache;
+        return SqlUtils.getCache(leaderboardname);
     }
 
     public boolean isDiffernt(){

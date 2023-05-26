@@ -1,7 +1,5 @@
 package org.kasun.discordleaderboards.Database;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.kasun.discordleaderboards.DiscordLeaderboards;
 import org.kasun.discordleaderboards.Configs.MainConfig;
 
@@ -23,9 +21,9 @@ public class Database {
                 Class.forName("org.h2.Driver");
                 connection = DriverManager.getConnection(h2url);
             } catch (ClassNotFoundException e) {
-                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Database Driver Not Found ! [code : 06]");
+                plugin.getLogger().severe("Database Driver Not Found ! [code : 06]");
             } catch (SQLException e) {
-                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to Connect H2 Database ! [code : 07]");
+                plugin.getLogger().severe("Failed to Connect H2 Database ! [code : 07]");
             }
 
 
@@ -40,10 +38,10 @@ public class Database {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 connection = DriverManager.getConnection("jdbc:mysql://" + adderss + "/" + database, username, password);
             } catch (ClassNotFoundException e) {
-                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "MySql Driver Not Found ! [code : 30]");
+                plugin.getLogger().severe("MySql Driver Not Found ! [code : 30]");
                 e.printStackTrace();
             } catch (SQLException e) {
-                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.RED + "Failed to Connect Mysql Database ! [code : 31]");
+                plugin.getLogger().severe("Failed to Connect Mysql Database ! [code : 31]");
                 e.printStackTrace();
             }
 
@@ -83,7 +81,7 @@ public class Database {
             preparedStatement.close();
 
         } catch (SQLException ex) {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Database Preparation Error Detected! [code : 08]");
+            plugin.getLogger().severe("Database Preparation Error Detected! [code : 08]");
             ex.printStackTrace();
         }
     }

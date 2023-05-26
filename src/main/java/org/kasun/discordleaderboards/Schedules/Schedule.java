@@ -8,8 +8,8 @@ import org.kasun.discordleaderboards.Utils.TimeUtils;
 import java.sql.Timestamp;
 
 public class Schedule {
-    private String delay;
-    private Leaderboard leaderboard;
+    private final String delay;
+    private final Leaderboard leaderboard;
     private boolean isalredysent;
 
     private final long SECSFORHOUR = 3600;

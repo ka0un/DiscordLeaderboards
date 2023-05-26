@@ -20,9 +20,9 @@ import java.util.List;
 import java.util.Random;
 
 public class SyncAllPlayers implements CommandExecutor {
-    private final DiscordLeaderboards plugin  = DiscordLeaderboards.getInstance();
+
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String lable, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player){
             Player p = (Player) sender;
 

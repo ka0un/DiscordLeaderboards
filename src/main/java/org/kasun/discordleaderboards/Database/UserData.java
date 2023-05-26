@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class UserData {
-    private MainConfig mainConfig = new MainConfig();
-    private Database database = new Database();
+    private final MainConfig mainConfig = new MainConfig();
+    private final Database database = new Database();
     private Player player;
     private OfflinePlayer offlinePlayer;
     private String placeholder;

@@ -22,75 +22,63 @@ public class CreateCommand implements CommandExecutor, TabCompleter {
     private final DiscordLeaderboards plugin = DiscordLeaderboards.getInstance();
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String lable, String[] args) {
-        if (args.length == 4) {
-            //name top placeholder delay
-            if (sender instanceof Player) {
-                Player p = (Player) sender;
-
-                if (!p.hasPermission("dl.create") && !p.hasPermission("dl.admin")) {
-                    p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "No Permission ! [dl.create], [dl.admin]");
-                    return true;
-                }
-
-                try {
-                    double value = Double.parseDouble(PlaceholderAPI.setPlaceholders(p, args[2]));
-                    Leaderboard leaderboard = new Leaderboard(args[0], Integer.parseInt(args[1]), args[2], Leaderboard.WebhookDelay.valueOf(args[3]));
-                    p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GREEN + "Starting Leaderboard Setup!");
-                    plugin.reloadConfig();
-                    UserData userData = new UserData(p, args[2]);
-                    userData.addToDatabase();
-                    p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.YELLOW + "Starting to Sync Offline Player Data... Please Wait!");
-
-                    Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-                        userData.addUserDataToDBAllPlayersThisPlaceholder();
-                        Bukkit.getScheduler().runTask(plugin, () -> {
-                            p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.YELLOW + "Synchronization Complete !");
-                            p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GREEN + "Leaderboard Created!");
-                            p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "you can change the settings from plugins\\DiscordLeaderboards\\leaderboard\\" + args[0] + ".yml");
-                        });
-                    });
-
-
-
-                    //getting random offline player
-                    List<OfflinePlayer> players = PlayerUtils.getAllPlayers();
-                    players.remove(p);
-                    Random random = new Random();
-                    int randomIndex = random.nextInt(players.size());
-                    OfflinePlayer randomPlayer = players.get(randomIndex);
-
-                    //checking placeholder if they supports offline players
-                    try {
-                        double value2 = Double.parseDouble(PlaceholderAPI.setPlaceholders(randomPlayer, args[2]));
-                    } catch (NumberFormatException ex) {
-                        p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "[ERROR] " + args[2] + " may not support offline players. [code : 17]");
-                    }
-
-                } catch (NumberFormatException e) {
-                    p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Placeholder " + args[2] + " Unsupported, Expansion Not Installed or Doesn't output Number value");
-                }
-
-            } else {
-                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "You cant use this command here");
-            }
-        } else {
-            if (sender instanceof Player) {
-                Player p = (Player) sender;
-                p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Wrong Command Usage !");
-                p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "/dl-create name 5 %placeholder% Daily");
-            } else {
-                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "You cant use this command here");
-            }
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (!(sender instanceof Player)) {
+            sender.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "You cant use this command here");
+            return false;
         }
+        Player p = (Player) sender;
+        if (args.length != 4) {
+            p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Wrong Command Usage !");
+            p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "/dl-create name 5 %placeholder% Daily");
+        }
+        //name top placeholder delay
+        if (!p.hasPermission("dl.create") && !p.hasPermission("dl.admin")) {
+            p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "No Permission ! [dl.create], [dl.admin]");
+            return true;
+        }
+        try {
+            Double.parseDouble(PlaceholderAPI.setPlaceholders(p, args[2]));
+            new Leaderboard(args[0], Integer.parseInt(args[1]), args[2], Leaderboard.WebhookDelay.valueOf(args[3]));
+            p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GREEN + "Starting Leaderboard Setup!");
+            plugin.reloadConfig();
+            UserData userData = new UserData(p, args[2]);
+            userData.addToDatabase();
+            p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.YELLOW + "Starting to Sync Offline Player Data... Please Wait!");
+
+            Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+                userData.addUserDataToDBAllPlayersThisPlaceholder();
+                Bukkit.getScheduler().runTask(plugin, () -> {
+                    p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.YELLOW + "Synchronization Complete !");
+                    p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GREEN + "Leaderboard Created!");
+                    p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "you can change the settings from plugins\\DiscordLeaderboards\\leaderboard\\" + args[0] + ".yml");
+                });
+            });
 
 
+            //getting random offline player
+            List<OfflinePlayer> players = PlayerUtils.getAllPlayers();
+            players.remove(p);
+            Random random = new Random();
+            int randomIndex = random.nextInt(players.size());
+            OfflinePlayer randomPlayer = players.get(randomIndex);
+
+            //checking placeholder if they supports offline players
+            try {
+                Double.parseDouble(PlaceholderAPI.setPlaceholders(randomPlayer, args[2]));
+            } catch (NumberFormatException ex) {
+                p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "[ERROR] " + args[2] + " may not support offline players. [code : 17]");
+            }
+
+        } catch (NumberFormatException e) {
+            p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Placeholder " + args[2] + " Unsupported, Expansion Not Installed or Doesn't output Number value");
+        }
         return true;
     }
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        List<String> suggestions = new ArrayList<String>();
+        List<String> suggestions = new ArrayList<>();
         if (args.length == 1) {
             suggestions.add("name");
         } else if (args.length == 2) {
