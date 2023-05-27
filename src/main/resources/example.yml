@@ -19,6 +19,21 @@ top: 5
 # Leaderboard amount, e.g., top 5 or top 3.
 # Must be an integer value.
 
+metric: "-"
+# Default : "-"
+# eg:- Wins , Points , $, Coins
+# leave - to disable
+
+higherisbetter: true
+# Default false
+# eg:- Parkour time, Deaths Low numbers is better
+# so make this option false
+
+floatingpoints: 0
+# Default 0
+# Number of Floating poins that you need to show in
+# leaderboard
+
 refresh-database-onsent: false
 # Required Default : False
 # Delete Collected Placeholder Values After Every Hourly, Daily,
