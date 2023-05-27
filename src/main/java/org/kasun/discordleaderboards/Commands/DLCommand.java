@@ -124,9 +124,9 @@ public class DLCommand implements TabExecutor {
 
                 //checking placeholder if they supports offline players
                 try {
-                    Double.parseDouble(PlaceholderAPI.setPlaceholders(randomPlayer, args[2]));
+                    Double.parseDouble(PlaceholderAPI.setPlaceholders(randomPlayer, args[3]));
                 } catch (NumberFormatException ex) {
-                    p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "[ERROR] " + args[3] + " may not support offline players. [code : 17]");
+                    p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GOLD + "[Warning!] " + args[3] + " may not support offline players. [code : 17]");
                 }
 
             } catch (NumberFormatException e) {
