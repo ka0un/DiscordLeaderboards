@@ -135,7 +135,11 @@ public class LeaderboardConfig {
     }
 
     public String getMetric() {
-        return metric;
+        String output = "";
+        if (!metric.equals(null) && !metric.equals("-")){
+            output = metric;
+        }
+        return output;
     }
 
     public void setMetric(String metric) {

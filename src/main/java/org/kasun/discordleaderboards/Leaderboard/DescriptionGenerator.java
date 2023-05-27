@@ -83,8 +83,6 @@ public class DescriptionGenerator {
             default:
                 break;
         }
-
-
         return description;
     }
 

@@ -42,7 +42,7 @@ public class TopList {
         for (Map.Entry<String, Integer> entry : toplistmap.entrySet()) {
             String name = entry.getKey();
             int score = entry.getValue();
-            String formattedEntry = String.format("%d. %-" + (maxNameLength + 4) + "s %d\\u000A", i++, name, score);
+            String formattedEntry = String.format("%d. %-" + (maxNameLength + 3) + "s %d%s\\u000A", i++, name, score, leaderboardConfig.getMetric());
             sb.append(formattedEntry);
         }
         String leaderboardString = sb.toString();
@@ -56,7 +56,7 @@ public class TopList {
         for (Map.Entry<String, Integer> entry : toplistmap.entrySet()) {
             String name = entry.getKey();
             int score = entry.getValue();
-            String formattedEntry = String.format("%d. %-20s %d\n", i++, name, score);
+            String formattedEntry = String.format("%d. %-20s %d%s\n", i++, name, score, leaderboardConfig.getMetric());
             sb.append(formattedEntry);
         }
         String leaderboardString = sb.toString();
