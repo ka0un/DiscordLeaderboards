@@ -1,5 +1,5 @@
 name: DiscordLeaderboards
-version: '0.0.1'
+version: '0.1.2'
 main: org.kasun.discordleaderboards.DiscordLeaderboards
 softdepend:
   - PlaceholderAPI

@@ -189,7 +189,7 @@ public class DLCommand implements TabExecutor {
                 try {
                     Double.parseDouble(PlaceholderAPI.setPlaceholders(randomPlayer, ph));
                 } catch (NumberFormatException ex) {
-                    p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "[ERROR] " + ph + " may not support offline players. [code : 17]");
+                    p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GOLD + "[WARNING!] " + ph + " may not support offline players. [code : 17]");
                 }
             }
         }
@@ -213,6 +213,7 @@ public class DLCommand implements TabExecutor {
             arguments.add("create");
             arguments.add("view");
             arguments.add("syncall");
+            arguments.add("reload");
             return arguments;
         }
         if (args[0].equalsIgnoreCase("forcesend")) {
@@ -256,6 +257,11 @@ public class DLCommand implements TabExecutor {
             if (args.length == 2) {
                 MainConfig mainConfig = new MainConfig();
                 return mainConfig.getLeaderboardsList();
+            }
+        }
+        if (args[0].equalsIgnoreCase("reload")) {
+            if (args.length == 2) {
+                return null;
             }
         }
         return null;
