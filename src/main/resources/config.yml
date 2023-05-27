@@ -60,7 +60,7 @@ embed-thumbnail: '-'
 #=================================================================
 # Reserved for Plugin Developer, Do not Change Anything Here
 # It May Break Your Plugin
-pluginversion: 0.0.1
+pluginversion: "0.1.2"
 firsttime: true
 
 

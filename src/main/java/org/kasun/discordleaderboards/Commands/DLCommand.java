@@ -101,7 +101,7 @@ public class DLCommand implements TabExecutor {
                 new Leaderboard(args[1], Integer.parseInt(args[2]), args[3], Leaderboard.WebhookDelay.valueOf(args[4]));
                 p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GREEN + "Starting Leaderboard Setup!");
                 plugin.reloadConfig();
-                UserData userData = new UserData(p, args[2]);
+                UserData userData = new UserData(p, args[3]);
                 userData.addToDatabase();
                 p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.YELLOW + "Starting to Sync Offline Player Data... Please Wait!");
 
@@ -201,7 +201,7 @@ public class DLCommand implements TabExecutor {
             commandsManager.getMainManager().reload();
             sender.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GREEN + "Reloaded!");
         }
-        return false;
+        return true;
     }
 
     @Override
