@@ -36,20 +36,20 @@ public class DLCommand implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 0) {
-            return false;
+            return true;
         }
         //Webhook Test Command
         if (args[0].equalsIgnoreCase("testwebhook")) {
             if (!sender.hasPermission("dl.testwebhook") && !sender.hasPermission("dl.admin")) {
                 sender.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "No Permission ! [dl.testwebhook], [dl.admin]");
-                return false;
+                return true;
             }
             String url = (String) plugin.getConfig().get("webhook-url");
             DiscordWebhook w = new DiscordWebhook(url);
             DiscordWebhook.EmbedObject embed = new DiscordWebhook.EmbedObject();
             if (url == null || url.equalsIgnoreCase("-")) {
                 sender.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Webhook Url not Configured");
-                return false;
+                return true;
             }
             embed.setTitle("Dleaderboards");
             embed.setDescription("Your Webhook is Working");
@@ -67,12 +67,12 @@ public class DLCommand implements TabExecutor {
         if (args[0].equalsIgnoreCase("forcesend")) {
             if (!sender.hasPermission("dl.forcesend") && !sender.hasPermission("dl.admin")) {
                 sender.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "No Permission ! [dl.forcesend], [dl.admin]");
-                return false;
+                return true;
             }
             if (args.length != 2) {
                 sender.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Wrong Command Usage !");
                 sender.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "/dl forcesend leaderboard");
-                return false;
+                return true;
             }
             CompletableFuture.runAsync(() -> {
                 Leaderboard leaderboard = new Leaderboard(args[1]);
@@ -84,7 +84,7 @@ public class DLCommand implements TabExecutor {
         if (args[0].equalsIgnoreCase("create")) {
             if (!(sender instanceof Player)) {
                 sender.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "You cant use this command here");
-                return false;
+                return true;
             }
             Player p = (Player) sender;
             if (args.length != 5) {
@@ -94,7 +94,7 @@ public class DLCommand implements TabExecutor {
             //name top placeholder delay
             if (!p.hasPermission("dl.create") && !p.hasPermission("dl.admin")) {
                 p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "No Permission ! [dl.create], [dl.admin]");
-                return false;
+                return true;
             }
             try {
                 Double.parseDouble(PlaceholderAPI.setPlaceholders(p, args[3]));
@@ -137,12 +137,12 @@ public class DLCommand implements TabExecutor {
         if (args[0].equalsIgnoreCase("view")) {
             if (!sender.hasPermission("dl.view") && !sender.hasPermission("dl.admin")) {
                 sender.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "No Permission ! [dl.view], [dl.admin]");
-                return false;
+                return true;
             }
             if (args.length != 2) {
                 sender.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "Wrong Command Usage !");
                 sender.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GRAY + "/dl view leaderboard");
-                return false;
+                return true;
             }
             CompletableFuture.runAsync(() -> {
                 Leaderboard leaderboard = new Leaderboard(args[1]);
@@ -155,13 +155,13 @@ public class DLCommand implements TabExecutor {
         if (args[0].equalsIgnoreCase("syncall")) {
             if (!(sender instanceof Player)) {
                 plugin.getLogger().info(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "you cant use that command here.");
-                return false;
+                return true;
             }
             Player p = (Player) sender;
 
             if (!p.hasPermission("dl.syncall") && !p.hasPermission("dl.admin")) {
                 p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "No Permission ! [dl.syncall], [dl.admin]");
-                return false;
+                return true;
             }
 
             p.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.YELLOW + "Synchronization Starting...");
@@ -196,7 +196,7 @@ public class DLCommand implements TabExecutor {
         if (args[0].equalsIgnoreCase("reload")) {
             if (!sender.hasPermission("dl.reload") && !sender.hasPermission("dl.admin")) {
                 sender.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.RED + "No Permission ! [dl.reload], [dl.admin]");
-                return false;
+                return true;
             }
             commandsManager.getMainManager().reload();
             sender.sendMessage(ChatColor.AQUA + "[Dleaderboards] " + ChatColor.GREEN + "Reloaded!");
