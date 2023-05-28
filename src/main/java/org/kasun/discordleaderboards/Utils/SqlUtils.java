@@ -85,8 +85,8 @@ public class SqlUtils {
     }
 
 
-    public static Map<String, Integer> getTopPlayerMap(String placeholderColumnName, int top, boolean ishigherbetter) {
-        Map<String, Integer> topPlayerScores = new LinkedHashMap<>();
+    public static Map<String, Double> getTopPlayerMap(String placeholderColumnName, int top, boolean ishigherbetter) {
+        Map<String, Double> topPlayerScores = new LinkedHashMap<>();
         MainConfig mainConfig = new MainConfig();
 
         try {
@@ -121,7 +121,7 @@ public class SqlUtils {
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 String playerName = rs.getString("PlayerName");
-                int score = rs.getInt(placeholderColumnName);
+                double score = rs.getDouble(placeholderColumnName);
                 if (ishigherbetter){
                     if (score > 0){
                         topPlayerScores.put(playerName, score);

@@ -2,6 +2,8 @@ package org.kasun.discordleaderboards.Leaderboard;
 
 import org.kasun.discordleaderboards.Utils.TimeUtils;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -16,11 +18,17 @@ public class DescriptionGenerator {
     private final long SECSFORDAY = 86400;
     private final long SECSFORWEEK = 604800;
     private final long SECSSFORMONTH = 2629746;
+    private int numberOfFloatingPoints;
+    private boolean isHigherBetter;
 
     public DescriptionGenerator(Leaderboard leaderboard) {
         this.leaderboard = leaderboard;
         embedDescriptionlist = leaderboard.getConfig().getEmbedDescription();
         topList = leaderboard.getTopList();
+        numberOfFloatingPoints = leaderboard.getConfig().getFloatingpoints();
+        isHigherBetter = leaderboard.getConfig().isHigherisbetter();
+        System.out.println("Debug " + numberOfFloatingPoints);
+        System.out.println("Debug " + isHigherBetter);
     }
 
     public DescriptionGenerator(String leaderboardname) {
@@ -42,22 +50,31 @@ public class DescriptionGenerator {
 
 
         //{top-1-name} {top-1-score} placeholders
-        Map<String, Integer> playerScores = topList.getTopListAsMap();
+        Map<String, Double> playerScores = topList.getTopListAsMap();
         Pattern pattern = Pattern.compile("\\{top-(\\d+)-(name|score)\\}");
         Matcher matcher = pattern.matcher(description);
         while (matcher.find()) {
             int position = Integer.parseInt(matcher.group(1));
             String placeholderType = matcher.group(2);
 
-            Map.Entry<String, Integer> entry = playerScores.entrySet().stream()
-                    .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+            Comparator<Map.Entry<String, Double>> scoreComparator;
+
+            if (isHigherBetter) {
+                scoreComparator = Map.Entry.comparingByValue(Comparator.reverseOrder());
+            } else {
+                scoreComparator = Map.Entry.comparingByValue();
+            }
+
+            Map.Entry<String, Double> entry = playerScores.entrySet().stream()
+                    .sorted(scoreComparator)
                     .skip(position - 1)
                     .findFirst()
                     .orElse(null);
 
             if (entry != null) {
                 String placeholder = "{top-" + position + "-" + placeholderType + "}";
-                String replacement = placeholderType.equals("name") ? entry.getKey() : String.valueOf(entry.getValue());
+                int intvalue = entry.getValue().intValue();
+                String replacement = placeholderType.equals("name") ? entry.getKey() : String.valueOf(intvalue);
                 description = description.replace(placeholder, replacement);
             }
         }
@@ -99,22 +116,32 @@ public class DescriptionGenerator {
 
 
         //{top-1-name} {top-1-score} placeholders
-        Map<String, Integer> playerScores = topList.getTopListAsMap();
+        Map<String, Double> playerScores = topList.getTopListAsMap();
         Pattern pattern = Pattern.compile("\\{top-(\\d+)-(name|score)\\}");
         Matcher matcher = pattern.matcher(description);
         while (matcher.find()) {
             int position = Integer.parseInt(matcher.group(1));
             String placeholderType = matcher.group(2);
 
-            Map.Entry<String, Integer> entry = playerScores.entrySet().stream()
-                    .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+            Comparator<Map.Entry<String, Double>> scoreComparator;
+            if (isHigherBetter){
+                scoreComparator = Map.Entry.comparingByValue(Comparator.reverseOrder());
+            }else {
+                scoreComparator = Map.Entry.comparingByValue();
+            }
+
+            Map.Entry<String, Double> entry = playerScores.entrySet().stream()
+                    .sorted(scoreComparator)
                     .skip(position - 1)
                     .findFirst()
                     .orElse(null);
 
             if (entry != null) {
                 String placeholder = "{top-" + position + "-" + placeholderType + "}";
-                String replacement = placeholderType.equals("name") ? entry.getKey() : String.valueOf(entry.getValue());
+                int intvalue = entry.getValue().intValue();
+                String replacement = placeholderType.equals("name") ? entry.getKey() : String.valueOf(intvalue);
+
+
                 description = description.replace(placeholder, replacement);
             }
         }

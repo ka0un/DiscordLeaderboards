@@ -77,8 +77,8 @@ embed-description:
 # Discord Embed Description
 # Valid Placeholders -
 # {toplist} - leaderboard toplist
-# {top <place> name} - name of the "place"th player eg :- {top 1 name} 1st's name
-# {top <place> score} - score(value) of the "place"th player eg :- {top 2 name} 2nd's score(value)
+# {top-<place>-name} - name of the "place"th player eg :- {top 1 name} 1st's name
+# {top-<place>-score} - score(value) of the "place"th player eg :- {top 2 name} 2nd's score(value)
 # {timestamp-now} - embed sent time (current time)
 # {timestamp-next} - next schedule time eg:- if its Daily , 1 Days left
 
