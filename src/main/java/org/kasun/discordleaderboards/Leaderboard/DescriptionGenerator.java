@@ -70,7 +70,12 @@ public class DescriptionGenerator {
             if (entry != null) {
                 String placeholder = "{top-" + position + "-" + placeholderType + "}";
                 int intValue = entry.getValue().intValue();
-                String replacement = placeholderType.equals("name") ? entry.getKey() : String.valueOf(intValue);
+                String replacement = "";
+                if (leaderboard.getConfig().getFloatingpoints() > 0){
+                    replacement = placeholderType.equals("name") ? entry.getKey() : String.valueOf(entry.getValue());
+                }else{
+                    replacement = placeholderType.equals("name") ? entry.getKey() : String.valueOf(intValue);
+                }
                 description = description.replace(placeholder, replacement);
             }
         }
