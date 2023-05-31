@@ -5,17 +5,22 @@
 > Create Minecraft Leaderboards with PlaceholderAPI and Post it to Discord Via Webhooks or DiscordSRV
 * Spigot - https://www.spigotmc.org/resources/discord-leaderboards-free-beta.109908/
 * BuildByBit - https://builtbybit.com/resources/discord-leaderboards-beta.28818/
-* PolyMart - https://polymart.org/resource/discord-leaderboards-free.4109
+* PolyMart - https://polymart.org/resource/discord-leaderboards-free.4109 (Discontinued)
 * Discord - https://dsc.gg/sundevs
 * Bstats - https://bstats.org/plugin/bukkit/Discord%20Leaderboards/18497
 * Trello - https://trello.com/b/3nEM0ADF/dleaderboard
 > Your stellar generosity in leaving a ⭐ warms my heart with gratitude. Thank you for brightening my day!
 
 ![Main2 Image](https://cdn.discordapp.com/attachments/1074520108514431026/1108469361464840263/Untitled.png "Discord Leaderboards")
+
+---
+
 ### Dependencies
 
 * PlaceholderAPI - Required
 * DiscordSRV - Optional
+
+---
 
 ### Commands And Permissions
 
@@ -26,6 +31,8 @@
 * dl-syncall - sync all offline players required placeholder values to plugin database
 * dl.admin - permission to all commands
 * dl.<commandname> - permission to specific command
+
+---
 
 ### Features
 
@@ -41,7 +48,12 @@
 * Embed Description Placeholders
 * Support Discord
 
+
 Contribution Appirciated!
 Thank You None030
+=======
+---
 
+
+Contribution Appirciated!
 ![Bstats Plugin Statistics](https://bstats.org/signatures/bukkit/Discord%20Leaderboards.svg "Plugin Statistics")
