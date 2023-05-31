@@ -33,6 +33,38 @@ public class TopList {
 
     }
 
+    public String getTopListAsString(boolean isWebhookFormat) {
+        Map<String, Double> toplistmap = getTopListAsMap();
+        int maxNameLength = getmaxnamelenght(toplistmap);
+        StringBuilder sb = new StringBuilder();
+        int i = 1;
+        for (Map.Entry<String, Double> entry : toplistmap.entrySet()) {
+            String name = entry.getKey();
+            double score = entry.getValue();
+            int intValue = (int) score;
+
+            String formattedEntry = "";
+            if (numberOfFloatingPoints <= 0) {
+                if (isWebhookFormat) {
+                    formattedEntry = String.format("%d. %-" + (maxNameLength + 3) + "s %d%s\\u000A", i++, name, intValue, leaderboardConfig.getMetric());
+                } else {
+                    formattedEntry = String.format("%d. %-" + (maxNameLength + 3) + "s %d%s\n", i++, name, intValue, leaderboardConfig.getMetric());
+                }
+            } else {
+                double roundedScore = roundScore(score);
+                if (isWebhookFormat) {
+                    formattedEntry = String.format("%d. %-" + (maxNameLength + 3) + "s %." + numberOfFloatingPoints + "f%s\\u000A", i++, name, roundedScore, leaderboardConfig.getMetric());
+                } else {
+                    formattedEntry = String.format("%d. %-" + (maxNameLength + 3) + "s %." + numberOfFloatingPoints + "f%s\n", i++, name, roundedScore, leaderboardConfig.getMetric());
+                }
+            }
+            sb.append(formattedEntry);
+        }
+        String leaderboardString = sb.toString();
+        return leaderboardString;
+    }
+
+
     public String getTopListAsStringForWebhook() {
         Map<String, Double> toplistmap = getTopListAsMap();
         int maxNameLength = getmaxnamelenght(toplistmap);
