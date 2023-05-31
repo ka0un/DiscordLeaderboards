@@ -42,5 +42,6 @@
 * Support Discord
 
 Contribution Appirciated!
+Thank You None030
 
 ![Bstats Plugin Statistics](https://bstats.org/signatures/bukkit/Discord%20Leaderboards.svg "Plugin Statistics")
