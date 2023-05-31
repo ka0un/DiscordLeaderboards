@@ -126,7 +126,7 @@ public class Leaderboard {
 
         }
 
-        DescriptionGenerator descriptionGenerator = new DescriptionGenerator(name);
+        DescriptionGenerator descriptionGenerator = new DescriptionGenerator(this);
         String description = descriptionGenerator.getDescription(true);
 
         if (description == null || description.equals("") || dembedDescription.equals("-")) {
