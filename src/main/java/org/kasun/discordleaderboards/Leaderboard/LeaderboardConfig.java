@@ -1,6 +1,7 @@
 package org.kasun.discordleaderboards.Leaderboard;
 
 import org.bukkit.configuration.file.FileConfiguration;
+import org.kasun.discordleaderboards.Configs.MainConfig;
 import org.kasun.discordleaderboards.DiscordLeaderboards;
 import org.kasun.discordleaderboards.Configs.CustomConfig;
 
@@ -16,6 +17,10 @@ public class LeaderboardConfig {
     private int top;
     private String delay;
     private boolean refreshOnSent;
+
+    private String metric;
+    private boolean higherisbetter;
+    private int floatingpoints;
     private String webhookurl;
     private String webhookAvatarUrl;
     private String webhookUserName;
@@ -26,6 +31,7 @@ public class LeaderboardConfig {
     private String embedFooter;
     private String embedImage;
     private String embedThumbnail;
+    private String leaderboardversion;
     private final CustomConfig customConfig;
 
     //Constructer for load exciting leaderboardConfig
@@ -38,11 +44,15 @@ public class LeaderboardConfig {
 
     //Constructer for create new LeaderboardConfig
     public LeaderboardConfig(String name, String placeholder, int top, String delay) {
+        MainConfig mainConfig = new MainConfig();
         this.name = name;
         this.placeholder = placeholder;
         this.top = top;
         this.delay = delay;
         this.refreshOnSent = false;
+        this.metric = "-";
+        this.higherisbetter = true;
+        this.floatingpoints = 0;
         this.webhookurl = "-";
         this.webhookAvatarUrl = "-";
         this.webhookUserName = "-";
@@ -55,6 +65,7 @@ public class LeaderboardConfig {
         this.embedFooter = "-";
         this.embedImage = "-";
         this.embedThumbnail = "-";
+        this.leaderboardversion = mainConfig.getPluginVersion();
 
         customConfig = new CustomConfig(name);
         customConfig.setup();
@@ -69,6 +80,9 @@ public class LeaderboardConfig {
         config.set("top", top);
         config.set("delay", delay);
         config.set("refresh-database-onsent", refreshOnSent);
+        config.set("metric", metric);
+        config.set("higherisbetter", higherisbetter);
+        config.set("floatingpoints", floatingpoints);
         config.set("webhook-url", webhookurl);
         config.set("webhook-avatar-url", webhookAvatarUrl);
         config.set("webhook-user-name", webhookUserName);
@@ -79,6 +93,7 @@ public class LeaderboardConfig {
         config.set("embed-footer", embedFooter);
         config.set("embed-image", embedImage);
         config.set("embed-thumbnail", embedThumbnail);
+        config.set("leaderboard-version", leaderboardversion);
 
         customConfig.save();
         customConfig.reload();
@@ -92,6 +107,9 @@ public class LeaderboardConfig {
         this.top = config.getInt("top");
         this.delay = config.getString("delay");
         this.refreshOnSent = config.getBoolean("refresh-database-onsent");
+        this.metric = config.getString("metric");
+        this.higherisbetter = config.getBoolean("higherisbetter");
+        this.floatingpoints = config.getInt("floatingpoints");
         this.webhookurl = config.getString("webhook-url");
         this.webhookAvatarUrl = config.getString("webhook-avatar-url");
         this.webhookUserName = config.getString("webhook-user-name");
@@ -102,9 +120,47 @@ public class LeaderboardConfig {
         this.embedFooter = config.getString("embed-footer");
         this.embedImage = config.getString("embed-image");
         this.embedThumbnail = config.getString("embed-thumbnail");
+        this.leaderboardversion = config.getString("leaderboard-version");
     }
 
     //getters and setters
+
+
+    public String getLeaderboardversion() {
+        return leaderboardversion;
+    }
+
+    public void setLeaderboardversion(String leaderboardversion) {
+        this.leaderboardversion = leaderboardversion;
+    }
+
+    public String getMetric() {
+        String output = "";
+        if (!metric.equals(null) && !metric.equals("-")){
+            output = metric;
+        }
+        return output;
+    }
+
+    public void setMetric(String metric) {
+        this.metric = metric;
+    }
+
+    public boolean isHigherisbetter() {
+        return higherisbetter;
+    }
+
+    public void setHigherisbetter(boolean higherisbetter) {
+        this.higherisbetter = higherisbetter;
+    }
+
+    public int getFloatingpoints() {
+        return floatingpoints;
+    }
+
+    public void setFloatingpoints(int floatingpoints) {
+        this.floatingpoints = floatingpoints;
+    }
 
     public boolean isRefreshOnSent() {
         return refreshOnSent;

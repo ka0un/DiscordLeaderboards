@@ -1,15 +1,19 @@
 package org.kasun.discordleaderboards.Commands;
 
 import org.kasun.discordleaderboards.DiscordLeaderboards;
+import org.kasun.discordleaderboards.MainManager;
 
 public class CommandsManager {
 
-    public CommandsManager() {
+    private final MainManager mainManager;
+
+    public CommandsManager(MainManager mainManager) {
+        this.mainManager = mainManager;
         DiscordLeaderboards plugin = DiscordLeaderboards.getInstance();
-        plugin.getCommand("dl-testwebhook").setExecutor(new WebhookTestCommand());
-        plugin.getCommand("dl-forcesend").setExecutor(new ForceLeaderboardSend());
-        plugin.getCommand("dl-create").setExecutor(new CreateCommand());
-        plugin.getCommand("dl-view").setExecutor(new ViewCommand());
-        plugin.getCommand("dl-syncall").setExecutor(new SyncAllPlayers());
+        plugin.getCommand("dl").setExecutor(new DLCommand(this));
+    }
+
+    public MainManager getMainManager() {
+        return mainManager;
     }
 }

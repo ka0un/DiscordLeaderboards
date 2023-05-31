@@ -1,6 +1,6 @@
 #===================================
 # Discord Leaderboards
-# Config Version 0.0.1
+# Config Version 0.1.2
 # Leaderboard Config
 #===================================
 
@@ -18,6 +18,21 @@ top: 5
 # Required
 # Leaderboard amount, e.g., top 5 or top 3.
 # Must be an integer value.
+
+metric: "-"
+# Default : "-"
+# eg:- Wins , Points , $, Coins
+# leave - to disable
+
+higherisbetter: true
+# Default false
+# eg:- Parkour time, Deaths Low numbers is better
+# so make this option false
+
+floatingpoints: 0
+# Default 0
+# Number of Floating poins that you need to show in
+# leaderboard
 
 refresh-database-onsent: false
 # Required Default : False
@@ -62,10 +77,15 @@ embed-description:
 # Discord Embed Description
 # Valid Placeholders -
 # {toplist} - leaderboard toplist
-# {top <place> name} - name of the "place"th player eg :- {top 1 name} 1st's name
-# {top <place> score} - score(value) of the "place"th player eg :- {top 2 name} 2nd's score(value)
+# {top-<place>-name} - name of the "place"th player eg :- {top 1 name} 1st's name
+# {top-<place>-score} - score(value) of the "place"th player eg :- {top 2 name} 2nd's score(value)
 # {timestamp-now} - embed sent time (current time)
 # {timestamp-next} - next schedule time eg:- if its Daily , 1 Days left
+# {%PlaceholderAPIExample%} -  you can add any placholderAPI placeholder that not related to specific player
+# Emojis -
+# Unicode Emojis - https://github.com/herrmannplatz/emoji-list/blob/master/list.json (may not supported by all devices)
+# <:emoji_name:emoji_id> - Discord Custom Emojis - enter "/" in discord chat and insert emoji to get the code
+
 
 embed-url: ""
 # Discord embed Title URL.
@@ -81,6 +101,8 @@ embed-image: ""
 
 embed-thumbnail: ""
 # Discord embed Thumbnail.
+
+leaderboard-version: "0.1.2"
 
 # Comments on leaderboards configs never generated again,
 # so keep this a reference you can disable this leaderboard

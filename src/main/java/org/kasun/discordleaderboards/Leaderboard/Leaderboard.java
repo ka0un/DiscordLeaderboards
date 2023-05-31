@@ -41,7 +41,7 @@ public class Leaderboard {
     public String toString(){
         String placeholder = leaderboardConfig.getPlaceholder();
         int top = leaderboardConfig.getTop();
-        return topList.getTopListAsString();
+        return topList.getTopListAsString(false);
     }
 
     public void send() {
@@ -126,8 +126,8 @@ public class Leaderboard {
 
         }
 
-        DescriptionGenerator descriptionGenerator = new DescriptionGenerator(name);
-        String description = descriptionGenerator.getDescriptionForWebhook();
+        DescriptionGenerator descriptionGenerator = new DescriptionGenerator(this);
+        String description = descriptionGenerator.getDescription(true);
 
         if (description == null || description.equals("") || dembedDescription.equals("-")) {
             description = dembedDescription;

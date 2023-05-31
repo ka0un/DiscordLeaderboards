@@ -36,7 +36,7 @@ public class LeaderboardDiscordSrvEmbed {
         discordsrvEmbed.setEmbedImage(image);
         discordsrvEmbed.setEmbedThumbnail(thumb);
         DescriptionGenerator descriptionGenerator = new DescriptionGenerator(leaderboard);
-        discordsrvEmbed.setEmbedDescription(descriptionGenerator.getDescriptionForSrv());
+        discordsrvEmbed.setEmbedDescription(descriptionGenerator.getDescription(false));
 
         return discordsrvEmbed;
     }

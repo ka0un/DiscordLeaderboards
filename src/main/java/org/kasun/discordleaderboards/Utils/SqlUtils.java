@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.kasun.discordleaderboards.Configs.MainConfig;
 import org.kasun.discordleaderboards.Database.Database;
+import org.kasun.discordleaderboards.Leaderboard.LeaderboardConfig;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -84,8 +85,8 @@ public class SqlUtils {
     }
 
 
-    public static Map<String, Integer> getTopPlayerMap(String placeholderColumnName, int top) {
-        Map<String, Integer> topPlayerScores = new LinkedHashMap<>();
+    public static Map<String, Double> getTopPlayerMap(String placeholderColumnName, int top, boolean ishigherbetter) {
+        Map<String, Double> topPlayerScores = new LinkedHashMap<>();
         MainConfig mainConfig = new MainConfig();
 
         try {
@@ -95,21 +96,37 @@ public class SqlUtils {
             String databaseName = mainConfig.getStorageType(); // Get the name of the current database
 
             String query;
-            if (databaseName.equalsIgnoreCase("h2")) {
-                query = "SELECT PlayerName, " + placeholderColumnName + " FROM UserData ORDER BY " + placeholderColumnName + " DESC LIMIT " + top;
-            } else if (databaseName.equalsIgnoreCase("mysql")) {
-                query = "SELECT PlayerName, " + placeholderColumnName + " FROM UserData ORDER BY " + placeholderColumnName + " DESC LIMIT " + top;
-            } else {
-                // Unsupported database type
-                throw new UnsupportedOperationException("Unsupported database type: " + databaseName);
+            if (ishigherbetter){
+                if (databaseName.equalsIgnoreCase("h2")) {
+                    query = "SELECT PlayerName, " + placeholderColumnName + " FROM UserData ORDER BY " + placeholderColumnName + " DESC LIMIT " + top;
+                } else if (databaseName.equalsIgnoreCase("mysql")) {
+                    query = "SELECT PlayerName, " + placeholderColumnName + " FROM UserData ORDER BY " + placeholderColumnName + " DESC LIMIT " + top;
+                } else {
+                    // Unsupported database type
+                    throw new UnsupportedOperationException("Unsupported database type: " + databaseName);
+                }
+            }else{
+                if (databaseName.equalsIgnoreCase("h2")) {
+                    query = "SELECT PlayerName, " + placeholderColumnName + " FROM UserData ORDER BY " + placeholderColumnName + " ASC LIMIT " + top;
+                } else if (databaseName.equalsIgnoreCase("mysql")) {
+                    query = "SELECT PlayerName, " + placeholderColumnName + " FROM UserData ORDER BY " + placeholderColumnName + " ASC LIMIT " + top;
+                } else {
+                    // Unsupported database type
+                    throw new UnsupportedOperationException("Unsupported database type: " + databaseName);
+                }
             }
+
 
             preparedStatement = database.getConnection().prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 String playerName = rs.getString("PlayerName");
-                int score = rs.getInt(placeholderColumnName);
-                if (score > 0){
+                double score = rs.getDouble(placeholderColumnName);
+                if (ishigherbetter){
+                    if (score > 0){
+                        topPlayerScores.put(playerName, score);
+                    }
+                }else{
                     topPlayerScores.put(playerName, score);
                 }
             }
