@@ -1,5 +1,6 @@
 package org.kasun.discordleaderboards.Leaderboard;
 
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.kasun.discordleaderboards.Utils.TimeUtils;
 
 import java.math.BigDecimal;
@@ -100,6 +101,21 @@ public class DescriptionGenerator {
                 break;
             default:
                 break;
+        }
+
+        //{%papi%} placeholders
+        String patternString = "\\{%(.*?)%\\}";
+        Pattern pattern1 = Pattern.compile(patternString);
+        Matcher matcher1 = pattern1.matcher(description);
+
+        StringBuilder result = new StringBuilder();
+        while (matcher1.find()) {
+            String placeholder = matcher1.group(0);
+            String innerValue = matcher1.group(1);
+            String replacement = PlaceholderAPI.setPlaceholders(null, "%" + innerValue + "%");
+
+            description = description.replace(placeholder, replacement);
+            result.append(innerValue).append(", ");
         }
 
         return description;
