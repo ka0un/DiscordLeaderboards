@@ -81,6 +81,11 @@ embed-description:
 # {top-<place>-score} - score(value) of the "place"th player eg :- {top 2 name} 2nd's score(value)
 # {timestamp-now} - embed sent time (current time)
 # {timestamp-next} - next schedule time eg:- if its Daily , 1 Days left
+# {%PlaceholderAPIExample%} -  you can add any placholderAPI placeholder that not related to specific player
+# Emojis -
+# Unicode Emojis - https://github.com/herrmannplatz/emoji-list/blob/master/list.json (may not supported by all devices)
+# <:emoji_name:emoji_id> - Discord Custom Emojis - enter "/" in discord chat and insert emoji to get the code
+
 
 embed-url: ""
 # Discord embed Title URL.
