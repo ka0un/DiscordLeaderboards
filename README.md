@@ -11,7 +11,7 @@
 * Trello - https://trello.com/b/3nEM0ADF/dleaderboard
 > Your stellar generosity in leaving a ⭐ warms my heart with gratitude. Thank you for brightening my day!
 
-![Main2 Image](https://cdn.discordapp.com/attachments/1074520108514431026/1108469361464840263/Untitled.png "Discord Leaderboards")
+![Main2 Image](https://cdn.discordapp.com/attachments/1074520108514431026/1113510349686194297/Beta12.png "Discord Leaderboards")
 
 ---
 
@@ -24,11 +24,12 @@
 
 ### Commands And Permissions
 
-* dl-create {name} {top} {%placeholder%} {schedule} - create leaderboard
-* dl-view {name} - preview leaderboard
-* dl-forcesend {name} - force send leaderboard to discord webook
-* dl-testwebhook - test the webhook url
-* dl-syncall - sync all offline players required placeholder values to plugin database
+* dl create {name} {top} {%placeholder%} {schedule} - create leaderboard
+* dl view {name} - preview leaderboard
+* dl forcesend {name} - force send leaderboard to discord webook
+* dl testwebhook - test the webhook url
+* dl syncall - sync all offline players required placeholder values to plugin database
+* dl reload - reload the config files
 * dl.admin - permission to all commands
 * dl.<commandname> - permission to specific command
 
@@ -49,7 +50,7 @@
 * Support Discord
 
 
-Contribution Appirciated!
+Contributers
 =======
 None030
 
