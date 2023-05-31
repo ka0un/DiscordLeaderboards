@@ -52,8 +52,5 @@
 Contribution Appirciated!
 =======
 None030
----
 
-
-Contribution Appirciated!
 ![Bstats Plugin Statistics](https://bstats.org/signatures/bukkit/Discord%20Leaderboards.svg "Plugin Statistics")
