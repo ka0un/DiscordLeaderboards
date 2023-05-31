@@ -18,6 +18,7 @@ public class MainManager {
     private ListenerManager listenerManager;
     private DiscordSrvManager discordSrvManager;
     private ScheduleManager scheduleManager;
+    private UpdateManager updateManager;
 
     public MainManager() {
         scheduleManager = new ScheduleManager();
@@ -25,6 +26,8 @@ public class MainManager {
         databaseManager = new DatabaseManager();
         commandsManager = new CommandsManager(this);
         listenerManager = new ListenerManager();
+        updateManager = new UpdateManager();
+
         if (Bukkit.getPluginManager().getPlugin("DiscordSRV") != null){
             discordSrvManager = new DiscordSrvManager();
         }
