@@ -1,5 +1,4 @@
 ![Main Image](https://cdn.discordapp.com/attachments/1074520108514431026/1108474446987141261/Group_9.png "Discord Leaderboards")
-![Ad Image](https://cdn.discordapp.com/attachments/1074520108514431026/1109732216604475492/Group_16.png "Add Star From Star Button on Top Right Corner")
 # Discord Leaderboards
 
 > Create Minecraft Leaderboards with PlaceholderAPI and Post it to Discord Via Webhooks or DiscordSRV
