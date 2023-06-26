@@ -31,6 +31,7 @@ public class MainConfig {
     private int scheduleDelayMins;
     private String pluginVersion;
     private boolean firstTime;
+    private String slashcommand;
 
     //constructer
     public MainConfig() {
@@ -59,6 +60,7 @@ public class MainConfig {
         scheduleDelayMins = config.getInt("scheduledelaymins");
         pluginVersion = config.getString("pluginversion");
         firstTime = config.getBoolean("firsttime");
+        slashcommand = config.getString("discordsrvslashcommand");
     }
 
     //save config
@@ -81,6 +83,7 @@ public class MainConfig {
         config.set("scheduledelaymins", scheduleDelayMins);
         config.set("pluginversion", pluginVersion);
         config.set("firsttime", firstTime);
+        config.set("discordsrvslashcommand", slashcommand);
 
         try {
             config.save(configFile);
@@ -98,6 +101,14 @@ public class MainConfig {
         }catch (IOException ignored){
 
         }
+    }
+
+    public String getSlashcommand() {
+        return slashcommand;
+    }
+
+    public void setSlashcommand(String slashcommand) {
+        this.slashcommand = slashcommand;
     }
 
     public void setLeaderboardsList(List<String> leaderboardsList) {

@@ -62,5 +62,5 @@ embed-thumbnail: '-'
 # It May Break Your Plugin
 pluginversion: "0.1.2"
 firsttime: true
-
+discordsrvslashcommand: leaderboard
 

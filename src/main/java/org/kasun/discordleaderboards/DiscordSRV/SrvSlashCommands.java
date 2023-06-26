@@ -22,7 +22,7 @@ public class SrvSlashCommands implements Listener, SlashCommandProvider {
     List<String> leaderboardList = mainConfig.getLeaderboardsList();
     @Override
     public Set<PluginSlashCommand> getSlashCommands() {
-        CommandData commandData = new CommandData("leaderboard", "view leaderboards");
+        CommandData commandData = new CommandData(mainConfig.getSlashcommand(), "view leaderboards");
         List<OptionData> options = new ArrayList<>();
         OptionData dropdownOption = new OptionData(OptionType.INTEGER, "leaderboard", "Dropdown Option Description", true);
 
