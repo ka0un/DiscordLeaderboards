@@ -20,9 +20,11 @@ public class SrvSlashCommands implements Listener, SlashCommandProvider {
     private final DiscordLeaderboards plugin  = DiscordLeaderboards.getInstance();
     MainConfig mainConfig = new MainConfig();
     List<String> leaderboardList = mainConfig.getLeaderboardsList();
+    private final String slashCommand = mainConfig.getSlashcommand();
+
     @Override
     public Set<PluginSlashCommand> getSlashCommands() {
-        CommandData commandData = new CommandData(mainConfig.getSlashcommand(), "view leaderboards");
+        CommandData commandData = new CommandData(slashCommand, "view leaderboards");
         List<OptionData> options = new ArrayList<>();
         OptionData dropdownOption = new OptionData(OptionType.INTEGER, "leaderboard", "Dropdown Option Description", true);
 
@@ -51,17 +53,20 @@ public class SrvSlashCommands implements Listener, SlashCommandProvider {
     }
 
 
-
-    @SlashCommand(path = "leaderboard")
+    @SlashCommand(path = "*", deferReply = true)
     public void bestPlugin(SlashCommandEvent event) {
-        int option = (int) event.getOption("leaderboard").getAsDouble();
-        CompletableFuture.runAsync(() -> {
-            Leaderboard leaderboard = new Leaderboard(leaderboardList.get(option));
-            LeaderboardDiscordSrvEmbed leaderboardDiscordSrvEmbed = new LeaderboardDiscordSrvEmbed(leaderboard);
-            MessageEmbed messageEmbed = leaderboardDiscordSrvEmbed.getDiscordsrvEmbed().getMessageEmbed();
-            event.replyEmbeds(messageEmbed).queue();
-        });
+        if (!event.getCommandPath().equals(slashCommand)){
+            //ignored
+        } else{
+            CompletableFuture.runAsync(() -> {
+                int option = (int) event.getOption("leaderboard").getAsDouble();
+                Leaderboard leaderboard = new Leaderboard(leaderboardList.get(option));
+                LeaderboardDiscordSrvEmbed leaderboardDiscordSrvEmbed = new LeaderboardDiscordSrvEmbed(leaderboard);
+                MessageEmbed messageEmbed = leaderboardDiscordSrvEmbed.getDiscordsrvEmbed().getMessageEmbed();
 
+                event.getHook().sendMessageEmbeds(messageEmbed).queue();
+            });
+        }
     }
 
     @SlashCommand(path = "ping")
