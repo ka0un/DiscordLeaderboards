@@ -6,7 +6,7 @@
 
     <groupId>org.kasun</groupId>
     <artifactId>DiscordLeaderboards</artifactId>
-    <version>Beta-1.2</version>
+    <version>Beta-1.3</version>
     <packaging>jar</packaging>
 
     <name>DiscordLeaderboards</name>
