@@ -5,6 +5,10 @@ import org.kasun.discordleaderboards.Configs.MainConfig;
 
 
 import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
 
 public class Database {
     MainConfig mainConfig = new MainConfig();
@@ -12,6 +16,78 @@ public class Database {
     private final DiscordLeaderboards plugin  = DiscordLeaderboards.getInstance();
 
     public Connection getConnection() {
+        Connection connection = null;
+        h2url = "jdbc:h2:file:" + plugin.getDataFolder().getAbsolutePath() + "/database/database";
+
+        if (mainConfig.getStorageType().equalsIgnoreCase("h2")) {
+            try {
+                org.h2.Driver driver = new org.h2.Driver();
+                Properties properties = new Properties();
+                connection = driver.connect(h2url, properties);
+            } catch (SQLException e) {
+                plugin.getLogger().severe("Failed to Connect H2 Database! [code: 07]");
+                e.printStackTrace();
+            }
+        } else if (mainConfig.getStorageType().equalsIgnoreCase("mysql")) {
+            String address = mainConfig.getMysqlAddress();
+            String database = mainConfig.getMysqlDatabase();
+            String username = mainConfig.getMysqlUsername();
+            String password = mainConfig.getMysqlPassword();
+
+            try {
+                com.mysql.cj.jdbc.Driver driver = new com.mysql.cj.jdbc.Driver();
+                Properties properties = new Properties();
+                properties.setProperty("user", username);
+                properties.setProperty("password", password);
+                connection = driver.connect("jdbc:mysql://" + address + "/" + database, properties);
+            } catch (SQLException e) {
+                plugin.getLogger().severe("Failed to Connect MySQL Database! [code: 31]");
+                e.printStackTrace();
+            }
+        }
+
+        return connection;
+    }
+
+
+
+    /*public Connection getConnection() {
+        Connection connection = null;
+        h2url = "jdbc:h2:file:" + plugin.getDataFolder().getAbsolutePath() + "/database/database";
+
+        if (mainConfig.getStorageType().equalsIgnoreCase("h2")) {
+            try {
+                Class.forName("org.h2.Driver");
+                connection = DriverManager.getConnection(h2url);
+            } catch (ClassNotFoundException e) {
+                plugin.getLogger().severe("H2 Driver Not Found! [code: 06]");
+                e.printStackTrace();
+            } catch (SQLException e) {
+                plugin.getLogger().severe("Failed to Connect H2 Database! [code: 07]");
+                e.printStackTrace();
+            }
+        } else if (mainConfig.getStorageType().equalsIgnoreCase("mysql")) {
+            String address = mainConfig.getMysqlAddress();
+            String database = mainConfig.getMysqlDatabase();
+            String username = mainConfig.getMysqlUsername();
+            String password = mainConfig.getMysqlPassword();
+
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                connection = DriverManager.getConnection("jdbc:mysql://" + address + "/" + database, username, password);
+            } catch (ClassNotFoundException e) {
+                plugin.getLogger().severe("MySQL Driver Not Found! [code: 30]");
+                e.printStackTrace();
+            } catch (SQLException e) {
+                plugin.getLogger().severe("Failed to Connect MySQL Database! [code: 31]");
+                e.printStackTrace();
+            }
+        }
+
+        return connection;
+    }*/
+
+    /*public Connection getConnection() {
         Connection connection = null;
         h2url = "jdbc:h2:file:" + plugin.getDataFolder().getAbsolutePath() + "/database/database";
 
@@ -49,6 +125,8 @@ public class Database {
 
         return connection;
     }
+
+     */
 
     public void initializeDatabase() {
 

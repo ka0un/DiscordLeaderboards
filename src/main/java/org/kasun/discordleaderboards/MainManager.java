@@ -1,6 +1,7 @@
 package org.kasun.discordleaderboards;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.event.HandlerList;
 import org.kasun.discordleaderboards.Commands.CommandsManager;
 import org.kasun.discordleaderboards.Configs.ConfigManager;
@@ -31,6 +32,8 @@ public class MainManager {
         if (Bukkit.getPluginManager().getPlugin("DiscordSRV") != null){
             discordSrvManager = new DiscordSrvManager();
         }
+
+
     }
 
     public void reload() {

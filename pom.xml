@@ -39,6 +39,16 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <relocations>
+                                <relocation>
+                                    <pattern>com.h2database.h2</pattern>
+                                    <shadedPattern>org.kasun.discordleaderboards.h2</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>mysql.mysql-connector-java</pattern>
+                                    <shadedPattern>org.kasun.discordleaderboards.mysql</shadedPattern>
+                                </relocation>
+                            </relocations>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                         </configuration>
                     </execution>
@@ -106,6 +116,7 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>
