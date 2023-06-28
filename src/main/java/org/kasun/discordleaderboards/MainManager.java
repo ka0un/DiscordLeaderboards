@@ -29,6 +29,7 @@ public class MainManager {
         listenerManager = new ListenerManager();
         updateManager = new UpdateManager();
 
+
         if (Bukkit.getPluginManager().getPlugin("DiscordSRV") != null){
             discordSrvManager = new DiscordSrvManager();
         }
