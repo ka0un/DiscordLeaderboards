@@ -4,7 +4,7 @@ import org.kasun.discordleaderboards.Configs.ConfigUpdater;
 import org.kasun.discordleaderboards.Configs.MainConfig;
 
 public class UpdateManager {
-    public String currentVersion = "0.1.2";
+    public String currentVersion = "0.1.3";
     private String version;
     final DiscordLeaderboards plugin  = DiscordLeaderboards.getInstance();
 

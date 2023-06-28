@@ -1,6 +1,6 @@
 #===================================
 # Discord Leaderboards
-# Config Version 0.1.2
+# Config Version 0.1.3
 # Leaderboard Config
 #===================================
 
@@ -102,7 +102,7 @@ embed-image: ""
 embed-thumbnail: ""
 # Discord embed Thumbnail.
 
-leaderboard-version: "0.1.2"
+leaderboard-version: "0.1.3"
 
 # Comments on leaderboards configs never generated again,
 # so keep this a reference you can disable this leaderboard

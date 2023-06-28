@@ -60,7 +60,7 @@ embed-thumbnail: '-'
 #=================================================================
 # Reserved for Plugin Developer, Do not Change Anything Here
 # It May Break Your Plugin
-pluginversion: "0.1.2"
+pluginversion: "0.1.3"
 firsttime: true
 discordsrvslashcommand: leaderboard
 
