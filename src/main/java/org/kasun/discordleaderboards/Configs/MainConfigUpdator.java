@@ -25,7 +25,16 @@ public class MainConfigUpdator {
         // Check if keys exist in the config file, add missing keys
         for (String key : newkeys) {
             if (!config.contains(key)) {
-                config.set(key, "-"); // Set a default value for the missing key
+                switch (key){
+                    case "discordsrvslashcommand":
+                        config.set(key, "leaderboards");
+                        break;
+                    default:
+                        config.set(key, "-");
+                        break;
+                    // Set a default value for the missing key
+
+                }
             }
         }
 
