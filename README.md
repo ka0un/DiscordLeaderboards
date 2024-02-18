@@ -1,4 +1,5 @@
 ![Main Image](https://cdn.discordapp.com/attachments/1074520108514431026/1108474446987141261/Group_9.png "Discord Leaderboards")
+
 # Discord Leaderboards
 
 > Create Minecraft Leaderboards with PlaceholderAPI and Post it to Discord Via Webhooks or DiscordSRV
@@ -8,7 +9,7 @@
 * Discord - https://dsc.gg/sundevs
 * Bstats - https://bstats.org/plugin/bukkit/Discord%20Leaderboards/18497
 * Trello - https://trello.com/b/3nEM0ADF/dleaderboard
-> Your stellar generosity in leaving a ⭐ warms my heart with gratitude. Thank you for brightening my day!
+> 📌 More Advanced & Premium Version https://builtbybit.com/resources/discord-leaderboards-premium.39497/
 
 ![Main2 Image](https://cdn.discordapp.com/attachments/1074520108514431026/1113510349686194297/Beta12.png "Discord Leaderboards")
 
