@@ -1,4 +1,5 @@
-![Main Image](https://cdn.discordapp.com/attachments/1074520108514431026/1108474446987141261/Group_9.png "Discord Leaderboards")
+![Group_9](https://github.com/ka0un/DiscordLeaderboards/assets/88395585/32620890-1f9b-40ce-a23a-cd70d9c0db2b)
+
 
 # Discord Leaderboards
 
@@ -11,7 +12,9 @@
 * Trello - https://trello.com/b/3nEM0ADF/dleaderboard
 > 📌 More Advanced & Premium Version https://builtbybit.com/resources/discord-leaderboards-premium.39497/
 
-![Main2 Image](https://cdn.discordapp.com/attachments/1074520108514431026/1113510349686194297/Beta12.png "Discord Leaderboards")
+
+![Beta12](https://github.com/ka0un/DiscordLeaderboards/assets/88395585/e33c572e-b9f6-484b-9e9b-c8ebaaac6bf6)
+
 
 ---
 
