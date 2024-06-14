@@ -4,6 +4,14 @@
 # Discord Leaderboards
 
 > Create Minecraft Leaderboards with PlaceholderAPI and Post it to Discord Via Webhooks or DiscordSRV
+
+![GitHub Release](https://img.shields.io/github/v/release/ka0un/DiscordLeaderboards?color=259bdc)
+![GitHub commits since latest release](https://img.shields.io/github/commits-since/ka0un/DiscordLeaderboards/latest?color=259bdc)
+![bStats Servers](https://img.shields.io/bstats/servers/18497?color=259bdc)
+![bStats Players](https://img.shields.io/bstats/players/18497?color=259bdc)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/ka0un/DiscordLeaderboards/total?color=259bdc)
+![GitHub Repo stars](https://img.shields.io/github/stars/ka0un/DiscordLeaderboards?color=259bdc)
+
 * Spigot - https://www.spigotmc.org/resources/discord-leaderboards-free-beta.109908/
 * BuildByBit - https://builtbybit.com/resources/discord-leaderboards-beta.28818/
 * PolyMart - https://polymart.org/resource/discord-leaderboards-free.4109 
